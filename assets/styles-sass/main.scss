@@ -1,0 +1,33 @@
+$dark:#000;
+$light:#fff;
+
+@font-face {
+	font-family: 'Montserrat Regular';
+	src: URL("assets/fonts/Montserrat-Regular.ttf") format("truetype"); 
+  }
+
+img{
+	object-fit: cover;
+  	object-position: center;
+}
+.page .entry-title {
+    display: none;
+}
+* {
+    font-family: 'Montserrat Regular';
+    margin: 0;
+	padding: 0;
+}
+button {
+    background-color: transparent;
+    outline: none;
+    border: none
+}
+/*  header styles */
+@import "header-promotion.scss";
+
+/* main menu */
+@import "main-menu.scss";
+
+/* inicio-page */
+@import "inicio-page.scss";

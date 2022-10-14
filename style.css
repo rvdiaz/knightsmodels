@@ -1,0 +1,218 @@
+@font-face {
+  font-family: 'Montserrat Regular';
+  src: URL("assets/fonts/Montserrat-Regular.ttf") format("truetype"); }
+img {
+  object-fit: cover;
+  object-position: center; }
+
+.page .entry-title {
+  display: none; }
+
+* {
+  font-family: 'Montserrat Regular';
+  margin: 0;
+  padding: 0; }
+
+button {
+  background-color: transparent;
+  outline: none;
+  border: none; }
+
+/*  header styles */
+.header-top-promotion {
+  background-image: url("http://localhost/knightsmodels/wp-content/uploads/2022/10/header-top-background.png");
+  height: 80px;
+  width: 100%; }
+
+.promotion-container {
+  max-width: 1136px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%; }
+
+.promotion-text {
+  color: light;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 100%; }
+
+.button-promotion-container {
+  display: flex;
+  align-items: center; }
+
+.button-promocion {
+  background-image: url("http://localhost/knightsmodels/wp-content/uploads/2022/10/button-header-top.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  font-size: 14px;
+  line-height: 100%;
+  text-transform: uppercase;
+  color: light;
+  font-weight: 500;
+  padding: 12px 38px;
+  text-decoration: none;
+  margin-right: 53px; }
+
+.close-promotion {
+  cursor: pointer; }
+
+.close-promotion img {
+  height: 20px;
+  width: 20px; }
+
+/* main menu */
+.main-menu {
+  min-height: 123px;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  width: 100%;
+  z-index: 1; }
+
+.main-menu-top {
+  max-width: 1082px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 8px;
+  position: relative; }
+
+.hamburger {
+  cursor: pointer; }
+
+.hamberguer-menu-desktop {
+  width: 100%;
+  display: none;
+  transition: all 2s ease-in-out;
+  position: absolute;
+  background-color: #000;
+  top: 50px;
+  left: 0; }
+
+.hamberguer-menu-desktop .menu-top-container {
+  overflow: hidden;
+  list-style-type: none;
+  margin: 0; }
+
+.hamberguer-menu-desktop.active {
+  display: block;
+  animation: fade .5s ease; }
+
+@keyframes fade {
+  from {
+    transform: translateY(0px);
+    opacity: 0; }
+  to {
+    transform: translateX(0px);
+    opacity: 1; } }
+.submenu-main-menu {
+  margin-top: 7px; }
+
+.search-button {
+  margin-right: 20px; }
+
+.search-button img {
+  height: 30px;
+  width: 30px; }
+
+.shop-button img {
+  height: 30px;
+  width: 27px; }
+
+.menu-bottom-container {
+  max-width: 1136px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px; }
+
+.menu-bottom-container .menu-bottom-items-container {
+  display: flex; }
+
+.menu-bottom-container .menu-bottom-items {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 100%;
+  color: light;
+  text-decoration: none;
+  display: flex;
+  align-items: center; }
+
+.menu-bottom-container .menu-bottom-items img {
+  margin-right: 20px; }
+
+/* inicio-page */
+.home-category-wrapper {
+  position: relative; }
+
+.home-category-logo-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.home-category-image img {
+  width: 100%; }
+
+.card-product-container {
+  margin: 0 10px;
+  width: 271px;
+  min-height: 525px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+
+.card-product-container-first {
+  width: 80px; }
+
+.inicio-category-products-container {
+  margin-top: 40px;
+  margin-bottom: 60px; }
+
+.product-image-container {
+  width: 271px;
+  height: 313px;
+  margin-bottom: 41px; }
+
+.product-title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 120%;
+  color: #000; }
+
+.product-price-wishlist-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: auto; }
+
+.product-price-wishlist-container .product-price {
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 100%;
+  color: #000; }
+
+.product-price-wishlist-container .add-whislist {
+  height: 24px;
+  width: 15px; }
+
+.product-add-cart-button-container {
+  margin-top: 19px; }
+
+.product-add-cart-button-container .add-cart-button {
+  background-image: url("http://localhost/knightsmodels/wp-content/uploads/2022/10/Rectangle-65.png");
+  background-repeat: no-repeat;
+  background-image: 100% 100%;
+  color: #fff;
+  font-size: 16px;
+  line-height: 100%;
+  font-weight: 799;
+  text-transform: uppercase;
+  width: 268px;
+  height: 65px; }
+
+/*# sourceMappingURL=style.css.map */

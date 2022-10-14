@@ -1,0 +1,72 @@
+.home-category-wrapper {
+    position: relative;
+}
+.home-category-logo-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.home-category-image img {
+    width: 100%;
+}
+.card-product-container {
+    margin: 0 10px;
+    width: 271px;
+    min-height: 525px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.card-product-container-first {
+    width: 80px;
+}
+.inicio-category-products-container {
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+.product-image-container {
+    width: 271px;
+    height: 313px;
+    margin-bottom: 41px;
+}
+.product-title {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 120%;
+    color: $dark;
+}
+.product-price-wishlist-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: auto;
+}
+.product-price-wishlist-container .product-price {
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 100%;
+    color: $dark;
+}
+.product-price-wishlist-container .add-whislist {
+    height: 24px;
+    width: 15px;
+}
+.product-add-cart-button-container {
+    margin-top: 19px;
+}
+.product-add-cart-button-container .add-cart-button {
+    background-image: url('http://localhost/knightsmodels/wp-content/uploads/2022/10/Rectangle-65.png');
+    background-repeat: no-repeat;
+    background-image: 100% 100%;
+    color: $light;
+    font-size: 16px;
+    line-height: 100%;
+    font-weight: 799;
+    text-transform: uppercase;
+    width: 268px;
+    height: 65px;
+}

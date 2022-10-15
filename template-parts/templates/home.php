@@ -39,7 +39,6 @@
             <!-- listar productor por categoria -->
             <div class="inicio-category-products-container" data-flickity='{ "freeScroll": true, "prevNextButtons": false, "pageDots" : false, "contain":true}'>
                 <div class="card-product-container-first">
-
                 </div>
                 <?php 
                 foreach ($products as $product) {
@@ -52,7 +51,7 @@
                             <p class="product-title"><?php echo $product->name;?></p>
                         </div>
                         <div class="product-price-wishlist-container">
-                            <p class="product-price"><?php echo $product->price;?></p>
+                            <p class="product-price"><?php echo $product->price.' '.get_woocommerce_currency_symbol();?></p>
                             <button class="add-whislist"><img src="<?php echo wp_get_upload_dir()["url"] ?>/icono-favoritos.svg" alt=""></button>
                         </div>
                         <div class="product-add-cart-button-container">

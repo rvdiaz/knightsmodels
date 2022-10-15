@@ -11,6 +11,21 @@ jQuery(document).ready(function(){
     jQuery('.home-category-logo-container')[0].style.height='auto';
     jQuery('.home-category-logo-container')[0].style.top='55%';
     }
+
+    if(jQuery('.menu-main-bottom-items')){
+        const menuButtons=jQuery('.menu-main-bottom-items');
+        for(let i=0;i<menuButtons.length;i++){
+            jQuery(`.menu-button-${i}`).hover(()=>{
+                jQuery('.menu-main-bottom-items').css('opacity','0.6');
+                jQuery(`.menu-button-${i}`).css('opacity','1');
+            })
+            jQuery(`.menu-bottom-items-container-${i}`).mouseleave(()=>{
+                jQuery(`.menu-main-bottom-items`).css('opacity','1');
+            })
+        }
+    }
 })
+
+
 
 

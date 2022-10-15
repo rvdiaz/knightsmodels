@@ -24,11 +24,27 @@
     background-color: $dark;
     top: 50px;
     left: 0;
+    z-index: 99;
 }
 .hamberguer-menu-desktop .menu-top-container {
     overflow: hidden;
     list-style-type: none;
     margin: 0;
+    padding: 21px;
+}
+.hamberguer-menu-desktop .menu-top-container li{
+    margin: 18px 0;
+}
+.hamberguer-menu-desktop .menu-top-container a{
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 100%;
+    text-transform: uppercase;
+    color: $light;
+    text-decoration: none;
+}
+.hamberguer-menu-desktop .menu-top-container a:hover {
+    color: $theme-color;
 }
 .hamberguer-menu-desktop.active {
     display: block;
@@ -38,7 +54,10 @@
     from{transform: translateY(0px); opacity: 0;}
     to {transform: translateX(0px); opacity: 1;}
 }
-
+.menu-top-items-container-category,
+.menu-top-items-container-aftercategory {
+    display: none;
+}
 .submenu-main-menu {
     margin-top: 7px;
 }
@@ -58,7 +77,8 @@
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    margin-top: 18px;
+    margin-top: 30px;
+    position: relative;
 }
 .menu-bottom-container .menu-bottom-items-container {
     display: flex;
@@ -67,14 +87,56 @@
     font-size: 16px;
     font-weight: 700;
     line-height: 100%;
-    color: light;
+    color: $light;
     text-decoration: none;
     display: flex;
     align-items: center;
+    cursor: pointer;
+}
+
+.menu-bottom-container .menu-main-bottom-items {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 100%;
+    color: $light;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 18px;
+}
+.menu-bottom-items-container:hover .dropdown-subcategories{
+    display: grid;
+    animation: fade .5s ease;
 }
 .menu-bottom-container .menu-bottom-items img {
     margin-right: 20px;
 }
-
+.menu-bottom-container .menu-main-bottom-items img {
+    margin-right: 20px;
+}
+.dropdown-subcategories {
+    display: none;
+    position: absolute;
+    top: 53px;
+    left: 0;
+    border-top: 2px solid $light;
+    width: 100%;
+    background-color: $dark;
+    padding: 64px 0;
+    grid-template-columns: repeat(6, 1fr);
+}
+.dropdown-subcategories .sub-category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.dropdown-subcategories .sub-category span {
+    color: $light;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 100%;
+    margin-top: 20px;
+}
 
 

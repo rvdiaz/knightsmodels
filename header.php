@@ -17,6 +17,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 	<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+	
 	<?php wp_head(); ?>
 </head>
 
@@ -56,20 +57,20 @@
 						$parent = get_term_by( 'id', $parent_id, 'product_cat' );
 						if($parent->name=='inicio'){
 						?>
-						<li class="menu-bottom-items-container">
-						<a href="<?php echo get_category_link( $cat->term_id);?>" class="menu-bottom-items">
+						<li class="menu-top-items-container-category">
+						<button class="menu-bottom-items">
 							<?php if(get_field('logo_ico_menu',$cat)) {?>
 							<img src="<?php echo get_field('logo_ico_menu',$cat)?>" alt="<?php echo $cat->name?>">
 							<?php } ?>
 							<span><?php echo $cat->name; ?></span>
-						</a>
+						</button>
 						</li>
 						<?php }
 						}
 						if(get_field('menu','option')){
 						foreach (get_field('menu','option') as $item) {	
 						?>
-						<li class="menu-bottom-items-container">
+						<li class="menu-top-items-container">
 						<a class="menu-bottom-items" href="<?php echo $item['menu_item']['url']?>" class="menu-bottom-items"><?php echo $item['menu_item']['title']; ?></a>
 						</li>
 						<?php } 
@@ -77,7 +78,7 @@
 						if(get_field('menu_despues_categoria','option')){
 						foreach (get_field('menu_despues_categoria','option') as $item) {
 						?>
-						<li class="menu-bottom-items-container">
+						<li class="menu-top-items-container-aftercategory">
 							<a class="menu-bottom-items" href="<?php echo $item['item_menu_a_categoria']['url']?>" class="menu-bottom-items"><?php echo $item['item_menu_a_categoria']['title']; ?></a>
 						</li>
 					<?php } }?>
@@ -100,26 +101,51 @@
 						'hide_empty' => false,
 					); 
 					$all_categories= get_terms('product_cat',$args);
-					foreach ($all_categories as $cat) {
+					$count=0;
+					foreach ($all_categories as $key =>$cat) {
 						$parent_id=$cat->parent;
 						$parent = get_term_by( 'id', $parent_id, 'product_cat' );
 						if($parent->name=='inicio'){
 					?>
-					<li class="menu-bottom-items-container">
-						<a href="<?php echo get_category_link( $cat->term_id);?>" class="menu-bottom-items">
+					<li class="menu-bottom-items-container menu-bottom-items-container-<?php echo $count;?>">
+						<button class="menu-main-bottom-items menu-button-<?php echo $count;?>">
 							<?php if(get_field('logo_ico_menu',$cat)) {?>
 							<img src="<?php echo get_field('logo_ico_menu',$cat)?>" alt="<?php echo $cat->name?>">
-							<?php } ?>
+							<?php 
+						} ?>
 							<span><?php echo $cat->name; ?></span>
-						</a>
+						</button>
+						<div class="dropdown-subcategories">
+							<?php
+								$argsSubCat= array(
+								'taxonomy' => 'product_cat',
+								'parent' => $cat->term_id,
+								'hide_empty' => false
+								); 
+								$subCategories = get_categories( $argsSubCat );
+								foreach ( $subCategories as $sub ) {
+								$thumbnail_id = get_woocommerce_term_meta( $sub->term_id, 'thumbnail_id', true );
+								$image = wp_get_attachment_url( $thumbnail_id );
+								?>
+								<a class="sub-category" href="<?php echo get_category_link( $sub->term_id ); ?>">
+									<img src="<?php echo $image;?>" alt="">
+									<span><?php echo $sub->name;?></span>
+								</a>
+								<?php } ?>
+  							</div>
 					</li>
-					<?php }
+					
+						<?php 
+						$count++;	
 					}
-					if(get_field('menu_despues_categoria','option')){
-						foreach (get_field('menu_despues_categoria','option') as $item) {
-					?>
+						}
+						if(get_field('menu_despues_categoria','option')){
+							foreach (get_field('menu_despues_categoria','option') as $item) {
+						?>
 						<li class="menu-bottom-items-container">
-							<a class="menu-bottom-items" href="<?php echo $item['item_menu_a_categoria']['url']?>" class="menu-bottom-items"><?php echo $item['item_menu_a_categoria']['title']; ?></a>
+							<button class="menu-main-bottom-items ">
+								<a class="menu-bottom-items" href="<?php echo $item['item_menu_a_categoria']['url']?>" class="menu-bottom-items"><?php echo $item['item_menu_a_categoria']['title']; ?></a>
+							</button>
 						</li>
 					<?php } }?>
 				</ul>	

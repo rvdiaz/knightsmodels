@@ -4,7 +4,7 @@
 .home-category-logo-container {
     position: absolute;
     top: 0;
-    height: 100%;
+    height: 240px;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -69,4 +69,7 @@
     text-transform: uppercase;
     width: 268px;
     height: 65px;
+}
+.dropdown-subcategories:hover{
+    display: grid;
 }

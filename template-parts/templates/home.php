@@ -35,6 +35,9 @@
 				    <img src="<?php echo get_field('logo_banner',$cat)?>" alt="<?php echo $cat->name?>">
 				<?php } ?>
             </div>
+            <div class="product-add-cart-button-container button-category-container-mobile">
+                <button class="add-cart-button"><?php echo $cat->name;?></button>
+            </div>
         </div>
             <!-- listar productor por categoria -->
             <div class="inicio-category-products-container" data-flickity='{ "freeScroll": true, "prevNextButtons": false, "pageDots" : false, "contain":true}'>
@@ -45,20 +48,24 @@
                     ?>
                     <div class="card-product-container">
                         <div class="product-image-container">
+                            <a href="<?php echo $product->get_permalink( );?>" target="_blank">
                             <?php echo $product->get_image()?>
+                            </a>
                         </div>
                         <div class="product-title-container">
-                            <p class="product-title"><?php echo $product->name;?></p>
+                            <a class="product-title" href="<?php echo $product->get_permalink( );?>" target="_blank"><?php echo $product->name;?></a>
                         </div>
                         <div class="product-price-wishlist-container">
                             <p class="product-price"><?php echo $product->price.' '.get_woocommerce_currency_symbol();?></p>
-                            <button class="add-whislist"><img src="<?php echo wp_get_upload_dir()["url"] ?>/icono-favoritos.svg" alt=""></button>
+                            <?php echo do_shortcode('[yith_wcwl_add_to_wishlist product_id='.$product->id.']');?>
                         </div>
                         <div class="product-add-cart-button-container">
-                            <button class="add-cart-button">Añadir a la cesta</button>
+                        <button onclick="add_to_cart_wc(event)" id_product="<?php echo $product->id;?>" class="add-cart-button">Añadir a la cesta</button>
                         </div>
                     </div>
                     <?php  } ?>
+                <div class="card-product-container-last">
+                </div>
             </div> 
 		<?php }
 					}

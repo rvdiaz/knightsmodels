@@ -18,6 +18,7 @@
 
 	<div class="entry-content">
 		<?php
+		
 		the_content();
 
 		wp_link_pages(
@@ -54,5 +55,8 @@
 </article><!-- #post-<?php the_ID(); ?> -->
 
 
+
 <!------------- Home --------------------------->	
+
 <?php include('templates/home.php'); ?>
+

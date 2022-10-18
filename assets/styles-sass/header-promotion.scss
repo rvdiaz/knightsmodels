@@ -42,3 +42,32 @@
     width: 20px;
 }
 
+@media (max-width: 1136px){
+.promotion-container {
+      margin: 0 20px !important;
+   }
+
+.header-top-promotion {
+    height: 120px;
+}
+}
+
+@media (max-width: 768px) {
+    .button-promotion-container {
+        flex-direction: column-reverse;
+        align-items: flex-end;
+    }
+    .close-promotion img {
+        height: 10px;
+        width: 10px;
+       }
+    .promotion-text {
+        font-size: 14px;
+       }
+    .button-promocion {
+        font-size: 10px;
+        padding: 3px 21px;
+        margin: 20px 0 0 0;
+        width: max-content;
+    }
+}

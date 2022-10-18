@@ -1,17 +1,30 @@
 .home-category-wrapper {
     position: relative;
 }
+
 .home-category-logo-container {
     position: absolute;
     top: 0;
-    height: 240px;
+    height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+.product-price-wishlist-container .yith-wcwl-add-to-wishlist a,
+.product-price-wishlist-container .yith-wcwl-add-to-wishlist span {
+    color:$dark;
+    font-size: 24px;
+}
+#yith-wcwl-popup-message {
+    display: none !important;
+}
+.product-price-wishlist-container .yith-wcwl-add-to-wishlist .yith-wcwl-icon {
+    margin: 0 !important;
+}
 .home-category-image img {
     width: 100%;
+    height: 100%;
 }
 .card-product-container {
     margin: 0 10px;
@@ -24,11 +37,14 @@
 .card-product-container-first {
     width: 80px;
 }
+.card-product-container-last {
+    width: 20px;
+}
 .inicio-category-products-container {
     margin-top: 40px;
     margin-bottom: 60px;
 }
-.product-image-container {
+.product-image-container img{
     width: 271px;
     height: 313px;
     margin-bottom: 41px;
@@ -38,11 +54,13 @@
     font-weight: 700;
     line-height: 120%;
     color: $dark;
+    text-decoration: none;
 }
 .product-price-wishlist-container {
     display: flex;
     width: 100%;
     justify-content: space-between;
+    align-items: center;
     margin-top: auto;
 }
 .product-price-wishlist-container .product-price {
@@ -51,7 +69,7 @@
     line-height: 100%;
     color: $dark;
 }
-.product-price-wishlist-container .add-whislist {
+.product-price-wishlist-container .yith-wcwl-add-to-wishlist img{
     height: 24px;
     width: 15px;
 }
@@ -65,11 +83,104 @@
     color: $light;
     font-size: 16px;
     line-height: 100%;
-    font-weight: 799;
+    font-weight: 700;
     text-transform: uppercase;
     width: 268px;
     height: 65px;
+    cursor: pointer;
 }
 .dropdown-subcategories:hover{
     display: grid;
+}
+.message-notification-container {
+    position: fixed;
+    z-index: 1000;
+    padding:20px ;
+    right: 0;
+    background-color: $theme-color;
+    color: $light;
+    font-size: 16px;
+    line-height: 100%;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: none;
+}
+.open-notification{
+    display: block;
+    animation: fade .10s ease;
+}
+.button-category-container-mobile {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .home-category-logo-container {
+        top: 0 !important;
+        height: 100% !important;
+    }
+    .button-category-container-mobile {
+        display: flex;
+        position: absolute;
+        bottom: -35px;
+        width: 100%;
+        justify-content: center;
+    }
+    .button-category-container-mobile .add-cart-button {
+        width: 320px !important;
+        background-size: 100% 100%;
+        margin: 0 20px;
+    }
+}
+@media (max-width: 768px) {
+    .button-category-container-mobile {
+        bottom: -20px;
+    }
+    .button-category-container-mobile .add-cart-button {
+        height: 40px;
+        bottom: -20px;
+       /*  width: 320px !important; */
+    }
+    .home-category-logo-container img {
+        height: 60px;
+    }
+    .card-product-container-first {
+        width: 21px;
+    }
+    .card-product-container{
+        width: 146px;
+        min-height: -webkit-fill-available;
+    }
+    .product-image-container img{
+        width: 130px;
+        height: auto;
+        margin-bottom: 14px;
+    }
+    .product-title {
+        font-size: 14px;
+        line-height: 17px;
+    }
+    .product-price {
+        font-size: 18px;
+        line-height: 18px;
+    }
+    .product-price-wishlist-container .yith-wcwl-add-to-wishlist{
+        margin-top: 0 !important;
+    }
+    .product-price-wishlist-container .yith-wcwl-add-to-wishlist a,
+    .product-price-wishlist-container .yith-wcwl-add-to-wishlist span {
+    color:$dark;
+    font-size: 20px;
+}
+    .product-add-cart-button-container {
+        margin-top: 10px;
+    }
+    .product-add-cart-button-container .add-cart-button {
+        width: 146px;
+        height: 45px;
+        font-size: 12px;
+        background-size: 100% 100%;
+    }
+    .inicio-category-products-container {
+        margin-bottom: 28px;
+    }
 }

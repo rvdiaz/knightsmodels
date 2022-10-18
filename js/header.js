@@ -1,5 +1,9 @@
 jQuery('.close-promotion').click(()=>{
     jQuery('.header-top-promotion ').css('display','none');
+    var now = new Date();
+    now.setTime(now.getTime() + 1 * 3600 * 1000);
+    cookievalue = escape(document.myform.customer.value) + ";"
+    document.cookie="showPromo=1"+cookievalue;
 })
 
 document.querySelector('.hamburger').addEventListener('click', function() {
@@ -9,7 +13,7 @@ document.querySelector('.hamburger').addEventListener('click', function() {
 jQuery(document).ready(function(){
     if(jQuery('.home-category-logo-container')){
     jQuery('.home-category-logo-container')[0].style.height='auto';
-    jQuery('.home-category-logo-container')[0].style.top='55%';
+    jQuery('.home-category-logo-container')[0].style.top='50%';
     }
 
     if(jQuery('.menu-main-bottom-items')){
@@ -26,6 +30,9 @@ jQuery(document).ready(function(){
     }
 })
 
+jQuery('.hamburger').on('click',()=>{
+    jQuery('.home-category-logo-container')[0].classList.toggle('background-black');
+})
 
 
 

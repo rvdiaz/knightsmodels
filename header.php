@@ -25,6 +25,10 @@
 <?php wp_body_open(); ?>
 <div id="page" class="site">
 	<header id="masthead" class="site-header">
+		<div class="message-notification-container">
+			<span id="message-notification">Producto agregado</span>
+		</div>
+		<?php if(!isset($_COOKIE['showPromo'])) {?>
 		<div class="header-top-promotion">
 			<div class="promotion-container">
 				<div class="promotion-text-container">
@@ -40,6 +44,7 @@
 				</div>
 			</div>
 		</div>
+		<?php } ?>
 		<div class="main-menu">
 			<div class="main-menu-top">
 				<div class="hamburger">
@@ -58,12 +63,22 @@
 						if($parent->name=='inicio'){
 						?>
 						<li class="menu-top-items-container-category">
-						<button class="menu-bottom-items">
-							<?php if(get_field('logo_ico_menu',$cat)) {?>
-							<img src="<?php echo get_field('logo_ico_menu',$cat)?>" alt="<?php echo $cat->name?>">
-							<?php } ?>
-							<span><?php echo $cat->name; ?></span>
-						</button>
+							<div class="menu-top-category-container-mobile">
+								<div class="main-image-category-mobile">
+									<?php 
+									$thumbnail_id_cat = get_woocommerce_term_meta( $cat->term_id, 'thumbnail_id', true );
+									$image_cat = wp_get_attachment_url( $thumbnail_id_cat);
+									?>
+									<?php if($image_cat) {?>
+									<img src="<?php echo $image_cat; ?>" alt="<?php echo $cat->name?>">
+								<?php } ?>
+								</div>
+								<div class="image-category-mobile-container">
+								<?php if(get_field('logo_banner',$cat)) {?>
+									<img src="<?php echo get_field('logo_banner',$cat)?>" alt="<?php echo $cat->name?>">
+								<?php } ?>
+								</div>
+							</div>
 						</li>
 						<?php }
 						}
@@ -85,13 +100,16 @@
 					</ul>	
 				</div>
 				<div class="logo-main-menu">
+					<a href="<?php echo get_site_url();?>">
 					<?php if(get_field('logo_sitio','option')){?>
 					<img src="<?php echo get_field('logo_sitio','option');?>" alt="knight models">
 					<?php } ?>
+					</a>
 				</div>
 				<div class="submenu-main-menu">
 					<button class="search-button"><img src="<?php echo wp_get_upload_dir()["url"]?>/icono-lupa.svg" alt="search"></button>
-					<button class="shop-button"><img src="<?php echo wp_get_upload_dir()["url"]?>/icono-cesta-numero.svg" alt="search"></button>
+					<a class="search-button" href="<?php echo get_field('wishlist_page','option');?>" target="_blank"><img src="<?php echo wp_get_upload_dir()["url"]?>/icons8-bookmark-24.png" alt="whishlist"></a>
+					<a class="shop-button" href="<?php echo wc_get_cart_url();?>"><img src="<?php echo wp_get_upload_dir()["url"]?>/icono-cesta-numero.svg" alt="search"></a>
 				</div>
 			</div>
 			<nav class="main-menu-bottom">
@@ -124,11 +142,11 @@
 								); 
 								$subCategories = get_categories( $argsSubCat );
 								foreach ( $subCategories as $sub ) {
-								$thumbnail_id = get_woocommerce_term_meta( $sub->term_id, 'thumbnail_id', true );
-								$image = wp_get_attachment_url( $thumbnail_id );
 								?>
 								<a class="sub-category" href="<?php echo get_category_link( $sub->term_id ); ?>">
-									<img src="<?php echo $image;?>" alt="">
+								<?php if(get_field('logo_banner',$sub)) {?>
+				    				<img src="<?php echo get_field('logo_banner',$sub)?>" alt="<?php echo $cat->sub?>">
+								<?php } ?>
 									<span><?php echo $sub->name;?></span>
 								</a>
 								<?php } ?>

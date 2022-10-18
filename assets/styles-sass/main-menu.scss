@@ -22,7 +22,7 @@
     transition: all 2s ease-in-out;
     position: absolute;
     background-color: $dark;
-    top: 50px;
+    top: 55px;
     left: 0;
     z-index: 99;
 }
@@ -61,10 +61,12 @@
 .submenu-main-menu {
     margin-top: 7px;
 }
-.search-button {
+.search-button  {
     margin-right: 20px;
 }
-.search-button img{
+
+.search-button img
+{
     height: 30px;
     width: 30px;
 }
@@ -130,6 +132,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-decoration: none;
 }
 .dropdown-subcategories .sub-category span {
     color: $light;
@@ -140,3 +143,88 @@
 }
 
 
+@media (max-width: 1136px){
+    .main-menu-top,
+    .menu-bottom-container {
+      margin: 0 20px;
+   }
+   .menu-bottom-container{
+    margin-top: 30px;
+   }
+   
+}
+@media (max-width: 1024px) {
+   .main-menu-bottom {
+    display: none;
+   }
+   .menu-top-items-container-aftercategory {
+    display: block;
+   }
+   .logo-main-menu {
+    margin-left: 25px;
+   }
+   .main-menu {
+    background-color: rgba(0,0,0,0);  
+    min-height: fit-content; 
+    border-top: 2px solid $light;
+    }
+    .home-category-image {
+        height: 45vh;
+    }
+    .menu-top-items-container-category {
+        display: block;
+    }
+    .hamberguer-menu-desktop {
+        width: 100vw;
+        left: -20px;
+        height: 100vh;
+    }
+    .menu-top-category-container-mobile {
+        position: relative;
+    }
+    .main-image-category-mobile img{
+        width: 100%;
+        height: 105px;
+    }
+    .image-category-mobile-container {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .image-category-mobile-container img {
+        height: 50px;
+    }
+    .hamberguer-menu-desktop.active {
+        display: block;
+        animation: fade .1s ease;
+      }
+}
+.background-black {
+    background-color: $dark;
+}
+@media (max-width: 768px) {
+    .home-category-image {
+        height: 180px;
+    }
+    .hamburger img {
+    height: 14px;
+}
+    .logo-main-menu img{
+    height: 24px;
+}
+.search-button img{
+    width: 18px;
+    height: 18px;
+}
+.shop-button img {
+    width: 15px;
+    height: 17px;
+}
+.submenu-main-menu {
+    margin: 0;
+}
+}

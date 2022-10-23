@@ -18,7 +18,6 @@
             'category' => array( $cat->slug )
         );
         $products = wc_get_products( $argsProduct );
-        /* ----- */
 
 			if($parent->name=='inicio' && count($products)>0){
 		?>
@@ -39,7 +38,7 @@
                 <button class="add-cart-button"><?php echo $cat->name;?></button>
             </div>
         </div>
-            <!-- listar productor por categoria -->
+            <!-- listar productos por categoria -->
             <div class="inicio-category-products-container" data-flickity='{ "freeScroll": true, "prevNextButtons": false, "pageDots" : false, "contain":true}'>
                 <div class="card-product-container-first">
                 </div>
@@ -60,7 +59,7 @@
                             <?php echo do_shortcode('[yith_wcwl_add_to_wishlist product_id='.$product->id.']');?>
                         </div>
                         <div class="product-add-cart-button-container">
-                        <button onclick="add_to_cart_wc(event)" id_product="<?php echo $product->id;?>" class="add-cart-button">Añadir a la cesta</button>
+                        <?php echo do_shortcode('[add_to_cart show_price=false id='.$product->id.']'); ?>
                         </div>
                     </div>
                     <?php  } ?>

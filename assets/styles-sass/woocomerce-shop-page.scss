@@ -1,0 +1,66 @@
+.woocommerce .products {
+    width: fit-content;
+    margin: 0 auto !important;
+}
+.woocommerce .products .product {
+    margin-right: 20px !important;
+    width: 271px !important;
+}
+.woocommerce .products .product:last-child{
+    margin-right: 0 !important;
+}
+.woocommerce .products .product img{
+    width: 100%;
+    height: 313px;
+}
+.woocommerce .products .woocommerce-loop-product__title {
+    padding: 0 !important;
+    margin-top: 41px !important;
+    font-size: 20px !important;
+    font-weight: 700;
+    line-height: 24px;
+    float: left;
+}
+.woocommerce .products .price {
+    clear: left;
+    float: left;
+    margin-top: 15px;
+    margin-bottom: 0 !important;
+    font-size: 26px !important;
+    font-weight: 400;
+    line-height: 24px;
+    color: $dark !important;
+}
+.woocommerce .yith-wcwl-add-to-wishlist {
+    float: right;
+}
+.woocommerce .yith-wcwl-add-to-wishlist .yith-wcwl-icon {
+    margin: 0 !important;
+}
+.woocommerce .yith-wcwl-add-to-wishlist a,
+.woocommerce .yith-wcwl-add-to-wishlist span {
+    color:$dark;
+    font-size: 24px;
+}
+.added_to_cart {
+    display: none !important;
+}
+.product_type_simple {
+    background-image: url('http://localhost/knightsmodels/wp-content/uploads/2022/10/Rectangle-65.png') !important;
+    background-repeat: no-repeat !important;
+    background-size: 100% 100% !important;
+    background-color: transparent !important;
+    color: $light !important;
+    font-size: 16px !important;
+    line-height: 100% !important;
+    font-weight: 700 !important;
+    padding: 25px 10px !important;
+    margin-top: 15px !important;
+    text-transform: uppercase;
+    width: -webkit-fill-available;
+    clear: both;
+    float: left;
+    text-align: center;
+}
+
+

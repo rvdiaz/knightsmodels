@@ -1,0 +1,112 @@
+.category-header-meta-wrapper {
+    flex-direction: column;
+    top: 40% !important;
+}
+.term-description {
+    display: none;
+}
+.category-meta-container {
+    text-align: center;
+}
+.category-meta-container .category-title {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 100%;
+    color: $light;
+    text-transform: uppercase;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+.category-meta-container .category-description {
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 500;
+    color: $light;
+    margin: 0 auto;
+    width: 80%;
+}
+.category-header-image-wrapper {
+    height: 460px;
+}
+.subcategories-container {
+    background-image: url('http://localhost/knightsmodels/wp-content/uploads/2022/10/Rectangle-115.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    min-height: 100px;
+    margin-top: -60px;
+    position: sticky;
+    width: 100%;
+    padding: 60px 0;
+}
+.subcategories-container .subcategories-title {
+    font-size: 26px;
+    font-weight: 800;
+    font-style: italic;
+    line-height: 26px;
+    color: $dark;
+    text-align: center;
+    margin-bottom: 60px;
+}
+.subcategories-container .subcategory-title {
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 700;
+    margin-top: 20px;
+    color: $dark;
+}
+.subcategories-container .subcategory-title-active{
+    color: $theme-color;
+}
+.subcategory-item-wrapper a {
+    text-decoration: none;
+}
+.subcategory-item-wrapper {
+    text-align: center;
+    margin: 0 30px;
+}
+
+.secondary-filter {
+    display: none;
+}
+.woocomerce-filters-container {
+    width: 1136px;
+    margin: 0 auto;
+    margin-bottom: 60px;
+}
+.main-filter{
+    padding: 15px 16px;
+    color: $dark;
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 700;
+    background-color: #00000033;
+    border-radius: 4px;
+    margin-right: 11px;
+    cursor: pointer;
+}
+.main-filters-container .active {
+    background-color: $theme-color;
+    opacity: 1;
+    color: $light;
+}
+.main-filters-container {
+    margin-bottom: 20px;
+    display: flex;
+}
+.secondary-filter-button{
+    cursor: pointer;
+    padding: 15px 16px;
+    color: $dark;
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 500;
+    border-radius: 4px;
+    margin-right: 10px;
+    border: 1px solid rgba(0,0,0,0.4);
+}
+.woocommerce-ordering {
+    display: none;
+}
+.woocommerce-result-count {
+    display: none;
+}

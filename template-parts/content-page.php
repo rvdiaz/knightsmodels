@@ -55,8 +55,7 @@
 </article><!-- #post-<?php the_ID(); ?> -->
 
 
-
 <!------------- Home --------------------------->	
 
-<?php include('templates/home.php'); ?>
+<?php include('templates/home/index.php'); ?>
 

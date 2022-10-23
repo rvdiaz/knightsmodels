@@ -1,52 +1,810 @@
-/*
-Error: File to import not found or unreadable: categories-page.scss.
-       Load path: /Applications/XAMPP/xamppfiles/htdocs/knightsmodels/wp-content/themes/knightsmodels/assets/styles-sass
-        on line 59 of /Applications/XAMPP/xamppfiles/htdocs/knightsmodels/wp-content/themes/knightsmodels/assets/styles-sass/main.scss
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  src: URL("assets/fonts/Montserrat-Light.ttf") format("truetype");
+  font-weight: 300; }
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  src: URL("assets/fonts/Montserrat-Regular.ttf") format("truetype");
+  font-weight: 400; }
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  src: URL("assets/fonts/Montserrat-Medium.ttf") format("truetype");
+  font-weight: 500; }
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  src: URL("assets/fonts/Montserrat-Bold.ttf") format("truetype");
+  font-weight: 700; }
+@font-face {
+  font-family: 'Montserrat';
+  font-style: italic;
+  src: URL("assets/fonts/Montserrat-BoldItalic.ttf") format("truetype");
+  font-weight: 800; }
+img {
+  object-fit: cover;
+  object-position: center; }
 
-54: 
-55: /* footer-section *\/
-56: @import "footer-section.scss";
-57: 
-58: /* categories page *\/
-59: @import "categories-page.scss";
+.page .entry-title {
+  display: none; }
 
-Backtrace:
-/Applications/XAMPP/xamppfiles/htdocs/knightsmodels/wp-content/themes/knightsmodels/assets/styles-sass/main.scss:59
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/tree/import_node.rb:67:in `rescue in import'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/tree/import_node.rb:44:in `import'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/tree/import_node.rb:28:in `imported_file'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/tree/import_node.rb:37:in `css_import?'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:314:in `visit_import'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:36:in `visit'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/stack.rb:79:in `block in with_base'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/stack.rb:135:in `with_frame'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/stack.rb:79:in `with_base'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:162:in `visit'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:52:in `map'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:52:in `visit_children'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:171:in `block in visit_children'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:183:in `with_environment'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:170:in `visit_children'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:36:in `block in visit'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:190:in `visit_root'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:36:in `visit'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:161:in `visit'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:10:in `visit'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/tree/root_node.rb:36:in `css_tree'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/engine.rb:389:in `_render_with_sourcemap'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/engine.rb:307:in `render_with_sourcemap'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/exec/sass_scss.rb:391:in `run'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/exec/sass_scss.rb:63:in `process_result'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/exec/base.rb:52:in `parse'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/lib/sass/exec/base.rb:19:in `parse!'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.5.2/bin/sass:13:in `<top (required)>'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/bin/sass:22:in `load'
-/private/var/folders/ms/h35xxwx503z3jrrz_t93zkh80000gn/T/AppTranslocation/89ED3C17-C4B2-4FC9-B2E1-EBF368CE32D5/d/Koala.app/Contents/Resources/app.nw/bin/sass:22:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: File to import not found or unreadable: categories-page.scss.\A        Load path: /Applications/XAMPP/xamppfiles/htdocs/knightsmodels/wp-content/themes/knightsmodels/assets/styles-sass\A         on line 59 of /Applications/XAMPP/xamppfiles/htdocs/knightsmodels/wp-content/themes/knightsmodels/assets/styles-sass/main.scss\A \A 54: \A 55: /* footer-section */\A 56: @import \"footer-section.scss\";\A 57: \A 58: /* categories page */\A 59: @import \"categories-page.scss\";"; }
+* {
+  font-family: "Montserrat";
+  margin: 0;
+  padding: 0; }
+
+button {
+  background-color: transparent;
+  outline: none;
+  border: none; }
+
+/*  header styles */
+.header-top-promotion {
+  background-image: url("http://localhost/knightsmodels/wp-content/uploads/2022/10/header-top-background.png");
+  height: 80px;
+  width: 100%; }
+
+.promotion-container {
+  max-width: 1136px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%; }
+
+.promotion-text {
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 100%; }
+
+.button-promotion-container {
+  display: flex;
+  align-items: center; }
+
+.button-promocion {
+  background-image: url("http://localhost/knightsmodels/wp-content/uploads/2022/10/button-header-top.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  font-size: 14px;
+  line-height: 100%;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 500;
+  padding: 12px 38px;
+  text-decoration: none;
+  margin-right: 53px; }
+
+.close-promotion {
+  cursor: pointer; }
+
+.close-promotion img {
+  height: 20px;
+  width: 20px; }
+
+@media (max-width: 1136px) {
+  .promotion-container {
+    margin: 0 20px !important; }
+
+  .header-top-promotion {
+    height: 120px; } }
+@media (max-width: 768px) {
+  .button-promotion-container {
+    flex-direction: column-reverse;
+    align-items: flex-end; }
+
+  .close-promotion img {
+    height: 10px;
+    width: 10px; }
+
+  .promotion-text {
+    font-size: 14px; }
+
+  .button-promocion {
+    font-size: 10px;
+    padding: 3px 21px;
+    margin: 20px 0 0 0;
+    width: max-content; } }
+/* main menu */
+.main-menu {
+  min-height: 123px;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  width: 100%;
+  z-index: 1; }
+
+.main-menu-top {
+  max-width: 1082px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 8px;
+  position: relative; }
+
+.hamburger {
+  cursor: pointer; }
+
+.hamberguer-menu-desktop {
+  width: 100%;
+  display: none;
+  transition: all 2s ease-in-out;
+  position: absolute;
+  background-color: #000;
+  top: 55px;
+  left: 0;
+  z-index: 99; }
+
+.hamberguer-menu-desktop .menu-top-container {
+  overflow: hidden;
+  list-style-type: none;
+  margin: 0;
+  padding: 21px; }
+
+.hamberguer-menu-desktop .menu-top-container li {
+  margin: 18px 0; }
+
+.hamberguer-menu-desktop .menu-top-container a {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 100%;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none; }
+
+.hamberguer-menu-desktop .menu-top-container a:hover {
+  color: #D5822F; }
+
+.hamberguer-menu-desktop.active {
+  display: block;
+  animation: fade .5s ease; }
+
+@keyframes fade {
+  from {
+    transform: translateY(0px);
+    opacity: 0; }
+  to {
+    transform: translateX(0px);
+    opacity: 1; } }
+.menu-top-items-container-category,
+.menu-top-items-container-aftercategory {
+  display: none; }
+
+.submenu-main-menu {
+  margin-top: 7px; }
+
+.search-button {
+  margin-right: 20px; }
+
+.search-button img {
+  height: 30px;
+  width: 30px; }
+
+.shop-button img {
+  height: 30px;
+  width: 27px; }
+
+.menu-bottom-container {
+  max-width: 1136px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  position: relative; }
+
+.menu-bottom-container .menu-bottom-items-container {
+  display: flex; }
+
+.menu-bottom-container .menu-bottom-items {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 100%;
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer; }
+
+.menu-bottom-container .menu-main-bottom-items {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 100%;
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 18px; }
+
+.menu-bottom-items-container:hover .dropdown-subcategories {
+  display: grid;
+  animation: fade .5s ease; }
+
+.menu-bottom-container .menu-bottom-items img {
+  margin-right: 20px; }
+
+.menu-bottom-container .menu-main-bottom-items img {
+  margin-right: 20px; }
+
+.dropdown-subcategories {
+  display: none;
+  position: absolute;
+  top: 53px;
+  left: 0;
+  border-top: 2px solid #fff;
+  width: 100%;
+  background-color: #000;
+  padding: 64px 0;
+  grid-template-columns: repeat(6, 1fr); }
+
+.dropdown-subcategories .sub-category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none; }
+
+.dropdown-subcategories .sub-category span {
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 100%;
+  margin-top: 20px; }
+
+@media (max-width: 1136px) {
+  .main-menu-top,
+  .menu-bottom-container {
+    margin: 0 20px; }
+
+  .menu-bottom-container {
+    margin-top: 30px; } }
+@media (max-width: 1024px) {
+  .main-menu-bottom {
+    display: none; }
+
+  .menu-top-items-container-aftercategory {
+    display: block; }
+
+  .logo-main-menu {
+    margin-left: 25px; }
+
+  .main-menu {
+    background-color: rgba(0, 0, 0, 0);
+    min-height: fit-content;
+    border-top: 2px solid #fff; }
+
+  .home-category-image {
+    height: 45vh; }
+
+  .menu-top-items-container-category {
+    display: block; }
+
+  .hamberguer-menu-desktop {
+    width: 100vw;
+    left: -20px;
+    height: 100vh; }
+
+  .menu-top-category-container-mobile {
+    position: relative; }
+
+  .main-image-category-mobile img {
+    width: 100%;
+    height: 105px; }
+
+  .image-category-mobile-container {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+
+  .image-category-mobile-container img {
+    height: 50px; }
+
+  .hamberguer-menu-desktop.active {
+    display: block;
+    animation: fade .1s ease; } }
+.background-black {
+  background-color: #000; }
+
+@media (max-width: 768px) {
+  .home-category-image {
+    height: 180px; }
+
+  .hamburger img {
+    height: 14px; }
+
+  .logo-main-menu img {
+    height: 24px; }
+
+  .search-button img {
+    width: 18px;
+    height: 18px; }
+
+  .shop-button img {
+    width: 15px;
+    height: 17px; }
+
+  .submenu-main-menu {
+    margin: 0; } }
+/* inicio-page */
+.home-category-wrapper {
+  position: relative; }
+
+.home-category-logo-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.product-price-wishlist-container .yith-wcwl-add-to-wishlist {
+  margin-top: 0; }
+
+.product-price-wishlist-container .yith-wcwl-add-to-wishlist a,
+.product-price-wishlist-container .yith-wcwl-add-to-wishlist span {
+  color: #000;
+  font-size: 24px; }
+
+#yith-wcwl-popup-message {
+  display: none !important; }
+
+.product-price-wishlist-container .yith-wcwl-add-to-wishlist .yith-wcwl-icon {
+  margin: 0 !important; }
+
+.home-category-image img {
+  width: 100%;
+  height: 100%; }
+
+.card-product-container {
+  margin: 0 10px;
+  width: 271px;
+  min-height: 525px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+
+.card-product-container-first {
+  width: 80px; }
+
+.card-product-container-last {
+  width: 20px; }
+
+.inicio-category-products-container {
+  margin-top: 40px;
+  margin-bottom: 60px; }
+
+.product-image-container img {
+  width: 271px;
+  height: 313px;
+  margin-bottom: 41px; }
+
+.product-title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 120%;
+  color: #000;
+  text-decoration: none; }
+
+.product-price-wishlist-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto; }
+
+.product-price-wishlist-container .product-price {
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 100%;
+  color: #000; }
+
+.product-price-wishlist-container .yith-wcwl-add-to-wishlist img {
+  height: 24px;
+  width: 15px; }
+
+.product-add-cart-button-container .add_to_cart_inline {
+  border: none !important;
+  padding: 0 !important; }
+
+.dropdown-subcategories:hover {
+  display: grid; }
+
+.message-notification-container {
+  position: fixed;
+  z-index: 1000;
+  padding: 20px;
+  right: 0;
+  background-color: #D5822F;
+  color: #fff;
+  font-size: 16px;
+  line-height: 100%;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: none; }
+
+.open-notification {
+  display: block;
+  animation: fade .10s ease; }
+
+.button-category-container-mobile {
+  display: none; }
+
+@media (max-width: 1024px) {
+  .home-category-logo-container {
+    top: 0 !important;
+    height: 100% !important; }
+
+  .button-category-container-mobile {
+    display: flex;
+    position: absolute;
+    bottom: -35px;
+    width: 100%;
+    justify-content: center; }
+
+  .button-category-container-mobile .add-cart-button {
+    width: 320px !important;
+    background-size: 100% 100%;
+    margin: 0 20px; } }
+@media (max-width: 768px) {
+  .button-category-container-mobile {
+    bottom: -20px; }
+
+  .button-category-container-mobile .add-cart-button {
+    height: 40px;
+    bottom: -20px;
+    /*  width: 320px !important; */ }
+
+  .home-category-logo-container img {
+    height: 60px; }
+
+  .card-product-container-first {
+    width: 21px; }
+
+  .card-product-container {
+    width: 146px;
+    min-height: -webkit-fill-available; }
+
+  .product-image-container img {
+    width: 130px;
+    height: auto;
+    margin-bottom: 14px; }
+
+  .product-title {
+    font-size: 14px;
+    line-height: 17px; }
+
+  .product-price {
+    font-size: 18px;
+    line-height: 18px; }
+
+  .product-price-wishlist-container .yith-wcwl-add-to-wishlist {
+    margin-top: 0 !important; }
+
+  .product-price-wishlist-container .yith-wcwl-add-to-wishlist a,
+  .product-price-wishlist-container .yith-wcwl-add-to-wishlist span {
+    color: #000;
+    font-size: 20px; }
+
+  .product-add-cart-button-container {
+    margin-top: 10px; }
+
+  .product-add-cart-button-container .add-cart-button {
+    width: 146px;
+    height: 45px;
+    font-size: 12px;
+    background-size: 100% 100%; }
+
+  .inicio-category-products-container {
+    margin-bottom: 28px; } }
+/* footer-section */
+.footer-page {
+  background-color: #000; }
+
+.footer-container {
+  height: 120px;
+  width: fit-content;
+  margin: 0 auto;
+  padding-top: 23px;
+  padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; }
+
+.shipping-zone-container {
+  display: flex;
+  align-items: center; }
+
+.country-list-wrapper {
+  display: flex;
+  align-items: center; }
+
+#country-list-active {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 14px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer; }
+
+#country-active-value {
+  margin: 0 5px; }
+
+.shipping-country-text {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 14px; }
+
+.dropdown-coountry-list {
+  position: relative;
+  display: inline-block; }
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #000;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  right: 0;
+  bottom: 35px;
+  border: 1px solid #fff; }
+
+.dropdown-content span {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 14px;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer; }
+
+.open {
+  display: block; }
+
+.copyright-text {
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 14px; }
+
+/* categories page */
+.category-header-meta-wrapper {
+  flex-direction: column;
+  top: 40% !important; }
+
+.term-description {
+  display: none; }
+
+.category-meta-container {
+  text-align: center; }
+
+.category-meta-container .category-title {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 100%;
+  color: #fff;
+  text-transform: uppercase;
+  margin-top: 40px;
+  margin-bottom: 20px; }
+
+.category-meta-container .category-description {
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: 500;
+  color: #fff;
+  margin: 0 auto;
+  width: 80%; }
+
+.category-header-image-wrapper {
+  height: 460px; }
+
+.subcategories-container {
+  background-image: url("http://localhost/knightsmodels/wp-content/uploads/2022/10/Rectangle-115.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  min-height: 100px;
+  margin-top: -60px;
+  position: sticky;
+  width: 100%;
+  padding: 60px 0; }
+
+.subcategories-container .subcategories-title {
+  font-size: 26px;
+  font-weight: 800;
+  font-style: italic;
+  line-height: 26px;
+  color: #000;
+  text-align: center;
+  margin-bottom: 60px; }
+
+.subcategories-container .subcategory-title {
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 700;
+  margin-top: 20px;
+  color: #000; }
+
+.subcategories-container .subcategory-title-active {
+  color: #D5822F; }
+
+.subcategory-item-wrapper a {
+  text-decoration: none; }
+
+.subcategory-item-wrapper {
+  text-align: center;
+  margin: 0 30px; }
+
+.secondary-filter {
+  display: none; }
+
+.woocomerce-filters-container {
+  width: 1136px;
+  margin: 0 auto;
+  margin-bottom: 60px; }
+
+.main-filter {
+  padding: 15px 16px;
+  color: #000;
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 700;
+  background-color: #00000033;
+  border-radius: 4px;
+  margin-right: 11px;
+  cursor: pointer; }
+
+.main-filters-container .active {
+  background-color: #D5822F;
+  opacity: 1;
+  color: #fff; }
+
+.main-filters-container {
+  margin-bottom: 20px;
+  display: flex; }
+
+.secondary-filter-button {
+  cursor: pointer;
+  padding: 15px 16px;
+  color: #000;
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 500;
+  border-radius: 4px;
+  margin-right: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.4); }
+
+.woocommerce-ordering {
+  display: none; }
+
+.woocommerce-result-count {
+  display: none; }
+
+/* woocomerce page */
+.woocommerce .products {
+  width: fit-content;
+  margin: 0 auto !important; }
+
+.woocommerce .products .product {
+  margin-right: 20px !important;
+  width: 271px !important; }
+
+.woocommerce .products .product:last-child {
+  margin-right: 0 !important; }
+
+.woocommerce .products .product img {
+  width: 100%;
+  height: 313px; }
+
+.woocommerce .products .woocommerce-loop-product__title {
+  padding: 0 !important;
+  margin-top: 41px !important;
+  font-size: 20px !important;
+  font-weight: 700;
+  line-height: 24px;
+  float: left; }
+
+.woocommerce .products .price {
+  clear: left;
+  float: left;
+  margin-top: 15px;
+  margin-bottom: 0 !important;
+  font-size: 26px !important;
+  font-weight: 400;
+  line-height: 24px;
+  color: #000 !important; }
+
+.woocommerce .yith-wcwl-add-to-wishlist {
+  float: right; }
+
+.woocommerce .yith-wcwl-add-to-wishlist .yith-wcwl-icon {
+  margin: 0 !important; }
+
+.woocommerce .yith-wcwl-add-to-wishlist a,
+.woocommerce .yith-wcwl-add-to-wishlist span {
+  color: #000;
+  font-size: 24px; }
+
+.added_to_cart {
+  display: none !important; }
+
+.product_type_simple {
+  background-image: url("http://localhost/knightsmodels/wp-content/uploads/2022/10/Rectangle-65.png") !important;
+  background-repeat: no-repeat !important;
+  background-size: 100% 100% !important;
+  background-color: transparent !important;
+  color: #fff !important;
+  font-size: 16px !important;
+  line-height: 100% !important;
+  font-weight: 700 !important;
+  padding: 25px 10px !important;
+  margin-top: 15px !important;
+  text-transform: uppercase;
+  width: -webkit-fill-available;
+  clear: both;
+  float: left;
+  text-align: center; }
+
+/* woocomerce after loop */
+.form-suscribe-container {
+  background-color: #000; }
+
+.form-suscriber-wrapper {
+  height: 180px;
+  width: 1136px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+
+.breadcrumbs-wrapper {
+  margin-bottom: 40px; }
+
+.breadcrumbs-wrapper .breadcrumbs a,
+.breadcrumbs-wrapper .breadcrumbs span {
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #000; }
+
+.breadcrumbs-wrapper .breadcrumbs a {
+  margin: 0 10px; }
+
+.blogs-wrapper .blog-question {
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 25px; }
+
+.blogs-wrapper .blog-description {
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 400;
+  color: #000; }
+
+.blogs-component {
+  width: 1136px;
+  margin: 0 auto;
+  margin-top: 60px;
+  margin-bottom: 40px; }
+
+.blogs-container {
+  border-top: 2px solid #000;
+  padding-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 60px; }
+
+/*# sourceMappingURL=style.css.map */

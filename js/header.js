@@ -11,6 +11,8 @@ document.querySelector('.hamburger').addEventListener('click', function() {
   });
 
 jQuery(document).ready(function(){
+    if(jQuery)
+
     if(jQuery('.home-category-logo-container')){
     jQuery('.home-category-logo-container')[0].style.height='auto';
     jQuery('.home-category-logo-container')[0].style.top='50%';
@@ -33,6 +35,8 @@ jQuery(document).ready(function(){
 jQuery('.hamburger').on('click',()=>{
     jQuery('.home-category-logo-container')[0].classList.toggle('background-black');
 })
+
+
 
 
 

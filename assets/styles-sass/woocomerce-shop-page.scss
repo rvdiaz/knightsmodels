@@ -1,51 +1,71 @@
-.woocommerce .products {
+.entry-content .woocommerce{
+    display: flex;
+    justify-content: center;
+    max-width: 1136px;
+    margin: 0 auto;
+}
+.entry-content .woocommerce .products:before {
+    display: none !important;
+}
+.entry-content .woocommerce .products {
     width: fit-content;
-    margin: 0 auto !important;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-column-gap: 20px;
 }
-.woocommerce .products .product {
-    margin-right: 20px !important;
+.entry-content .woocommerce .products .product_type_simple{
+    z-index: 3;
+}
+.entry-content .woocommerce .products .type-product {
     width: 271px !important;
+    display: flex;
+    flex-direction: column;
+    float: none !important;
 }
-.woocommerce .products .product:last-child{
+.entry-content  .woocommerce .products .product:last-child{
     margin-right: 0 !important;
 }
-.woocommerce .products .product img{
+.entry-content .woocommerce .products .product .attachment-woocommerce_thumbnail{
     width: 100%;
     height: 313px;
+    object-fit: contain;
 }
-.woocommerce .products .woocommerce-loop-product__title {
+.price-whislist-product-wraper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+.price-whislist-product-wraper .price{
+    font-size: 26px !important;
+    font-weight: 400;
+    line-height: 26px;
+    color: $dark !important;
+    margin-bottom: 0 !important;
+}
+.entry-content .woocommerce .products .woocommerce-loop-product__title {
     padding: 0 !important;
     margin-top: 41px !important;
+    margin-bottom: 10px !important;
     font-size: 20px !important;
     font-weight: 700;
     line-height: 24px;
-    float: left;
 }
-.woocommerce .products .price {
-    clear: left;
-    float: left;
-    margin-top: 15px;
-    margin-bottom: 0 !important;
-    font-size: 26px !important;
-    font-weight: 400;
-    line-height: 24px;
-    color: $dark !important;
+.yith-wcwl-add-to-wishlist {
+    margin-top: 0;
 }
-.woocommerce .yith-wcwl-add-to-wishlist {
-    float: right;
-}
-.woocommerce .yith-wcwl-add-to-wishlist .yith-wcwl-icon {
+.price-whislist-product-wraper .yith-wcwl-add-to-wishlist .yith-wcwl-icon {
     margin: 0 !important;
 }
-.woocommerce .yith-wcwl-add-to-wishlist a,
-.woocommerce .yith-wcwl-add-to-wishlist span {
+.price-whislist-product-wraper .yith-wcwl-add-to-wishlist a,
+.price-whislist-product-wraper .yith-wcwl-add-to-wishlist span {
     color:$dark;
     font-size: 24px;
 }
 .added_to_cart {
     display: none !important;
 }
-.product_type_simple {
+.products .product_type_simple {
     background-image: url('http://localhost/knightsmodels/wp-content/uploads/2022/10/Rectangle-65.png') !important;
     background-repeat: no-repeat !important;
     background-size: 100% 100% !important;
@@ -55,12 +75,73 @@
     line-height: 100% !important;
     font-weight: 700 !important;
     padding: 25px 10px !important;
-    margin-top: 15px !important;
     text-transform: uppercase;
     width: -webkit-fill-available;
     clear: both;
     float: left;
     text-align: center;
 }
+.share-whishlist-wrapper {
+    display: flex;
+    position: relative;
+}
+.share-product-button {
+    cursor: pointer;
+}
+.share-product-button img{
+    width: 20px !important;
+    height: 20px !important;
+    margin-left: 13px;
+}
+.share-links {
+    display: none;
+    position: absolute;
+    right: 0;
+    bottom: 35px;
+    width: 80px;
+    background-color: white;
+    box-shadow: 0px 0px 1px 0px $dark;
+    padding: 5px;
+}
+.share-links img {
+    width: 80px !important;
+    margin: 0 !important;
+}
+.active-share {
+    display: flex;
+}
 
+@media (max-width: 1200px){
+    .entry-content .woocommerce .products {
+        padding: 0 20px !important;
+        grid-template-columns: repeat(3,1fr);
+        width: 100%;
+    }
+    .entry-content .woocommerce .products .product {
+        width: 100% !important;
+    }
+    .entry-content .woocommerce-loop-product__title {
+        float: initial !important;
+    }
+    .entry-content .woocommerce .products .product img{
+        object-fit: contain;
+        align-self: center;
+    }
+}
+@media (max-width: 900px){
+    .entry-content .woocommerce .products {
+        grid-template-columns: repeat(2,1fr);
+    }
+    
+}
+@media (max-width: 600px){
+    .entry-content .woocommerce .product_type_simple {
+        font-size: 12px !important;
+        padding: 14px 0 !important;
+        background-size: 100% 100%;
+    }
+    .entry-content .woocommerce .products {
+        grid-template-columns: repeat(1,1fr);
+    }
+}
 

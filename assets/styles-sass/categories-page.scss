@@ -67,11 +67,30 @@
 
 .secondary-filter {
     display: none;
+    flex-wrap: wrap;
+}
+.secondary-filters-container .active-secondary {
+    border-color: $theme-color;
+    color: $theme-color;
 }
 .woocomerce-filters-container {
     width: 1136px;
     margin: 0 auto;
     margin-bottom: 60px;
+    display: flex;
+    justify-content: space-between;
+}
+.loading-container{
+    display: none;
+}
+.loading-image {
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loading-image img {
+    width: 50px;
 }
 .main-filter{
     padding: 15px 16px;
@@ -109,4 +128,39 @@
 }
 .woocommerce-result-count {
     display: none;
+}
+
+@media (max-width: 1136px){
+    .subcategories-container .subcategories-title{
+        margin-top: 60px;
+    }
+}
+@media (max-width: 1024px){
+    .category-header-meta-wrapper {
+        top: 0 !important;
+    }
+    .woocomerce-filters-container {
+        width: 100%;
+    }
+    .filter-wrapper {
+        margin: 0 20px;
+    }
+}
+@media (max-width: 600px){
+    .subcategory-item-wrapper {
+        margin: 0 15px;
+    }
+    .logo-subcategory-dark img {
+        width: 40px;
+        height: 40px;
+    }
+    .subcategory-title-wrapper {
+        font-size: 12px;
+    }
+    .main-filters-container .main-filter,
+    .secondary-filters-container .secondary-filter-button{
+        padding: 10px 10px;
+        margin: 5px;
+    }
+   
 }

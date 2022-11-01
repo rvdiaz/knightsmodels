@@ -14,11 +14,14 @@
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
 
-	<?php knightsmodels_post_thumbnail(); ?>
+	<?php knightsmodels_post_thumbnail(); 
+	if(is_product_category()){
+		do_shortcode('[woocommerce-product-category]');
+	}
+	?>
 
 	<div class="entry-content">
 		<?php
-		
 		the_content();
 
 		wp_link_pages(
@@ -30,7 +33,10 @@
 		?>
 	</div><!-- .entry-content -->
 
-	<?php if ( get_edit_post_link() ) : ?>
+	<?php if ( get_edit_post_link() ) : 
+		if(is_product_category()){
+		do_shortcode('[after-categories-component]');
+		}?>
 		<footer class="entry-footer">
 			<?php
 			edit_post_link(

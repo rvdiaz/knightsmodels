@@ -65,6 +65,7 @@
     justify-content: space-between;
     align-items: center;
     margin-top: auto;
+    margin-bottom: 10px !important;
 }
 .product-price-wishlist-container .product-price {
     font-size: 26px;
@@ -77,11 +78,25 @@
     width: 15px;
 }
 
-.product-add-cart-button-container .add_to_cart_inline{
+.add_to_cart_inline{
     border: none !important;
     padding: 0 !important;
+    margin: 0 !important;
 }
-
+.product-add-cart-button-container .product_type_simple {
+    background-image: url('http://localhost/knightsmodels/wp-content/uploads/2022/10/Rectangle-65.png') !important;
+    background-repeat: no-repeat !important;
+    background-size: 100% 100% !important;
+    background-color: transparent !important;
+    color: $light !important;
+    font-size: 16px !important;
+    line-height: 100% !important;
+    font-weight: 700 !important;
+    padding: 25px 10px !important;
+    text-transform: uppercase;
+    width: -webkit-fill-available;
+    text-align: center;
+}
 .dropdown-subcategories:hover{
     display: grid;
 }
@@ -120,18 +135,25 @@
     }
     .button-category-container-mobile .add-cart-button {
         width: 320px !important;
+        background-image: url('http://localhost/knightsmodels/wp-content/uploads/2022/10/Rectangle-65.png') !important;
+    background-repeat: no-repeat !important;
         background-size: 100% 100%;
         margin: 0 20px;
+        background-size: 100% 100% !important;
+        background-color: transparent !important;
+        color: $light !important;
+        font-size: 12px !important;
+        line-height: 100% !important;
+        font-weight: 700 !important;
+        padding: 14px 10px !important;
+        text-transform: uppercase;
+        width: -webkit-fill-available;
+        text-align: center;
     }
 }
 @media (max-width: 768px) {
     .button-category-container-mobile {
         bottom: -20px;
-    }
-    .button-category-container-mobile .add-cart-button {
-        height: 40px;
-        bottom: -20px;
-       /*  width: 320px !important; */
     }
     .home-category-logo-container img {
         height: 60px;
@@ -148,6 +170,9 @@
         height: auto;
         margin-bottom: 14px;
     }
+    .product-title-container {
+        margin-bottom: 10px;
+    }
     .product-title {
         font-size: 14px;
         line-height: 17px;
@@ -156,6 +181,7 @@
         font-size: 18px;
         line-height: 18px;
     }
+   
     .product-price-wishlist-container .yith-wcwl-add-to-wishlist{
         margin-top: 0 !important;
     }
@@ -167,13 +193,14 @@
     .product-add-cart-button-container {
         margin-top: 10px;
     }
-    .product-add-cart-button-container .add-cart-button {
-        width: 146px;
-        height: 45px;
-        font-size: 12px;
-        background-size: 100% 100%;
-    }
     .inicio-category-products-container {
         margin-bottom: 28px;
+    }
+    .product-add-cart-button-container .product_type_simple {
+        padding: 14px 0px !important;
+        font-size: 12px !important;
+    }
+    .product-price-wishlist-container {
+        margin-bottom: 0 !important;
     }
 }

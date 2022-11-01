@@ -1,4 +1,6 @@
 <?php
+add_shortcode( 'after-categories-component', 'after_categories_component' );
+
 function after_categories_component(){
     $woocommerce_category_id = get_queried_object_id();
 	$cat=get_term_by( 'id', $woocommerce_category_id, 'product_cat' );
@@ -37,9 +39,12 @@ function after_categories_component(){
          ?>
     </div>
     </div>
+    <?php
+        do_shortcode('[social-media]');
+    ?>
 </div>
 <?php 
 
 } 
-add_action( 'woocommerce_after_shop_loop', 'after_categories_component', 1 );
+
 

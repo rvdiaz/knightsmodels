@@ -191,10 +191,16 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 
 
 /* load category woocomerce header */
-require get_template_directory() . '/template-parts/templates/woocomerce/category-page-header/index.php';
+require get_template_directory() . '/template-parts/templates/woocommerce/category-page-header/index.php';
 
 /* load category woocomerce footer */
-require get_template_directory() . '/template-parts/templates/woocomerce/after-categories/index.php';
+require get_template_directory() . '/template-parts/templates/woocommerce/after-categories/index.php';
+
+/* load social media block */
+require get_template_directory() . '/template-parts/templates/block-social-media/index.php';
+
+/* load category highlights */
+require get_template_directory() . '/template-parts/templates/woocommerce/category-highlights/index.php';
 
 function loop_columns() {
 	return 4; // 5 products per row
@@ -209,11 +215,101 @@ function woocommerce_add_to_cart_button_text_archives() {
 
 /* ajax */
 
+/* filter by order */
+add_action('wp_ajax_nopriv_filter', 'filter');
+add_action('wp_ajax_filter', 'filter');
 
-add_action('wp_ajax_nopriv_filter_by_price', 'filter_price');
-add_action('wp_ajax_filter_by_price', 'filter_price');
+function filter(){
+	$category= $_POST['dataSend']['category'];
+	$gol= $_POST['dataSend']['gol'];
+	switch ($gol) {
+		case 'new':{
+			echo do_shortcode( '[products columns="4" category='.$category.' orderby="date" order="ASC" ]' );
+			wp_die();	
+			break;
+		}
+		case 'high':{
+			echo do_shortcode( '[products columns="4" category='.$category.' orderby="price" order="DESC" ]' );
+			wp_die();	
+			break;
+		}
+		case 'low':{
+			echo do_shortcode( '[products columns="4" category='.$category.' orderby="price" order="ASC" ]' );
+			wp_die();	
+			break;
+		}
+		default:{
+			echo "No se encontro ningun item bajo este filtro";
+			wp_die();	
+			break;
+		}
+	}
+}
+/* filter by attributes */
+add_action('wp_ajax_nopriv_filterAttribute', 'filterAttribute');
+add_action('wp_ajax_filterAttribute', 'filterAttribute');
 
-function filter_price(){
-	echo do_shortcode( '[products limit="4" columns="4" orderby="price" order="ASC" ]' );
+function filterAttribute(){
+	$terms= $_POST['dataSend']['terms'];
+	$category= $_POST['dataSend']['category'];
+	echo do_shortcode( '[products columns="4" category='.$category.' attribute="new" terms="'.$terms.'" ]' );
 	wp_die();	
+}
+
+/* filter by range price */
+add_action('wp_ajax_nopriv_filterRange', 'filterRange');
+add_action('wp_ajax_filterRange', 'filterRange');
+
+function filterRange(){
+	$min = $_POST['dataSend']['min'];
+	$max = $_POST['dataSend']['max'];
+	$category = $_POST['dataSend']['category'];
+	$query = array(
+        'post_status' => 'publish',
+        'post_type' => 'product',
+		'product_cat' => $category,
+        'meta_query' => array(
+        array(
+            'key' => '_price',
+            'value' => array($min, $max),
+            'compare' => 'BETWEEN',
+            'type' => 'NUMERIC'
+            ),
+        ),
+    );
+    
+    $wpquery =new WP_Query($query);
+	$list='';
+	if($wpquery->have_posts()){
+        while ($wpquery->have_posts()){
+            $wpquery->the_post();
+			$list.='
+			<li class="product type-product">
+			 '.get_the_post_thumbnail().'
+                <h2 class="woocommerce-loop-product__title">'.get_the_title().'</h2>
+                <div class="price-whislist-product-wraper">
+                    <span class="price">'.get_post_meta( get_the_ID(), '_price', true ).'</span>
+                    <div class="share-whishlist-wrapper">'.
+					 do_shortcode("[yith_wcwl_add_to_wishlist product_id=".get_the_ID()."]") 
+					 .'<button class="share-product-button" onclick="showSharePopup(event)"><img refpopup="" src="'.wp_get_upload_dir()["url"].'/share.png" ></button>
+            			<div class="share-links">
+                			<a href="https://www.facebook.com/share.php?u='.get_permalink( $product->ID ).'" target="_blank"><img src="'.wp_get_upload_dir()["url"].'/facebook-share.png" > </a>
+               				<a href="https://wa.me/?text='. get_permalink( $product->ID ).'"  target="_blank"><img src="'.wp_get_upload_dir()["url"].'/whatsapp.svg" ></a>
+            			</div> 
+                    </div>
+                </div>'.
+				do_shortcode("[add_to_cart show_price=false id=".get_the_ID()."]")
+            .'</li>
+			';
+		}
+		echo '
+		<div class="woocommerce">
+            <ul class="products">'.$list.
+			'</ul>
+		</div>';
+		wp_die();	
+	} else {
+		echo 'No hay resultados encontrados';
+		wp_die();	
+	} 
 }

@@ -1,4 +1,6 @@
 <?php
+add_shortcode( 'woocommerce-product-category', 'woocommerce_product_category' );
+
 function woocommerce_product_category( ) {
     $woocommerce_category_id = get_queried_object_id();
 	$cat=get_term_by( 'id', $woocommerce_category_id, 'product_cat' );
@@ -24,11 +26,11 @@ function woocommerce_product_category( ) {
                 </div>
             </div>
         </div>
+        <?php do_shortcode('[category-highlights]'); ?>
         <div class="subcategories-container">
             <div class="subcategories-title-wrapper">
                 <p class="subcategories-title">BANDAS</p>
             </div>
-            <button onclick="filter_price()">wdwd</button>
             <div class="subcategories-wrapper">
             <div class="subcategory-list-container" data-flickity='{ "freeScroll": true, "prevNextButtons": false, "pageDots" : false, "contain":true}'>
                 <div class="card-product-container-first">
@@ -71,32 +73,49 @@ function woocommerce_product_category( ) {
             </div>
             </div>
             <div class="woocomerce-filters-container">
-                <input id="category-slug" type="hidden" value="<?php echo $cat->slug;?>">
-                <div class="main-filters-container">
+                <div class="filter-wrapper">
+                    <input id="category-slug" type="hidden" value="<?php echo $cat->slug;?>">
+                    <div class="main-filters-container">
                     <button onclick="ordenar_filter(event)" class="main-filter active">Ordenar por</button>
                     <button onclick="rango_filter(event)" class="main-filter">Rango</button>
                     <button onclick="origen_filter(event)" class="main-filter">Origen</button>
-                </div>
-                <div class="secondary-filters-container" >
+                    </div>
+                    <div class="secondary-filters-container" >
                     <div id="ordenar-filter" class="secondary-filter">
-                        <button class="secondary-filter-button">Nuevo</button>
-                        <button class="secondary-filter-button">Precio mas bajo</button>
-                        <button class="secondary-filter-button">Precio mas alto</button>
+                        <button class="secondary-filter-button" filter="new" onclick="filter(event)">Nuevo</button>
+                        <button class="secondary-filter-button" filter="low" onclick="filter(event)">Precio mas bajo</button>
+                        <button class="secondary-filter-button" filter="high" onclick="filter(event)">Precio mas alto</button>
                     </div>
                     <div id="rango-filter" class="secondary-filter">
-                        <button class="secondary-filter-button">100-200</button>
-                        <button class="secondary-filter-button">200-300</button>
-                        <button class="secondary-filter-button">300-400</button>
+                        <?php
+                        if(get_field('lista_de_opciones_de_rango','option'))
+                        foreach (get_field('lista_de_opciones_de_rango','option') as $range) {
+                        ?>
+                        <button onclick="filterRange(event)" class="secondary-filter-button" min="<?php echo $range['minimo']; ?>" max="<?php echo $range['maximo']; ?>"><?php echo $range['minimo'];?> - <?php echo $range['maximo'];?></button>
+                        <?php } ?>
                     </div>
                     <div id="origen-filter" class="secondary-filter">
-                        <button class="secondary-filter-button">cuba</button>
-                        <button class="secondary-filter-button">USA</button>
-                        <button class="secondary-filter-button">Italy</button>
+                        <?php
+                           $attribute_terms = get_terms(array(
+                            'taxonomy' => 'pa_new',
+                            'hide_empty' => true,
+                        ));
+                         foreach ($attribute_terms as $attr) {
+                        ?>
+                        <button onclick="filterAttribute(event)" class="secondary-filter-button"><?php echo $attr->name;?></button>
+                        <?php   } ?>
+                    </div>
+                    </div>
+                </div>
+                <div class="loading-container">
+                    <div class="loading-image">
+                        <img src="<?php echo wp_get_upload_dir()["url"] ?>/Double-Ring-1s-200px-1.gif" alt="">
                     </div>
                 </div>
             </div>
         <?php
+        
 	}
+    
 }
 
-add_action( 'woocommerce_before_shop_loop', 'woocommerce_product_category', 1 );

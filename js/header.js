@@ -11,7 +11,7 @@ document.querySelector('.hamburger').addEventListener('click', function() {
   });
 
 jQuery(document).ready(function(){
-    if(jQuery('.home-category-logo-container')){
+    if(jQuery('.home-category-logo-container')[0]){
     jQuery('.home-category-logo-container')[0].style.height='auto';
     jQuery('.home-category-logo-container')[0].style.top='50%';
     }

@@ -1,0 +1,201 @@
+.contact-form-title-container {
+    padding: 0 20px;
+    max-width: 1136px;
+    margin: 0 auto;
+    margin-top: 34px;
+    margin-bottom: 54px;
+    text-align: center;
+}
+.contact-form-title-container img {
+    width: 286px;
+    height: 80px;
+}
+.contact-form-title p{
+    font-size: 28px;
+    line-height: 28px;
+    font-style: italic;
+    font-weight: 800;
+    text-align: center;
+    margin-top: 60px;
+}
+.contact-group {
+    height: 60px;
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.contact-form-container .input-title {
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+.contact-group,
+.contact-group-textarea {
+    margin-top: 16px;
+}
+.contact-group span span {
+    position: absolute;
+    width: fit-content;
+    padding: 6px 0;
+}
+.contact-group input,
+.contact-group select {
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 300;
+    color: $dark;
+}
+.contact-group-textarea textarea {
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 300;
+    color: $dark;
+}
+.contact-group input{
+    border: none;
+    height: 58px;
+}
+.contact-group span {
+    padding: 0 20px;
+    width: 90%;
+}
+.contact-group select {
+    height: 58px;
+    width: 100%;
+    border: none;
+}
+.contact-group input:focus,
+.contact-group select:focus,
+.contact-group-textarea textarea:focus {
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
+.contact-form-container {
+    max-width: 1136px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.contact-first-block {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 26px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+.contact-second-block {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 26px;
+}
+.contact-group-wrapper-file {
+  grid-column-start: 2;
+  grid-column-end: 4;
+}
+.contact-group-wrapper-textarea {
+    margin-top: 40px;
+}
+.contact-group-textarea {
+    background-size: 100% 100%;
+    padding: 22px 20px;
+}
+.contact-group-textarea textarea {
+    border: none;
+    width: 100%;
+}
+.contact-terms-conditions-block,
+.contact-submit-form {
+    width: 80%;
+    margin: 40px auto;
+}
+.contact-terms-conditions-block span{
+    margin: 0;
+}
+.contact-terms-conditions-block p {
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: 300;
+}
+.contact-terms-conditions-block .terms-condition-text {
+    margin-bottom: 20px;
+}
+.contact-terms-conditions-block input {
+    margin-right: 20px;
+    width: 20px;
+    height: 20px;
+}
+.contact-submit-form {
+    text-align: center;
+}
+.contact-submit-form input {
+    width: 570px;
+    height: 60px;
+    border: none;
+    background-size: 100% 100%;
+    background-color: transparent;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 700;
+    color: $light;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.contact-group-file span {
+    padding: 0;
+    width: 100%;
+}
+.contact-group-file input[type=file]{
+    content:"dfdf";
+    height: 60px;
+    width: 100%;
+}
+
+.contact-group-file input[type=file]::file-selector-button {
+    content: "Seleccionar";
+    color: $light;
+    height: 58px;
+    width: 207px;
+    border: none;
+    margin: 0;
+    padding: 0;
+    padding-top:0;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 300;
+    font-family: 'Montserrat';
+    float: right;
+  }
+
+  @media (max-width: 1024px){
+    .contact-form-title-container {
+        margin-bottom: 30px;
+    }
+    .contact-form-title-container img {
+        width: 214px;
+        height: 60px;
+    }
+    .contact-form-title p{
+        font-size: 20px;
+        margin-top: 30px;
+    }
+    .contact-first-block,
+    .contact-second-block {
+        grid-template-columns: 1fr;
+    }
+    .contact-group-wrapper-file {
+        grid-column-start: initial;
+        grid-column-end: initial;
+    }
+    .contact-terms-conditions-block,
+    .contact-submit-form {
+        width: 100%;
+    }
+    .contact-submit-form input {
+        width: 100%;
+    }
+  }

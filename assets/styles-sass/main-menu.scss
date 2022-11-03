@@ -5,6 +5,11 @@
     width: 100%;
     z-index: 1;
 }
+.main-menu-dark {
+    min-height: 123px;
+    background-color:$dark;
+    width: 100%;
+}
 .main-menu-top {
     max-width: 1082px;
     margin: 0 auto;
@@ -127,6 +132,7 @@
     background-color: $dark;
     padding: 64px 0;
     grid-template-columns: repeat(6, 1fr);
+    z-index: 99;
 }
 .dropdown-subcategories .sub-category {
     display: flex;

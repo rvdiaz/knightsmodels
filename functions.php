@@ -142,6 +142,8 @@ function knightsmodels_scripts() {
 	wp_style_add_data( 'knightsmodels-style', 'rtl', 'replace' );
 
 	wp_enqueue_script( 'knightsmodels-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'knightsmodels-descargas', get_template_directory_uri() . '/js/descargas.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'knightsmodels-contact', get_template_directory_uri() . '/js/contact-form.js', array(), _S_VERSION, true );
 	wp_enqueue_script( 'knightsmodels-header', get_template_directory_uri() . '/js/header.js', array(), _S_VERSION, true );
 	wp_enqueue_script( 'knightsmodels-sliders', get_template_directory_uri() . '/js/flickity.pkgd.min.js', array(), _S_VERSION, true );
 	wp_enqueue_script( 'knightsmodels-footer', get_template_directory_uri() . '/js/footer.js', array(), _S_VERSION, true );
@@ -196,22 +198,26 @@ require get_template_directory() . '/template-parts/templates/woocommerce/catego
 /* load category woocomerce footer */
 require get_template_directory() . '/template-parts/templates/woocommerce/after-categories/index.php';
 
+/* load category woocomerce first level */
+require get_template_directory() . '/template-parts/templates/woocommerce/first-level-category/index.php';
+
 /* load social media block */
 require get_template_directory() . '/template-parts/templates/block-social-media/index.php';
 
 /* load category highlights */
 require get_template_directory() . '/template-parts/templates/woocommerce/category-highlights/index.php';
 
+
 function loop_columns() {
 	return 4; // 5 products per row
 	}
 add_filter('loop_shop_columns', 'loop_columns', 999);
 
-add_filter( 'woocommerce_product_add_to_cart_text', 'woocommerce_add_to_cart_button_text_archives' );  
+/* add_filter( 'woocommerce_product_add_to_cart_text', 'woocommerce_add_to_cart_button_text_archives' );  
 	
 function woocommerce_add_to_cart_button_text_archives() {
 	return __( 'Añadir a la cesta', 'woocommerce' );
-}
+} */
 
 /* ajax */
 
@@ -313,3 +319,4 @@ function filterRange(){
 		wp_die();	
 	} 
 }
+add_filter( 'wpcf7_form_elements', 'do_shortcode' );

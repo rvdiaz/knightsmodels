@@ -16,14 +16,22 @@
 
 	<?php knightsmodels_post_thumbnail(); 
 	if(is_product_category()){
-		do_shortcode('[woocommerce-product-category]');
+		$woocommerce_category_id = get_queried_object_id();
+		$cat=get_term_by( 'id', $woocommerce_category_id, 'product_cat' );
+		$parent_id=$cat->parent;
+		$parent = get_term_by( 'id', $parent_id, 'product_cat' );
+		if($parent->name!='inicio' && $cat->name!='inicio')
+			do_shortcode('[woocommerce-product-second-category]');
 	}
 	?>
 
 	<div class="entry-content">
 		<?php
-		the_content();
-
+		if(is_product_category() && $parent->name=='inicio'){
+			do_shortcode('[categories-first-level]');
+		} else {
+			the_content();
+		}
 		wp_link_pages(
 			array(
 				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'knightsmodels' ),
@@ -64,4 +72,12 @@
 <!------------- Home --------------------------->	
 
 <?php include('templates/home/index.php'); ?>
+
+<!------------- Descargas --------------------------->	
+
+<?php include('templates/descargas/index.php'); ?>
+
+<!------------- Contact Form --------------------------->	
+
+<?php include('templates/contact-form/index.php'); ?>
 

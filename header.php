@@ -45,7 +45,7 @@
 			</div>
 		</div>
 		<?php } ?>
-		<div class="main-menu">
+		<div class="<?php if(is_product_category() || is_front_page()) echo "main-menu"; else echo "main-menu-dark";?>">
 			<div class="main-menu-top">
 				<div class="hamburger">
          			<img src="<?php echo wp_get_upload_dir()["url"] ?>/icono-hamburguesa.png" >
@@ -126,13 +126,13 @@
 						if($parent->name=='inicio'){
 					?>
 					<li class="menu-bottom-items-container menu-bottom-items-container-<?php echo $count;?>">
-						<button class="menu-main-bottom-items menu-button-<?php echo $count;?>">
+						<a class="menu-main-bottom-items menu-button-<?php echo $count;?>" href="<?php echo get_category_link( $cat->term_id ); ?>">
 							<?php if(get_field('logo_ico_menu',$cat)) {?>
 							<img src="<?php echo get_field('logo_ico_menu',$cat)?>" alt="<?php echo $cat->name?>">
 							<?php 
 						} ?>
 							<span><?php echo $cat->name; ?></span>
-						</button>
+						</a>
 						<div class="dropdown-subcategories">
 							<?php
 								$argsSubCat= array(

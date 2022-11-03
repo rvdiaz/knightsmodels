@@ -1,5 +1,5 @@
 <?php
-add_shortcode( 'woocommerce-product-category', 'woocommerce_product_category' );
+add_shortcode( 'woocommerce-product-second-category', 'woocommerce_product_category' );
 
 function woocommerce_product_category( ) {
     $woocommerce_category_id = get_queried_object_id();
@@ -27,7 +27,16 @@ function woocommerce_product_category( ) {
             </div>
         </div>
         <?php do_shortcode('[category-highlights]'); ?>
+        
         <div class="subcategories-container">
+        <div class="shop-views-filter">
+            <input type="range" id="filter-views" name="points" min="0" max="2">
+            <div class="filter-views-options">
+                <button class="one-column"><img src="<?php echo wp_get_upload_dir()["url"]?>/icono-vista-horizontal.svg" alt=""></button>
+                <button class="one-column"><img src="<?php echo wp_get_upload_dir()["url"]?>/icono-vista-dos-columnas.svg" alt=""></button>
+                <button class="one-column"><img src="<?php echo wp_get_upload_dir()["url"]?>/icono-vista-general.svg" alt=""></button>
+            </div>
+        </div>
             <div class="subcategories-title-wrapper">
                 <p class="subcategories-title">BANDAS</p>
             </div>

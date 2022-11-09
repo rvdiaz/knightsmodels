@@ -1,3 +1,65 @@
+/*!
+Theme Name: knightsmodels
+Theme URI: http://underscores.me/
+Author: Underscores.me
+Author URI: http://underscores.me/
+Description: Description
+Version: 1.0.0
+Tested up to: 5.4
+Requires PHP: 5.6
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: knightsmodels
+Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned.
+
+knightsmodels is based on Underscores https://underscores.me/, (C) 2012-2020 Automattic, Inc.
+Underscores is distributed under the terms of the GNU GPL v2 or later.
+
+Normalizing styles have been helped along thanks to the fine work of
+Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
+*/
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Generic
+	- Normalize
+	- Box sizing
+# Base
+	- Typography
+	- Elements
+	- Links
+	- Forms
+## Layouts
+# Components
+	- Navigation
+	- Posts and pages
+	- Comments
+	- Widgets
+	- Media
+	- Captions
+	- Galleries
+# plugins
+	- Jetpack infinite scroll
+# Utilities
+	- Accessibility
+	- Alignments
+
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+# Generic
+--------------------------------------------------------------*/
+/* Normalize
+--------------------------------------------- */
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+/* Document
+	 ========================================================================== */
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
 @font-face {
   font-family: 'Montserrat';
   font-style: normal;
@@ -42,7 +104,6 @@ button {
 
 /*  header styles */
 .header-top-promotion {
-  background-image: url("http://localhost/knightsmodels/wp-content/uploads/2022/10/header-top-background.png");
   height: 80px;
   width: 100%; }
 
@@ -65,7 +126,6 @@ button {
   align-items: center; }
 
 .button-promocion {
-  background-image: url("http://localhost/knightsmodels/wp-content/uploads/2022/10/button-header-top.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   font-size: 14px;
@@ -235,20 +295,22 @@ button {
 .dropdown-subcategories {
   display: none;
   position: absolute;
-  top: 53px;
+  top: 100%;
   left: 0;
   border-top: 2px solid #fff;
-  width: 100%;
+  width: 90%;
   background-color: #000;
-  padding: 64px 0;
+  padding: 5%;
   grid-template-columns: repeat(6, 1fr);
+  grid-gap: 25px;
   z-index: 99; }
 
 .dropdown-subcategories .sub-category {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-decoration: none; }
+  text-decoration: none;
+  text-align: center; }
 
 .dropdown-subcategories .sub-category span {
   color: #fff;
@@ -385,9 +447,9 @@ button {
   margin-bottom: 60px; }
 
 .product-image-container img {
+  object-fit: contain;
   width: 271px;
-  height: 313px;
-  margin-bottom: 41px; }
+  height: 313px; }
 
 .product-title {
   font-size: 20px;
@@ -420,7 +482,6 @@ button {
   margin: 0 !important; }
 
 .product-add-cart-button-container .product_type_simple {
-  background-image: url("http://localhost/knightsmodels/wp-content/uploads/2022/10/Rectangle-65.png") !important;
   background-repeat: no-repeat !important;
   background-size: 100% 100% !important;
   background-color: transparent !important;
@@ -470,7 +531,6 @@ button {
 
   .button-category-container-mobile .add-cart-button {
     width: 320px !important;
-    background-image: url("http://localhost/knightsmodels/wp-content/uploads/2022/10/Rectangle-65.png") !important;
     background-repeat: no-repeat !important;
     background-size: 100% 100%;
     margin: 0 20px;
@@ -548,62 +608,14 @@ button {
   flex-direction: column;
   justify-content: space-around; }
 
-.shipping-zone-container {
-  display: flex;
-  align-items: center; }
+.list-languages .js-wpml-ls-item-toggle,
+.list-languages .wpml-ls-sub-menu a {
+  background-color: #000 !important;
+  color: #fff !important; }
 
-.country-list-wrapper {
-  display: flex;
-  align-items: center; }
-
-#country-list-active {
-  color: #fff;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 14px;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  display: flex;
-  align-items: center;
-  cursor: pointer; }
-
-#country-active-value {
-  margin: 0 5px; }
-
-.shipping-country-text {
-  color: #fff;
-  font-size: 14px;
-  font-weight: 300;
-  line-height: 14px; }
-
-.dropdown-coountry-list {
-  position: relative;
-  display: inline-block; }
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #000;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-  right: 0;
-  bottom: 35px;
-  border: 1px solid #fff; }
-
-.dropdown-content span {
-  color: #fff;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 14px;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  cursor: pointer; }
-
-.open {
-  display: block; }
+.list-languages .js-wpml-ls-item-toggle:hover,
+.list-languages .wpml-ls-sub-menu a:hover {
+  color: #fff !important; }
 
 .copyright-text {
   color: #fff;
@@ -643,7 +655,6 @@ button {
   height: 460px; }
 
 .subcategories-container {
-  background-image: url("http://localhost/knightsmodels/wp-content/uploads/2022/10/Rectangle-115.png");
   background-repeat: no-repeat;
   background-size: 100%;
   min-height: 100px;
@@ -659,7 +670,8 @@ button {
   line-height: 26px;
   color: #000;
   text-align: center;
-  margin-bottom: 60px; }
+  margin-bottom: 60px;
+  text-transform: uppercase; }
 
 .subcategories-container .subcategory-title {
   font-size: 16px;
@@ -808,6 +820,7 @@ button {
 .entry-content .woocommerce {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   max-width: 1136px;
   margin: 0 auto; }
 
@@ -852,11 +865,13 @@ button {
 
 .entry-content .woocommerce .products .woocommerce-loop-product__title {
   padding: 0 !important;
-  margin-top: 41px !important;
   margin-bottom: 10px !important;
   font-size: 20px !important;
   font-weight: 700;
   line-height: 24px; }
+
+.mposshopmassage {
+  display: none; }
 
 .yith-wcwl-add-to-wishlist {
   margin-top: 0; }
@@ -873,7 +888,6 @@ button {
   display: none !important; }
 
 .products .product_type_simple {
-  background-image: url("http://localhost/knightsmodels/wp-content/uploads/2022/10/Rectangle-65.png") !important;
   background-repeat: no-repeat !important;
   background-size: 100% 100% !important;
   background-color: transparent !important;
@@ -1252,7 +1266,8 @@ button {
   font-style: italic;
   font-weight: 800;
   text-align: center;
-  margin-top: 60px; }
+  margin-top: 60px;
+  margin-bottom: 74px; }
 
 .contact-group {
   height: 60px;
@@ -1319,7 +1334,6 @@ button {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 26px;
-  margin-top: 20px;
   margin-bottom: 40px; }
 
 .contact-second-block {
@@ -1384,12 +1398,10 @@ button {
   width: 100%; }
 
 .contact-group-file input[type=file] {
-  content: "dfdf";
-  height: 60px;
-  width: 100%; }
+  width: 100%;
+  height: 60px; }
 
 .contact-group-file input[type=file]::file-selector-button {
-  content: "Seleccionar";
   color: #fff;
   height: 58px;
   width: 207px;
@@ -1398,7 +1410,7 @@ button {
   padding: 0;
   padding-top: 0;
   background-color: transparent;
-  cursor: pointer;
+  cursor: potrank voy inter;
   font-size: 16px;
   line-height: 16px;
   font-weight: 300;
@@ -1431,5 +1443,27 @@ button {
 
   .contact-submit-form input {
     width: 100%; } }
+/* first level category */
+.preorder-background-image-item {
+  width: 100%;
+  height: 500px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%; }
+
+.first-level-category-products-container {
+  margin: 60px 0; }
+
+.category-description-container {
+  height: 222px;
+  background-color: #000; }
+
+.second-card {
+  margin-top: 38px; }
+
+/* content page */
+.content-page {
+  margin-top: 60px;
+  max-width: 1136px;
+  margin: 0 auto; }
 
 /*# sourceMappingURL=style.css.map */

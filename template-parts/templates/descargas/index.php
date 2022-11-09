@@ -11,16 +11,20 @@ $args= array(
     </div>    
     <div class="descargas-files-container">
             <?php
-            foreach ($all_categories as $keycat => $cat) {
-                $parent_id=$cat->parent;
-                $parent = get_term_by( 'id', $parent_id, 'product_cat' );
-                if($parent->name=='inicio'){
-                    $thumbnail_id = get_woocommerce_term_meta( $cat->term_id, 'thumbnail_id', true );
-                    $image = wp_get_attachment_url( $thumbnail_id );
+            if(get_field('menu_categorias','option')){
+                foreach (get_field('menu_categorias','option') as $category_id) {
+                    $cat = get_term_by( 'id', $category_id['id_categoria'], 'product_cat' );
             ?>
             <div class="descargas-files-wrapper">
-                <div class="descargas-images-wrapper" style="background-image:url(<?php echo $image;?>)">
-                    <img src="<?php echo get_field('logo_banner',$cat)?>" alt="<?php echo $cat->name?>">
+                <div class="descargas-images-wrapper" style="background-image:url(<?php if(get_field('imagen_slider_categoria',$cat)){ 
+                    echo get_field('imagen_slider_categoria',$cat); 
+                    } elseif(get_field('imagen_seccion_principal_categoria','option')) {
+                    echo get_field('imagen_seccion_principal_categoria','option');} ?>)">
+                    <?php if(get_field('logo_banner',$cat)){?>
+                        <img src="<?php echo get_field('logo_banner',$cat)?>" alt="<?php echo $cat->name?>">
+                    <?php } elseif (get_field('imagen_blanca_categoria','option')){ ?>
+                        <img src="<?php echo get_field('imagen_blanca_categoria','option')?>" alt="<?php echo $cat->name?>">
+                    <?php } ?>
                     <button class="descargas-dropdown-files" ><img onclick="openAccord(event)" idaccordion="accordion-<?php echo $keycat;?>" src="<?php echo wp_get_upload_dir()["url"]?>/icono-flecha-opciones.png" ></button>
                 </div>
                 <div class="descargas-files-accordion" id="accordion-<?php echo $keycat;?>">
@@ -53,26 +57,3 @@ $args= array(
 do_shortcode('[after-categories-component]');
 }   
 ?>
-
-<style>
-    .contact-form-container .contact-group{
-        background-image:url("<?php echo wp_get_upload_dir()["url"]?>/Group-62.png");
-    }
-    .contact-form-container .contact-group-file{
-        background-image:url("<?php echo wp_get_upload_dir()["url"]?>/Group-110.png");
-    }
-    .contact-form-container .contact-group-textarea{
-        background-image:url("<?php echo wp_get_upload_dir()["url"]?>/Group-111.png");
-    }
-    .contact-submit-form input {
-        background-image: url("<?php echo wp_get_upload_dir()["baseurl"]?>/2022/10/Rectangle-65.png");
-    }
-    .contact-group-file input[type=file]::file-selector-button {
-        background-image: url("<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/Rectangle-152.png");
-    }
-    @media (max-width: 1024px){
-    .contact-group {
-        background-image:url("<?php echo wp_get_upload_dir()["url"]?>/Group-110.png") !important;
-    }
-  }
-</style>

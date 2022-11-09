@@ -20,16 +20,19 @@
 		$cat=get_term_by( 'id', $woocommerce_category_id, 'product_cat' );
 		$parent_id=$cat->parent;
 		$parent = get_term_by( 'id', $parent_id, 'product_cat' );
-		if($parent->name!='inicio' && $cat->name!='inicio')
+		if($parent->slug!='inicio' && $cat->slug!='inicio')
 			do_shortcode('[woocommerce-product-second-category]');
 	}
 	?>
 
 	<div class="entry-content">
 		<?php
-		if(is_product_category() && $parent->name=='inicio'){
+		if(is_product_category() && $parent->slug=='inicio'){
 			do_shortcode('[categories-first-level]');
-		} else {
+		} elseif(get_field('plantilla')=='contenido'){
+			do_shortcode('[content]');
+		}
+		else {
 			the_content();
 		}
 		wp_link_pages(
@@ -80,4 +83,6 @@
 <!------------- Contact Form --------------------------->	
 
 <?php include('templates/contact-form/index.php'); ?>
+
+
 

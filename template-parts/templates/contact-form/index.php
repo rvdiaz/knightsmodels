@@ -7,11 +7,10 @@
             <?php } ?>
         </div>
         <div class="contact-form-title">
-            <p>Contáctanos</p>
+            <p><?php echo get_the_title(); ?></p>
         </div>
     </div>
 <?php
-
-    do_shortcode('[contact-form-7 id="227" title="Contact Form"]');
+    echo do_shortcode('[contact-form-7 id="227" title="Contact Form"]');
     do_shortcode('[after-categories-component]');
  }

@@ -67,7 +67,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
             <button class="share-product-button" onclick="showSharePopup(event)"><img refpopup="" src="<?php echo wp_get_upload_dir()["url"] ?>/share.png" ></button>
             <div class="share-links">
                 <a href="https://www.facebook.com/share.php?u=<?php echo get_permalink( $product->ID );?>" target="_blank"><img src="<?php echo wp_get_upload_dir()["url"] ?>/facebook-share.png" > </a>
-                <a href="https://wa.me/?text=<?php echo get_permalink( $product->ID );?>"  target="_blank"><img src="<?php echo wp_get_upload_dir()["url"] ?>/whatsapp.svg" ></a>
+                <a href="https://wa.me/?text=<?php echo get_permalink( $product->ID );?>"  target="_blank"><img src="<?php echo wp_get_upload_dir()["url"] ?>/whatsapp.png" ></a>
             </div>
         </div>
     </div> 

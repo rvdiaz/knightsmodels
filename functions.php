@@ -204,6 +204,9 @@ require get_template_directory() . '/template-parts/templates/woocommerce/first-
 /* load social media block */
 require get_template_directory() . '/template-parts/templates/block-social-media/index.php';
 
+/* load content */
+require get_template_directory() . '/template-parts/templates/content-template/index.php';
+
 /* load category highlights */
 require get_template_directory() . '/template-parts/templates/woocommerce/category-highlights/index.php';
 
@@ -289,12 +292,13 @@ function filterRange(){
 	if($wpquery->have_posts()){
         while ($wpquery->have_posts()){
             $wpquery->the_post();
+			$prod=wc_get_product( get_the_ID() );
 			$list.='
 			<li class="product type-product">
 			 '.get_the_post_thumbnail().'
                 <h2 class="woocommerce-loop-product__title">'.get_the_title().'</h2>
                 <div class="price-whislist-product-wraper">
-                    <span class="price">'.get_post_meta( get_the_ID(), '_price', true ).'</span>
+                    <span class="price">'.$prod->get_price_html().'</span>
                     <div class="share-whishlist-wrapper">'.
 					 do_shortcode("[yith_wcwl_add_to_wishlist product_id=".get_the_ID()."]") 
 					 .'<button class="share-product-button" onclick="showSharePopup(event)"><img refpopup="" src="'.wp_get_upload_dir()["url"].'/share.png" ></button>

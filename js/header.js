@@ -31,7 +31,9 @@ jQuery(document).ready(function(){
 })
 
 jQuery('.hamburger').on('click',()=>{
+    if(window.screen.width < 1024){
     jQuery('.home-category-logo-container')[0].classList.toggle('background-black');
+}
 })
 
 

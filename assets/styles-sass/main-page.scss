@@ -48,9 +48,9 @@
     margin-bottom: 60px;
 }
 .product-image-container img{
+    object-fit: contain;
     width: 271px;
     height: 313px;
-    margin-bottom: 41px;
 }
 .product-title {
     font-size: 20px;
@@ -84,7 +84,6 @@
     margin: 0 !important;
 }
 .product-add-cart-button-container .product_type_simple {
-    background-image: url('http://localhost/knightsmodels/wp-content/uploads/2022/10/Rectangle-65.png') !important;
     background-repeat: no-repeat !important;
     background-size: 100% 100% !important;
     background-color: transparent !important;
@@ -135,8 +134,7 @@
     }
     .button-category-container-mobile .add-cart-button {
         width: 320px !important;
-        background-image: url('http://localhost/knightsmodels/wp-content/uploads/2022/10/Rectangle-65.png') !important;
-    background-repeat: no-repeat !important;
+        background-repeat: no-repeat !important;
         background-size: 100% 100%;
         margin: 0 20px;
         background-size: 100% 100% !important;

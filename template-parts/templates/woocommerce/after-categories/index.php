@@ -12,11 +12,23 @@ function after_categories_component(){
             $cat=get_term_by( 'id', $woocommerce_category_id, 'product_cat' );
             $parent_cat_id=$cat->parent;
             $parent_cat = get_term_by( 'id', $parent_cat_id, 'product_cat' );
+            if($parent_cat->slug!="inicio"){
+            if(get_field("logo_banner",$parent_cat)){
             ?>
-            <img src="<?php echo get_field("logo_banner",$parent_cat);?>" alt="<?php echo $parent_cat->name; ?>">
-            <?php } elseif (get_field('logo_sitio','option')){?>
+                <img src="<?php echo get_field("logo_banner",$parent_cat);?>" alt="<?php echo $parent_cat->name; ?>">
+            <?php } elseif(get_field('imagen_blanca_categoria','option')) {?>
+                <img src="<?php echo get_field('imagen_blanca_categoria','option');?>" alt="knight models">
+           <?php }
+            } elseif (get_field("logo_banner",$cat)){
+                ?>
+                    <img src="<?php echo get_field("logo_banner",$cat);?>" alt="<?php echo $parent_cat->name; ?>">
+                <?php } elseif(get_field('imagen_blanca_categoria','option')) {?>
+                    <img src="<?php echo get_field('imagen_blanca_categoria','option');?>" alt="knight models">
+               <?php }
+            } elseif (get_field('logo_sitio','option')){
+                ?>
                 <img src="<?php echo get_field('logo_sitio','option');?>" alt="knight models">
-            <?php } ?>
+            <?php }  ?>
         </div>
         <div class="form-suscriber">
 

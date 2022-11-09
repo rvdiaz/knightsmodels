@@ -3,7 +3,6 @@ add_shortcode( 'social-media', 'social_media' );
 
 function social_media(){
     ?>
-    
     <div class="social-media-container">
         <div class="social-media">
             <?php
@@ -43,4 +42,3 @@ function social_media(){
 <?php
 }
 ?>
-

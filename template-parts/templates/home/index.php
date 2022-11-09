@@ -3,48 +3,58 @@
     ?>    
     <div class="home-categories-container">
         <!-- listar categorias -->
-        <?php $args= array(
+        <?php /* $args= array(
 	    'orderby' => 'name',
 	    'hide_empty' => false,
 	    ); 
 	    $all_categories= get_terms('product_cat',$args);
 		foreach ($all_categories as $cat) {
 		$parent_id=$cat->parent;
-		$parent = get_term_by( 'id', $parent_id, 'product_cat' );
-
+		$parent = get_term_by( 'id', $parent_id, 'product_cat' ); */
+        if(get_field('menu_categorias','option')){
+            foreach (get_field('menu_categorias','option') as $category_id) {
+                $cat = get_term_by( 'id', $category_id['id_categoria'], 'product_cat' );
+                $parent_id=$cat->parent;
+		        $parent = get_term_by( 'id', $parent_id, 'product_cat' ); 
         /* get product by category */
-
         $argsProduct = array(
             'category' => array( $cat->slug )
         );
-        $products = wc_get_products( $argsProduct );
-
-			if($parent->name=='inicio' && count($products)>0){
+            $products = wc_get_products( $argsProduct );
+			if($parent->slug=='inicio' && count($products)>0){
 		?>
 		<div id="home-category-wrapper" class="home-category-wrapper">
             <div class="home-category-image">
                 <?php
-                $thumbnail_id = get_woocommerce_term_meta( $cat->term_id, 'thumbnail_id', true );
-                $image = wp_get_attachment_url( $thumbnail_id );
+               /*  $thumbnail_id = get_woocommerce_term_meta( $cat->term_id, 'thumbnail_id', true );
+                $image = wp_get_attachment_url( $thumbnail_id ); */
+                if(get_field('imagen_slider_categoria',$cat)){
                 ?>
-                <img src="<?php echo $image;?>" alt="<?php $cat->name; ?>">
+                    <img src="<?php echo get_field('imagen_slider_categoria',$cat);?>" alt="<?php $cat->name; ?>">
+                <?php } elseif(get_field('imagen_seccion_principal_categoria','option')){?>
+                    <img src="<?php echo get_field('imagen_seccion_principal_categoria','option');?>" alt="<?php echo $cat->name?>">
+                <?php } ?>
             </div>
             <div class="home-category-logo-container">
                 <?php if(get_field('logo_banner',$cat)) {?>
 				    <img src="<?php echo get_field('logo_banner',$cat)?>" alt="<?php echo $cat->name?>">
-				<?php } ?>
+				<?php } elseif(get_field('imagen_blanca_categoria','option')){ ?>
+                    <img src="<?php echo get_field('imagen_blanca_categoria','option')?>" alt="<?php echo $cat->name?>">
+                <?php } ?>
             </div>
             <div class="product-add-cart-button-container button-category-container-mobile">
                 <button class="add-cart-button"><?php echo $cat->name;?></button>
             </div>
         </div>
             <!-- listar productos por categoria -->
-            <div class="inicio-category-products-container" data-flickity='{ "freeScroll": true, "prevNextButtons": false, "pageDots" : false, "contain":true}'>
+            <div class="inicio-category-products-container"  data-flickity='{ "freeScroll": true, "prevNextButtons": false, "pageDots" : false, "contain":true}'>
                 <div class="card-product-container-first">
                 </div>
                 <?php 
                 foreach ($products as $product) {
                     ?>
+                    <div>
+                    </div>
                     <div class="card-product-container">
                         <div class="product-image-container">
                             <a href="<?php echo $product->get_permalink( );?>" target="_blank">
@@ -55,20 +65,23 @@
                             <a class="product-title" href="<?php echo $product->get_permalink( );?>" target="_blank"><?php echo $product->name;?></a>
                         </div>
                         <div class="product-price-wishlist-container">
-                            <p class="product-price"><?php echo $product->price.' '.get_woocommerce_currency_symbol();?></p>
+                            <p class="product-price"><?php echo $product->get_price_html();?></p>
                             <?php echo do_shortcode('[yith_wcwl_add_to_wishlist product_id='.$product->id.']');?>
                         </div>
                         <div class="product-add-cart-button-container">
                         <?php echo do_shortcode('[add_to_cart show_price=false id='.$product->id.']'); ?>
                         </div>
                     </div>
-                    <?php  } ?>
+                    <?php         
+                } ?>
                 <div class="card-product-container-last">
                 </div>
             </div> 
 		<?php }
-					}
+		}
+    } 
     ?>  
     </div>    
-
- <?php  } ?>
+ <?php  
+    }
+ ?>

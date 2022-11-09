@@ -9,17 +9,23 @@ function woocommerce_product_category( ) {
         <div class="home-category-wrapper">
             <div class="home-category-image category-header-image-wrapper">
                 <?php
-                $thumbnail_id = get_woocommerce_term_meta( $woocommerce_category_id, 'thumbnail_id', true );
-                $image = wp_get_attachment_url( $thumbnail_id );
+                if(get_field('imagen_slider_categoria',$cat)){
                 ?>
-                <img src="<?php echo $image;?>" alt="<?php $cat->name; ?>">
+                <img src="<?php echo get_field('imagen_slider_categoria',$cat);?>" alt="<?php $cat->name; ?>">
+                <?php } elseif (get_field('imagen_seccion_principal_categoria','option')) { ?>
+                   <img src="<?php echo get_field('imagen_seccion_principal_categoria','option');?>" alt="<?php $cat->name; ?>">
+                <?php } ?>
             </div>
             <div class="home-category-logo-container category-header-meta-wrapper">
                 <?php if(get_field('logo_banner',$cat)) {?>
                     <div>
 				        <img src="<?php echo get_field('logo_banner',$cat)?>" alt="<?php echo $cat->name?>">
                     </div>
-                <?php } ?>
+                <?php }elseif (get_field('imagen_blanca_categoria','option')) {?>
+                    <div>
+                    <img src="<?php echo get_field('imagen_blanca_categoria','option');?>" alt="<?php echo $cat->name?>">
+                </div>
+               <?php } ?>
                 <div class="category-meta-container">
                     <p class="category-title"><?php echo $cat->name;?></p>
                     <p class="category-description"><?php echo $cat->description;?></p>
@@ -28,7 +34,7 @@ function woocommerce_product_category( ) {
         </div>
         <?php do_shortcode('[category-highlights]'); ?>
         
-        <div class="subcategories-container">
+        <div class="subcategories-container" style="background-image:url('<?php echo wp_get_upload_dir()["url"]?>/Rectangle-115.png')"?>
         <div class="shop-views-filter">
             <input type="range" id="filter-views" name="points" min="0" max="2">
             <div class="filter-views-options">
@@ -49,10 +55,10 @@ function woocommerce_product_category( ) {
 	            'hide_empty' => false
 	            ); 
 	            $all_categories= get_terms('product_cat',$args); 
-		       foreach ($all_categories as $cate) {
+		        foreach ($all_categories as $cate) {
                     $parent_id=$cate->parent;
                     $parent = get_term_by( 'id', $parent_id, 'product_cat' );
-                    if($parent->name!='inicio' && $cate->name!='inicio'){
+                    if($parent->slug!='inicio' && $cate->slug!='inicio'){
                     ?>
                     <div class="subcategory-item-wrapper">
                         <a href="<?php echo get_category_link( $cate->term_id ); ?>">
@@ -60,11 +66,19 @@ function woocommerce_product_category( ) {
                         if($cate->term_id !=  $woocommerce_category_id){ 
                             ?>
                             <div class="logo-subcategory-dark">
-                                <img src="<?php echo get_field('logo_ico_menu',$cate); ?>" alt="<?php echo $cate->name; ?>">
+                                <?php if(get_field('logo_ico_menu',$cate)) {?>
+                                    <img src="<?php echo get_field('logo_ico_menu',$cate); ?>" alt="<?php echo $cate->name; ?>">
+                                <?php } elseif (get_field('imagen_negra_categoria','option')) { ?>
+                                    <img src="<?php echo get_field('imagen_negra_categoria','option'); ?>" alt="<?php echo $cate->name; ?>">
+                               <?php } ?>
                             </div>
                         <?php } else {?>
                             <div class="logo-subcategory-dark">
-                                <img src="<?php echo get_field('logo_ico_menu_active',$cate); ?>" alt="<?php echo $cate->name; ?>">
+                                <?php if(get_field('logo_ico_menu_active',$cate)) {?>
+                                    <img src="<?php echo get_field('logo_ico_menu_active',$cate); ?>" alt="<?php echo $cate->name; ?>">
+                                <?php } elseif (get_field('imagen_categoria_activa','option')) {?>
+                                    <img src="<?php echo get_field('imagen_categoria_activa','option'); ?>" alt="<?php echo $cate->name; ?>">
+                                <?php } ?>
                             </div>
                         <?php } ?>
                         <div class="subcategory-title-wrapper">

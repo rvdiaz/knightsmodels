@@ -1,6 +1,7 @@
 .entry-content .woocommerce{
     display: flex;
     justify-content: center;
+    flex-direction: column;
     max-width: 1136px;
     margin: 0 auto;
 }
@@ -45,11 +46,13 @@
 }
 .entry-content .woocommerce .products .woocommerce-loop-product__title {
     padding: 0 !important;
-    margin-top: 41px !important;
     margin-bottom: 10px !important;
     font-size: 20px !important;
     font-weight: 700;
     line-height: 24px;
+}
+.mposshopmassage {
+    display: none;
 }
 .yith-wcwl-add-to-wishlist {
     margin-top: 0;
@@ -66,7 +69,6 @@
     display: none !important;
 }
 .products .product_type_simple {
-    background-image: url('http://localhost/knightsmodels/wp-content/uploads/2022/10/Rectangle-65.png') !important;
     background-repeat: no-repeat !important;
     background-size: 100% 100% !important;
     background-color: transparent !important;

@@ -8,6 +8,10 @@ jQuery('.close-promotion').click(()=>{
 
 document.querySelector('.hamburger').addEventListener('click', function() {
     document.querySelector('.hamberguer-menu-desktop').classList.toggle('active');
+    if(window.screen.width < 1024){
+        jQuery('.category-highlights-slider').toggleClass('hide');
+        jQuery('.main-menu')[0].classList.toggle('background-black');
+    }
   });
 
 jQuery(document).ready(function(){
@@ -30,11 +34,6 @@ jQuery(document).ready(function(){
     }
 })
 
-jQuery('.hamburger').on('click',()=>{
-    if(window.screen.width < 1024){
-    jQuery('.home-category-logo-container')[0].classList.toggle('background-black');
-}
-})
 
 
 

@@ -26,7 +26,7 @@
     width: 80%;
 }
 .category-header-image-wrapper {
-    height: 460px;
+    height: 500px;
 }
 .subcategories-container {
     background-repeat: no-repeat;
@@ -143,6 +143,7 @@
     }
     .woocomerce-filters-container {
         width: 100%;
+        margin-bottom: 40px;
     }
     .filter-wrapper {
         margin: 0 20px;
@@ -150,7 +151,15 @@
 }
 @media (max-width: 600px){
     .subcategories-container {
+        padding: 30px 0;
+    }
+    .subcategories-container-subcategories {
+        padding-top: 100px;
+    }
+    .subcategories-container .subcategories-title{
+        font-size: 20px;
         margin-top: 0;
+        margin-bottom: 30px;
     }
     .subcategory-item-wrapper {
         margin: 0 15px;

@@ -296,7 +296,9 @@ function filterRange(){
 			$list.='
 			<li class="product type-product">
 			 '.get_the_post_thumbnail().'
-                <h2 class="woocommerce-loop-product__title">'.get_the_title().'</h2>
+			 	<div class="product-title-container">
+                	<h2 class="woocommerce-loop-product__title">'.get_the_title().'</h2>
+				</div>
                 <div class="price-whislist-product-wraper">
                     <span class="price">'.$prod->get_price_html().'</span>
                     <div class="share-whishlist-wrapper">'.
@@ -323,4 +325,219 @@ function filterRange(){
 		wp_die();	
 	} 
 }
+
+/* filter by all product first category */
+add_action('wp_ajax_nopriv_firstFilterAll', 'firstFilterAll');
+add_action('wp_ajax_firstFilterAll', 'firstFilterAll');
+
+function firstFilterAll(){
+	$category = $_POST['dataSend']['category'];
+	$argsProduct = array(
+		'category' => array($category)
+	);
+	$i=0;
+	$products = wc_get_products( $argsProduct ); 
+	$list='<div class="card-product-container-first">
+	</div>';
+	if(count($products)> 0){
+	while ($i < count($products)) {
+		$list.='
+		<div>
+			<div class="card-product-container">
+                <div class="product-image-container">
+					<a href="'.$products[$i]->get_permalink().'">
+						'.$products[$i]->get_image().'
+					</a>
+				</div>
+				<div class="product-title-container">
+					<a class="product-title" href="'.$products[$i]->get_permalink().'">'.$products[$i]->get_name().'</a>
+				</div>
+				<div class="product-price-wishlist-container">
+					<p class="product-price">'. $products[$i]->get_price_html(). '</p>
+					'.do_shortcode("[yith_wcwl_add_to_wishlist product_id=".$products[$i]->id.']').'
+				</div>
+				<div class="product-add-cart-button-container">
+					'. do_shortcode("[add_to_cart show_price=false id=".$products[$i]->id."]").'
+				</div>
+			</div>
+			';
+		if($products[$i+1]){
+			$list.='
+			<div class="card-product-container second-card">
+                <div class="product-image-container">
+					<a href="'.$products[$i+1]->get_permalink().'">
+						'.$products[$i+1]->get_image().'
+					</a>
+				</div>
+				<div class="product-title-container">
+					<a class="product-title" href="'.$products[$i+1]->get_permalink().'">'.$products[$i+1]->get_name().'</a>
+				</div>
+				<div class="product-price-wishlist-container">
+					<p class="product-price">'. $products[$i+1]->get_price_html(). '</p>
+					'.do_shortcode("[yith_wcwl_add_to_wishlist product_id=".$products[$i+1]->id.']').'
+				</div>
+				<div class="product-add-cart-button-container">
+					'. do_shortcode("[add_to_cart show_price=false id=".$products[$i+1]->id."]").'
+				</div>
+			</div>
+		</div>';
+		}
+			$i=$i+2;
+		}
+		echo '
+		<div class="woocommerceq">
+            <ul class="productsq">'.$list.
+			'</ul>
+		</div>';
+		wp_die();	
+	} else {
+		echo 'No hay resultados encontrados';
+		wp_die();	
+	} 
+}
+
+/* filter by recents product first category */
+add_action('wp_ajax_nopriv_firstFilterRecent', 'firstFilterRecent');
+add_action('wp_ajax_firstFilterRecent', 'firstFilterRecent');
+
+function firstFilterRecent(){
+	$category = $_POST['dataSend']['category'];
+	$argsProduct = array(
+		'category' => array($category),
+		'orderby' => 'date',
+    	'order' => 'DESC'
+	);
+	$i=0;
+	$products = wc_get_products( $argsProduct ); 
+	$list='<div class="card-product-container-first">
+	</div>';
+	if(count($products)> 0){
+	while ($i < count($products)) {
+		$list.='
+		<div>
+			<div class="card-product-container">
+                <div class="product-image-container">
+					<a href="'.$products[$i]->get_permalink().'">
+						'.$products[$i]->get_image().'
+					</a>
+				</div>
+				<div class="product-title-container">
+					<a class="product-title" href="'.$products[$i]->get_permalink().'">'.$products[$i]->get_name().'</a>
+				</div>
+				<div class="product-price-wishlist-container">
+					<p class="product-price">'. $products[$i]->get_price_html(). '</p>
+					'.do_shortcode("[yith_wcwl_add_to_wishlist product_id=".$products[$i]->id.']').'
+				</div>
+				<div class="product-add-cart-button-container">
+					'. do_shortcode("[add_to_cart show_price=false id=".$products[$i]->id."]").'
+				</div>
+			</div>
+			';
+		if($products[$i+1]){
+			$list.='
+			<div class="card-product-container second-card">
+                <div class="product-image-container">
+					<a href="'.$products[$i+1]->get_permalink().'">
+						'.$products[$i+1]->get_image().'
+					</a>
+				</div>
+				<div class="product-title-container">
+					<a class="product-title" href="'.$products[$i+1]->get_permalink().'">'.$products[$i+1]->get_name().'</a>
+				</div>
+				<div class="product-price-wishlist-container">
+					<p class="product-price">'. $products[$i+1]->get_price_html(). '</p>
+					'.do_shortcode("[yith_wcwl_add_to_wishlist product_id=".$products[$i+1]->id.']').'
+				</div>
+				<div class="product-add-cart-button-container">
+					'. do_shortcode("[add_to_cart show_price=false id=".$products[$i+1]->id."]").'
+				</div>
+			</div>
+		</div>';
+		}
+			$i=$i+2;
+		}
+		echo '
+		<div class="woocommerceq">
+            <ul class="productsq">'.$list.
+			'</ul>
+		</div>';
+		wp_die();	
+	} else {
+		echo 'No hay resultados encontrados';
+		wp_die();	
+	} 
+}
+
+/* filter by best sale product first category */
+add_action('wp_ajax_nopriv_firstFilterSales', 'firstFilterSales');
+add_action('wp_ajax_firstFilterSales', 'firstFilterSales');
+
+function firstFilterSales(){
+	$category = $_POST['dataSend']['category'];
+	$argsProduct = array(
+		'category' => array($category),
+		'orderby'   => 'meta_value_num',
+  		'meta_key'  => 'total_sales',
+	);
+	$i=0;
+	$products = wc_get_products( $argsProduct ); 
+	$list='<div class="card-product-container-first">
+	</div>';
+	if(count($products)> 0){
+	while ($i < count($products)) {
+		$list.='
+		<div>
+			<div class="card-product-container">
+                <div class="product-image-container">
+					<a href="'.$products[$i]->get_permalink().'">
+						'.$products[$i]->get_image().'
+					</a>
+				</div>
+				<div class="product-title-container">
+					<a class="product-title" href="'.$products[$i]->get_permalink().'">'.$products[$i]->get_name().'</a>
+				</div>
+				<div class="product-price-wishlist-container">
+					<p class="product-price">'. $products[$i]->get_price_html(). '</p>
+					'.do_shortcode("[yith_wcwl_add_to_wishlist product_id=".$products[$i]->id.']').'
+				</div>
+				<div class="product-add-cart-button-container">
+					'. do_shortcode("[add_to_cart show_price=false id=".$products[$i]->id."]").'
+				</div>
+			</div>
+			';
+		if($products[$i+1]){
+			$list.='
+			<div class="card-product-container second-card">
+                <div class="product-image-container">
+					<a href="'.$products[$i+1]->get_permalink().'">
+						'.$products[$i+1]->get_image().'
+					</a>
+				</div>
+				<div class="product-title-container">
+					<a class="product-title" href="'.$products[$i+1]->get_permalink().'">'.$products[$i+1]->get_name().'</a>
+				</div>
+				<div class="product-price-wishlist-container">
+					<p class="product-price">'. $products[$i+1]->get_price_html(). '</p>
+					'.do_shortcode("[yith_wcwl_add_to_wishlist product_id=".$products[$i+1]->id.']').'
+				</div>
+				<div class="product-add-cart-button-container">
+					'. do_shortcode("[add_to_cart show_price=false id=".$products[$i+1]->id."]").'
+				</div>
+			</div>
+		</div>';
+		}
+			$i=$i+2;
+		}
+		echo '
+		<div class="woocommerceq">
+            <ul class="productsq">'.$list.
+			'</ul>
+		</div>';
+		wp_die();	
+	} else {
+		echo 'No hay resultados encontrados';
+		wp_die();	
+	} 
+}
+
 add_filter( 'wpcf7_form_elements', 'do_shortcode' );

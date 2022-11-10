@@ -25,9 +25,9 @@ $args= array(
                     <?php } elseif (get_field('imagen_blanca_categoria','option')){ ?>
                         <img src="<?php echo get_field('imagen_blanca_categoria','option')?>" alt="<?php echo $cat->name?>">
                     <?php } ?>
-                    <button class="descargas-dropdown-files" ><img onclick="openAccord(event)" idaccordion="accordion-<?php echo $keycat;?>" src="<?php echo wp_get_upload_dir()["url"]?>/icono-flecha-opciones.png" ></button>
+                    <button class="descargas-dropdown-files" ><img onclick="openAccord(event)" idaccordion="accordion-<?php echo $category_id['id_categoria'];?>" src="<?php echo wp_get_upload_dir()["url"]?>/icono-flecha-opciones.png" ></button>
                 </div>
-                <div class="descargas-files-accordion" id="accordion-<?php echo $keycat;?>">
+                <div class="descargas-files-accordion" id="accordion-<?php echo $category_id['id_categoria'];?>">
                     <?php if(get_field('lista_de_carpetas_de_descarga',$cat))
                     foreach (get_field('lista_de_carpetas_de_descarga',$cat) as $key => $filelist) { ?>
                     <button class="descarga-button" onclick="openAccordFile(event)" idfiles="<?php echo $cat->slug;?>-file-<?php echo $key?>">

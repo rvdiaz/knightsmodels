@@ -43,7 +43,9 @@
                 <?php } ?>
             </div>
             <div class="product-add-cart-button-container button-category-container-mobile">
-                <button class="add-cart-button"><?php echo $cat->name;?></button>
+                <a class="add-cart-button" href="<?php echo get_term_link($category_id['id_categoria'],'product_cat'); ?>">
+                    <?php echo $cat->name;?>
+                </a>
             </div>
         </div>
             <!-- listar productos por categoria -->
@@ -57,12 +59,12 @@
                     </div>
                     <div class="card-product-container">
                         <div class="product-image-container">
-                            <a href="<?php echo $product->get_permalink( );?>" target="_blank">
+                            <a href="<?php echo $product->get_permalink( );?>">
                             <?php echo $product->get_image()?>
                             </a>
                         </div>
                         <div class="product-title-container">
-                            <a class="product-title" href="<?php echo $product->get_permalink( );?>" target="_blank"><?php echo $product->name;?></a>
+                            <a class="product-title" href="<?php echo $product->get_permalink( );?>"><?php echo $product->name;?></a>
                         </div>
                         <div class="product-price-wishlist-container">
                             <p class="product-price"><?php echo $product->get_price_html();?></p>

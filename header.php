@@ -94,14 +94,20 @@
 									$image_cat = wp_get_attachment_url( $thumbnail_id_cat);
 									?>
 									<?php if($image_cat) {?>
-									<img src="<?php echo $image_cat; ?>" alt="<?php echo $cat->name?>">
-								<?php } ?>
+										<img src="<?php echo $image_cat; ?>" alt="<?php echo $cat->name?>">
+									<?php }elseif (get_field('imagen_seccion_principal_categoria','option')) {?>
+										<img src="<?php echo get_field('imagen_seccion_principal_categoria','option'); ?>" alt="<?php echo $cat->name?>">
+									<?php } ?>
 								</div>
-								<div class="image-category-mobile-container">
-								<?php if(get_field('logo_banner',$cat)) {?>
-									<img src="<?php echo get_field('logo_banner',$cat)?>" alt="<?php echo $cat->name?>">
-								<?php } ?>
-								</div>
+								<a  href="<?php echo get_term_link($category_id['id_categoria'],'product_cat'); ?>">
+									<div class="image-category-mobile-container">
+										<?php if(get_field('logo_banner',$cat)) {?>
+											<img src="<?php echo get_field('logo_banner',$cat)?>" alt="<?php echo $cat->name?>">
+										<?php } elseif (get_field('imagen_blanca_categoria','option')) {?>
+											<img src="<?php echo get_field('imagen_blanca_categoria','option')?>" alt="<?php echo $cat->name?>">
+										<?php } ?>
+									</div>
+								</a>
 							</div>
 						</li>
 						<?php }

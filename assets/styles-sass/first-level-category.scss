@@ -3,15 +3,199 @@
     width: 100%;
     height: 500px;
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.preorder-banner {
+    height: 60px;
+    background: $dark;
+}
+.preorder-info-item {
+    margin-top: auto;
+    width: 1136px;
+    text-align: right;
+    z-index: 10;
+}
+.preorder-category-image img {
+    width: 80px;
+}
+.preorder-title-item {
+    color: $light;
+    font-size: 48px;
+    line-height: 48px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+.preorder-button-item {
+    margin-bottom: 10px;
+}
+.preorder-button-item .product_type_simple{
+    width: 570px;
+    z-index: 1;
 }
 .first-level-category-products-container {
     margin: 60px 0;
 }
 .category-description-container {
-    height: 222px;
+    min-height: 282px;
     background-color: $dark;
+    padding-top: 50px;
+}
+.category-description {
+    border-top: 2px solid $light;
+    padding-top: 38px;
+}
+.category-description p{
+   margin: 0 auto;
+   width: 30%;
+   text-align: center;
+   color: $light;
+   font-size: 18px;
+   font-weight: 500;
+   line-height: 21px;
+}
+.category-description-blog-button {
+    margin: 40px auto;
+    text-align: center;
+    width: 570px;
+}
+.category-description-blog-button button{
+    padding: 22px;
+    width: 570px;
+    background-size: 100% 100%;
+}
+.category-description-blog-button a {
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 16px;
+    text-decoration: none;
+    color: $light;
+}
+.preorder-list-slider .flickity-page-dots {
+    z-index: 100;
+}
+.preorder-list-slider .flickity-page-dots .dot {
+    background-color: $light;
+    opacity: 1;
+    width: 7px;
+    height: 7px;
+}
+.preorder-list-slider .flickity-page-dots .is-selected{
+    width: 32px;
+    border-radius: 4px;
 }
 .second-card {
     margin-top: 38px;
 }
+.preorder-list-slider {
+    position: relative;
+}
+.preorder-gradient-container {
+    position: absolute;
+    bottom: -50px;
+    width: 100%;
+}
+.preorder-gradient-container img {
+    width: 100%;
+}
+.first-level-category-filter {
+    border-bottom: 4px solid #EEEEEE;
+    padding-bottom: 4px;
+}
+.first-level-category-filter-button-container {
+    width: 1136px;
+    margin: 0 auto;
+    outline: none !important;
+    border: none !important;
+}
+.first-level-category--filter-button {
+    font-size: 16px;
+    line-height: 16px;
+    color: $dark;
+    font-weight: 400;
+    margin-right: 40px;
+    text-transform: uppercase;
+    margin-bottom: -4px;
+    padding-bottom: 19px;
+    cursor: pointer;
+}
+.first-level-category-filter-button-container .first-select {
+    border-bottom: 4px solid $dark;
+    font-weight: 700;
+}
+.first-level-category-filter-button-container .flickity-viewport {
+    overflow: initial !important;
+}
+@media (max-width: 1136px) {
+    .preorder-info-item {
+      width: calc(100% - 20px);
+    }
+  }
+@media (max-width: 1024px){
+.preorder-banner {
+    display: none;
+}
+.preorder-title-item{
+    font-size: 16px;
+    line-height: 16px;
+}
+.category-description p {
+    font-size: 14px;
+    width: calc(80% - 20px);
+}
+
+}
+@media (max-width: 768px){
+.preorder-category-image img {
+    width: 57px;
+}
+.first-level-category-products-container {
+    margin: 0;
+    margin-bottom: 33px;
+}
+.preorder-background-image-item {
+    height: 300px;
+} 
+.preorder-info-item {
+    width: 100%;
+}
+.preorder-category-image,
+.preorder-title-item {
+    padding: 0 20px;
+}
+.preorder-title-item {
+    margin-bottom: 0;
+}
+.category-description-blog-button {
+    width: calc(100% - 40px);
+}
+.category-description-blog-button button{
+    padding: 14px;
+    width: 100%;
+}
+.category-description-container {
+    min-height: 252px;
+}
+.category-description-blog-button a {
+    font-size: 12px;
+}
+.preorder-button-item .product_type_simple{
+    width: 100%;
+}
+.preorder-button-item {
+    width: 100%;
+}
+.preorder-button-item .product-add-cart-button-container {
+    padding: 0 20px;
+}
+.preorder-gradient-container {
+    bottom: -20px;
+}
+}
+

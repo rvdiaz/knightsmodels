@@ -28,13 +28,15 @@ function woocommerce_product_category( ) {
                <?php } ?>
                 <div class="category-meta-container">
                     <p class="category-title"><?php echo $cat->name;?></p>
-                    <p class="category-description"><?php echo $cat->description;?></p>
+                    <?php if(get_field('descripcion_pagina_categoria',$cat)){?>
+                        <p><?php echo get_field('descripcion_pagina_categoria',$cat)?></p>
+                    <?php } ?>
                 </div>
             </div>
         </div>
         <?php do_shortcode('[category-highlights]'); ?>
         
-        <div class="subcategories-container" style="background-image:url('<?php echo wp_get_upload_dir()["url"]?>/Rectangle-115.png')"?>
+        <div class="subcategories-container subcategories-container-subcategories" style="background-image:url('<?php echo wp_get_upload_dir()["url"]?>/Rectangle-115.png')"?>
         <div class="shop-views-filter">
             <input type="range" id="filter-views" name="points" min="0" max="2">
             <div class="filter-views-options">
@@ -137,8 +139,5 @@ function woocommerce_product_category( ) {
                 </div>
             </div>
         <?php
-        
-	}
-    
+    }
 }
-

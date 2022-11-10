@@ -44,12 +44,11 @@
 		?>
 	</div><!-- .entry-content -->
 
-	<?php if ( get_edit_post_link() ) : 
-		if(is_product_category()){
-		do_shortcode('[after-categories-component]');
-		}?>
-		<footer class="entry-footer">
+	<footer class="entry-footer">
 			<?php
+			if(is_product_category()){
+			echo do_shortcode('[after-categories-component]');   
+			}
 			edit_post_link(
 				sprintf(
 					wp_kses(
@@ -68,7 +67,7 @@
 			);
 			?>
 		</footer><!-- .entry-footer -->
-	<?php endif; ?>
+
 </article><!-- #post-<?php the_ID(); ?> -->
 
 

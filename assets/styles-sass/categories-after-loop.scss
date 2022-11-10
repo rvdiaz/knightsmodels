@@ -72,6 +72,8 @@
     flex-wrap: wrap;
     margin-top: 40px;
     margin-bottom: 70px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 .footer-links a{
     font-size: 12px;
@@ -83,6 +85,9 @@
 }
 .category-highlights-slider {
     display: none;
+}
+.hide {
+    display: none !important;
 }
 .category-highlights-title-slider p {
     font-size: 20px;

@@ -20,14 +20,14 @@
 		$cat=get_term_by( 'id', $woocommerce_category_id, 'product_cat' );
 		$parent_id=$cat->parent;
 		$parent = get_term_by( 'id', $parent_id, 'product_cat' );
-		if($parent->slug!='inicio' && $cat->slug!='inicio')
+		if(($parent->slug!='inicio' && $cat->slug!='inicio') || isset($_GET['cat']))
 			do_shortcode('[woocommerce-product-second-category]');
 	}
 	?>
 
 	<div class="entry-content">
 		<?php
-		if(is_product_category() && $parent->slug=='inicio'){
+		if(is_product_category() && $parent->slug=='inicio' && !isset($_GET['cat'])){
 			do_shortcode('[categories-first-level]');
 		} elseif(get_field('plantilla')=='contenido'){
 			do_shortcode('[content]');

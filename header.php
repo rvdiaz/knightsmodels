@@ -116,7 +116,7 @@
 						foreach (get_field('menu','option') as $item) {	
 						?>
 						<li class="menu-top-items-container">
-						<a class="menu-bottom-items" href="<?php echo $item['menu_item']['url']?>" class="menu-bottom-items"><?php echo $item['menu_item']['title']; ?></a>
+							<a class="menu-bottom-items" href="<?php echo $item['menu_item']['url']?>" class="menu-bottom-items"><?php echo $item['menu_item']['title']; ?></a>
 						</li>
 						<?php } 
 						}

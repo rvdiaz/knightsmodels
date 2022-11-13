@@ -29,7 +29,7 @@ function woocommerce_product_category( ) {
                 <div class="category-meta-container">
                     <p class="category-title"><?php echo $cat->name;?></p>
                     <?php if(get_field('descripcion_pagina_categoria',$cat)){?>
-                        <p><?php echo get_field('descripcion_pagina_categoria',$cat)?></p>
+                        <p class="category-description-text"><?php echo get_field('descripcion_pagina_categoria',$cat)?></p>
                     <?php } ?>
                 </div>
             </div>

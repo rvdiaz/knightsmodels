@@ -10,7 +10,7 @@ function category_highlights(){
             <p >Productos Destacados</p>
         </div>
     <?php
-        echo do_shortcode( '[products columns="4" category='.$cat->slug.']' );
+        echo do_shortcode( '[products limit="10" columns="4" category='.$cat->slug.']' );
     ?>
     </div>
     <?php

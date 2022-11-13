@@ -10,7 +10,7 @@
  */
 
 ?>
-	<footer class="footer-page">
+	<footer class="footer-page" style="text-align: center;">
 		<div class="footer-container">
 			<div class="selects-menu-container">
 				<div class="list-languages">
@@ -23,6 +23,7 @@
 				<?php } ?>
 			</div>
 		</div>
+		<img src="https://knight.informagedevelop.com/wp-content/uploads/2022/11/financiaciones.png" class="img-financiacion"/>
 	</footer><!-- #colophon -->
 </div><!-- #page -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>

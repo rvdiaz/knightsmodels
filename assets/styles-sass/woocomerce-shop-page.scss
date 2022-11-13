@@ -13,15 +13,13 @@
     display: grid;
     grid-template-columns: repeat(4,1fr);
     grid-column-gap: 20px;
+    margin-bottom: 0;
 }
 .entry-content .woocommerce .products .product_type_simple{
     z-index: 3;
 }
 .entry-content .woocommerce .products .type-product {
     width: 271px !important;
-   /*  display: flex;
-    flex-direction: column;
-    float: none !important; */
     display: grid;
 }
 .entry-content  .woocommerce .products .product:last-child{
@@ -129,6 +127,7 @@
         object-fit: contain;
         align-self: center;
     }
+    
 }
 @media (max-width: 900px){
     .entry-content .woocommerce .products {

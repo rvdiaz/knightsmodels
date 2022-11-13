@@ -2,6 +2,8 @@
 add_shortcode( 'categories-first-level', 'categories_first_level' );
 
 function categories_first_level(){
+    if(isset($_GET['cat']))
+        var_dump($_GET['cat']);
     $woocommerce_category_id = get_queried_object_id();
 	$cat=get_term_by( 'id', $woocommerce_category_id, 'product_cat' );
     $args= array(
@@ -71,7 +73,7 @@ function categories_first_level(){
         </div>
      </div>
 
-     <div class="subcategories-container" style="background-image:url('<?php echo wp_get_upload_dir()["url"]?>/Rectangle-115.png')"?>
+     <div class="subcategories-container" style="background-image:url('<?php echo wp_get_upload_dir()["url"]?>/Rectangle-115.png')">
         <div class="subcategories-title-wrapper">
             <p class="subcategories-title">Afiliaciones</p>
         </div>
@@ -101,11 +103,13 @@ function categories_first_level(){
      <input id="first-category-slug" type="hidden" value="<?php echo $cat->slug;?>">
 
      <div class="first-level-category-filter">
-        <div class="first-level-category-filter-button-container" data-flickity='{ "freeScroll": true, "prevNextButtons": false, "pageDots" : false, "contain":true}'>
+        <div class="first-level-category-filter-button-container" data-flickity='{ "freeScroll": false, "prevNextButtons": false, "pageDots" : false, "contain":true}'>
+            <div class="card-product-container-first"></div>
             <button class="first-level-category--filter-button" onclick="first_filters_all(event)">Todos</button>
             <button class="first-level-category--filter-button" onclick="first_filters(event)">Bat-Ofertas</button>
             <button class="first-level-category--filter-button" onclick="first_filters_recent(event)">Novedades</button>
             <button class="first-level-category--filter-button" onclick="first_filters_sales(event)">Los más vendidos</button>
+            <div class="card-product-container-first"></div>
         </div>
      </div>
      <div class="first-level-category-products-container" data-flickity='{ "freeScroll": true, "prevNextButtons": false, "pageDots" : false, "contain":true}'>
@@ -142,7 +146,7 @@ function categories_first_level(){
             <?php if($products[$i+1]){ ?>
             <div class="card-product-container second-card">
                 <div class="product-image-container">
-                    <a href="<?php echo $products[$i+1]->get_permalink( );?>" target="_blank">
+                    <a href="<?php echo $products[$i+1]->get_permalink();?>" target="_blank">
                         <?php echo $products[$i+1]->get_image()?>
                     </a>
                 </div>
@@ -162,6 +166,11 @@ function categories_first_level(){
         <?php 
         $i=$i+2;
     } ?>
+    </div>
+    <div class="first-level-category-all-product-link-container">
+        <button style="background-image: url('<?php echo wp_get_upload_dir()["url"]?>/Group-110.png')">
+            <a href="<?php echo get_permalink();?>?cat=all">Todos los productos</a>
+        </button>
     </div>
     <div class="loading-container">
         <div class="loading-image">

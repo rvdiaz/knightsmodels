@@ -59,7 +59,8 @@
    font-weight: 500;
    line-height: 21px;
 }
-.category-description-blog-button {
+.category-description-blog-button,
+.first-level-category-all-product-link-container {
     margin: 40px auto;
     text-align: center;
     width: 570px;
@@ -77,9 +78,20 @@
     text-decoration: none;
     color: $light;
 }
-.preorder-list-slider .flickity-page-dots {
-    z-index: 100;
+.first-level-category-all-product-link-container button {
+    padding: 22px;
+    width: 570px;
+    background-size: 100% 100%;
 }
+.first-level-category-all-product-link-container a {
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 16px;
+    text-decoration: none;
+    color: $dark;
+}
+
 .preorder-list-slider .flickity-page-dots .dot {
     background-color: $light;
     opacity: 1;
@@ -114,6 +126,9 @@
     outline: none !important;
     border: none !important;
 }
+.first-level-category-filter-button-container .flickity-viewport {
+    overflow: initial !important;
+}
 .first-level-category--filter-button {
     font-size: 16px;
     line-height: 16px;
@@ -129,11 +144,10 @@
     border-bottom: 4px solid $dark;
     font-weight: 700;
 }
-.first-level-category-filter-button-container .flickity-viewport {
-    overflow: initial !important;
-}
+
 @media (max-width: 1136px) {
-    .preorder-info-item {
+    .preorder-info-item,
+    .first-level-category-filter-button-container {
       width: calc(100% - 20px);
     }
   }
@@ -152,12 +166,20 @@
 
 }
 @media (max-width: 768px){
+.first-level-category--filter-button {
+    font-size: 12px;
+    margin-right: 20px;
+    padding-bottom: 10px;
+}
+
+.first-level-category-filter-button-container .flickity-viewport {
+    overflow: hidden !important;
+}
 .preorder-category-image img {
     width: 57px;
 }
 .first-level-category-products-container {
-    margin: 0;
-    margin-bottom: 33px;
+    margin: 33px 0;
 }
 .preorder-background-image-item {
     height: 300px;
@@ -172,17 +194,20 @@
 .preorder-title-item {
     margin-bottom: 0;
 }
-.category-description-blog-button {
+.category-description-blog-button,
+.first-level-category-all-product-link-container {
     width: calc(100% - 40px);
 }
-.category-description-blog-button button{
+.category-description-blog-button button,
+.first-level-category-all-product-link-container button{
     padding: 14px;
     width: 100%;
 }
 .category-description-container {
     min-height: 252px;
 }
-.category-description-blog-button a {
+.category-description-blog-button a,
+.first-level-category-all-product-link-container a {
     font-size: 12px;
 }
 .preorder-button-item .product_type_simple{

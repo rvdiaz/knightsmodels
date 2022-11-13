@@ -22,9 +22,7 @@
     cursor: pointer;
 }
 .hamberguer-menu-desktop {
-    width: 100%;
     display: none;
-    transition: all 2s ease-in-out;
     position: absolute;
     background-color: $dark;
     top: 100%;
@@ -47,13 +45,15 @@
     text-transform: uppercase;
     color: $light;
     text-decoration: none;
+    width: max-content;
 }
 .hamberguer-menu-desktop .menu-top-container .menu-bottom-items:hover {
     color: $theme-color;
 }
 .hamberguer-menu-desktop.active {
+    width: 100%;
     display: block;
-    animation: fade .5s ease;
+    animation: fade 0.6s ease;
   }
 @keyframes fade {
     from{transform: translateY(0px); opacity: 0;}
@@ -183,10 +183,20 @@
         display: block;
     }
     .hamberguer-menu-desktop {
+        display: block;
         width: 100vw;
+        visibility:hidden;
+        opacity:0;
+        transition:visibility 0.3s linear,opacity 0.3s linear;
         left: -20px;
         height: 100vh;
     }
+    .hamberguer-menu-desktop.active {
+        width: 100vw;
+        visibility:visible;
+        opacity:1;
+        transition: width 0.5s ease;
+      }
     .menu-top-category-container-mobile {
         position: relative;
     }
@@ -206,10 +216,7 @@
     .image-category-mobile-container img {
         height: 50px;
     }
-    .hamberguer-menu-desktop.active {
-        display: block;
-        animation: fade .1s ease;
-      }
+    
 }
 .background-black {
     background-color: $dark;

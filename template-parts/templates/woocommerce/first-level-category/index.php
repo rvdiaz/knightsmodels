@@ -18,7 +18,7 @@ function categories_first_level(){
     );
         $products = wc_get_products( $argsProduct );
     ?>
-
+    <!-- slider pre order -->
      <div class="preorder-list-slider">
         <div class="preorder-banner"> 
         </div>
@@ -73,6 +73,7 @@ function categories_first_level(){
         </div>
      </div>
 
+     <!-- subcategories slider -->
      <div class="subcategories-container" style="background-image:url('<?php echo wp_get_upload_dir()["url"]?>/Rectangle-115.png')">
         <div class="subcategories-title-wrapper">
             <p class="subcategories-title">Afiliaciones</p>
@@ -102,6 +103,7 @@ function categories_first_level(){
      </div>
      <input id="first-category-slug" type="hidden" value="<?php echo $cat->slug;?>">
 
+     <!-- filters -->
      <div class="first-level-category-filter">
         <div class="first-level-category-filter-button-container" data-flickity='{ "freeScroll": false, "prevNextButtons": false, "pageDots" : false, "contain":true}'>
             <div class="card-product-container-first"></div>
@@ -112,6 +114,8 @@ function categories_first_level(){
             <div class="card-product-container-first"></div>
         </div>
      </div>
+
+     <!-- slider products -->
      <div class="first-level-category-products-container" data-flickity='{ "freeScroll": true, "prevNextButtons": false, "pageDots" : false, "contain":true}'>
         <?php
          $argsProduct = array(
@@ -177,5 +181,51 @@ function categories_first_level(){
             <img src="<?php echo wp_get_upload_dir()["url"] ?>/Double-Ring-1s-200px-1.gif" alt="">
         </div>
     </div>
+
+    <!-- blog relation post -->
+    <div class="blog-container" style="background-image: url('<?php echo wp_get_upload_dir()["url"]?>/Rectangle-138.png')">
+        <div class="title-blog-container">
+            <p>Bat-Blog</p>
+        </div>
+        <div class="blog-slider-container" data-flickity='{"prevNextButtons": false, "pageDots" : true, "contain":true}'>
+            <?php
+            if(get_field('lista_de_blog')){
+              foreach (get_field('lista_de_blog') as $id) {
+                $blog=get_post($id['blog_relacionado']);
+            ?>
+            <div class="blog-slider-item-container">
+                <div class="blog-image">
+                    <?php echo get_the_post_thumbnail( $id['blog_relacionado'], 'medium');?>
+                </div>
+                <div class="blog-info">
+                    <p class="blog-title">
+                        <?php echo get_the_title($id['blog_relacionado']);?>
+                    </p>
+                    <p class="blog-date">
+                        <?php echo get_the_date('F j, Y',$id['blog_relacionado']);?>
+                    </p>
+                    <p class="blog-slider-description">
+                        <?php echo  get_the_excerpt($id['blog_relacionado']);?>
+                    </p>
+                </div>
+                <div class="blog-seemore-button">
+                    <a href="<?php echo get_permalink($id['blog_relacionado'])?>">See more...</a>
+                </div>  
+            </div>
+        <?php 
+       }     
+    }
+?>
+        </div>
+    </div>
+<div class="blog-page-link" style="background-image: url('<?php echo wp_get_upload_dir()["url"]?>/header-top-background.png')">
+    <div class="category-description-blog-button">
+        <?php if(get_field('boton_blog_page','option')){?>
+        <button style="background-image: url('<?php echo wp_get_upload_dir()["url"]?>/button-header-top.png')">
+            <a href="<?php echo get_field('boton_blog_page','option')['url'] ?>"><?php echo get_field('boton_blog_page','option')['title'] ?></a>
+        </button>
+        <?php } ?>
+    </div>
+</div>
 <?php
 }

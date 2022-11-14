@@ -38,9 +38,13 @@
     }
     .product-add-cart-button-container .product_type_simple,
     .products .product_type_simple,
-    .button-category-container-mobile .add-cart-button  {
+    .button-category-container-mobile .add-cart-button,
+	.product .single_add_to_cart_button  {
         background-image: url('<?php echo wp_get_upload_dir()["url"]?>/Rectangle-65.png') !important;
     }
+	.form-suscriber .submit-input {
+		background-image: url('<?php echo wp_get_upload_dir()["url"]?>/icono-enviar.png') !important;
+	}
     @media (max-width: 1024px){
     .contact-group {
         background-image:url("<?php echo wp_get_upload_dir()["url"]?>/Group-110.png") !important;

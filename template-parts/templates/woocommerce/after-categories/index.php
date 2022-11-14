@@ -31,7 +31,7 @@ function after_categories_component(){
             <?php }  ?>
         </div>
         <div class="form-suscriber">
-
+            <?php echo do_shortcode('[mc4wp_form id="298"]');?>
         </div>
     </div>
 </div>

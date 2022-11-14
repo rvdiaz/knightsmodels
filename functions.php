@@ -541,3 +541,5 @@ function firstFilterSales(){
 }
 
 add_filter( 'wpcf7_form_elements', 'do_shortcode' );
+
+add_filter('woocommerce_show_page_title', 'false');

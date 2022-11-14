@@ -10,3 +10,19 @@ if( function_exists('acf_add_options_page') ) {
 		'redirect'		=> false
 	));
 }
+
+add_theme_support('post-thumbnails');
+add_post_type_support( 'blog', 'thumbnail' );  
+register_post_type( 'blog',
+    // CPT Options
+        array(
+            'labels' => array(
+                'name' => __( 'Blog' ),
+                'singular_name' => __( 'Blog' )
+            ),
+            'public' => true,
+            'has_archive' => true,
+            'rewrite' => array('slug' => 'blog'),
+            'show_in_rest' => true,
+        )
+    );

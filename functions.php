@@ -210,19 +210,15 @@ require get_template_directory() . '/template-parts/templates/content-template/i
 /* load category highlights */
 require get_template_directory() . '/template-parts/templates/woocommerce/category-highlights/index.php';
 
+/* load search modal */
+require get_template_directory() . '/template-parts/templates/modal-search/index.php';
+
+
 
 function loop_columns() {
 	return 4; // 5 products per row
 	}
 add_filter('loop_shop_columns', 'loop_columns', 999);
-
-/* add_filter( 'woocommerce_product_add_to_cart_text', 'woocommerce_add_to_cart_button_text_archives' );  
-	
-function woocommerce_add_to_cart_button_text_archives() {
-	return __( 'Añadir a la cesta', 'woocommerce' );
-} */
-
-/* ajax */
 
 /* filter by order */
 add_action('wp_ajax_nopriv_filter', 'filter');
@@ -233,22 +229,22 @@ function filter(){
 	$gol= $_POST['dataSend']['gol'];
 	switch ($gol) {
 		case 'new':{
-			echo do_shortcode( '[products columns="4" category='.$category.' orderby="date" order="ASC" ]' );
+			echo do_shortcode( '[products columns="4" category='.$category.' limit="16" paginate="true" orderby="date" order="ASC" ]' );
 			wp_die();	
 			break;
 		}
 		case 'high':{
-			echo do_shortcode( '[products columns="4" category='.$category.' orderby="price" order="DESC" ]' );
+			echo do_shortcode( '[products columns="4" category='.$category.' limit="16" paginate="true" orderby="price" order="DESC" ]' );
 			wp_die();	
 			break;
 		}
 		case 'low':{
-			echo do_shortcode( '[products columns="4" category='.$category.' orderby="price" order="ASC" ]' );
+			echo do_shortcode( '[products columns="4" category='.$category.' limit="16" paginate="true" orderby="price" order="ASC" ]' );
 			wp_die();	
 			break;
 		}
 		default:{
-			echo "No se encontro ningun item bajo este filtro";
+			_e('No search results', 'knightsmodels');;
 			wp_die();	
 			break;
 		}
@@ -261,7 +257,7 @@ add_action('wp_ajax_filterAttribute', 'filterAttribute');
 function filterAttribute(){
 	$terms= $_POST['dataSend']['terms'];
 	$category= $_POST['dataSend']['category'];
-	echo do_shortcode( '[products columns="4" category='.$category.' attribute="new" terms="'.$terms.'" ]' );
+	echo do_shortcode( '[products columns="4" category='.$category.' limit="16" paginate="true" attribute="new" terms="'.$terms.'" ]' );
 	wp_die();	
 }
 
@@ -277,6 +273,8 @@ function filterRange(){
         'post_status' => 'publish',
         'post_type' => 'product',
 		'product_cat' => $category,
+		'limit' => 16,
+		'paginate'=>true,
         'meta_query' => array(
         array(
             'key' => '_price',
@@ -294,10 +292,10 @@ function filterRange(){
             $wpquery->the_post();
 			$prod=wc_get_product( get_the_ID() );
 			$list.='
-			<li class="product type-product">
+			<li class="product type-product range-image">
 			 '.get_the_post_thumbnail().'
 			 	<div class="product-title-container">
-                	<h2 class="woocommerce-loop-product__title">'.get_the_title().'</h2>
+                	<a href="'.get_permalink( $product->ID ).'" class="woocommerce-loop-product__title">'.get_the_title().'</a>
 				</div>
                 <div class="price-whislist-product-wraper">
                     <span class="price">'.$prod->get_price_html().'</span>
@@ -320,8 +318,13 @@ function filterRange(){
 			'</ul>
 		</div>';
 		wp_die();	
-	} else {
-		echo 'No hay resultados encontrados';
+	} else {?>
+		<div class="not-results-container">
+			<p>
+				<?php _e('No search results', 'knightsmodels'); ?>
+			</p>
+		</div>
+	<?php
 		wp_die();	
 	} 
 }
@@ -333,14 +336,16 @@ add_action('wp_ajax_firstFilterAll', 'firstFilterAll');
 function firstFilterAll(){
 	$category = $_POST['dataSend']['category'];
 	$argsProduct = array(
-		'category' => array($category)
+		'category' => array($category),
+		'limit' => -1
 	);
 	$i=0;
 	$products = wc_get_products( $argsProduct ); 
 	$list='<div class="card-product-container-first">
 	</div>';
 	if(count($products)> 0){
-	while ($i < count($products)) {
+		if(count($products) > 10){
+			while ($i < count($products)) {
 		$list.='
 		<div>
 			<div class="card-product-container">
@@ -384,14 +389,43 @@ function firstFilterAll(){
 		}
 			$i=$i+2;
 		}
+		}else {
+		foreach ($products as $product) {
+		$list.='
+		<div>
+			<div class="card-product-container">
+                <div class="product-image-container">
+					<a href="'.$product->get_permalink().'">
+						'.$product->get_image().'
+					</a>
+				</div>
+				<div class="product-title-container">
+					<a class="product-title" href="'.$product->get_permalink().'">'.$product->get_name().'</a>
+				</div>
+				<div class="product-price-wishlist-container">
+					<p class="product-price">'. $product->get_price_html(). '</p>
+					'.do_shortcode("[yith_wcwl_add_to_wishlist product_id=".$product->id.']').'
+				</div>
+				<div class="product-add-cart-button-container">
+					'. do_shortcode("[add_to_cart show_price=false id=".$product->id."]").'
+				</div>
+			</div>
+		</div>
+			';
+		}
+	}
 		echo '
 		<div class="woocommerceq">
             <ul class="productsq">'.$list.
 			'</ul>
 		</div>';
 		wp_die();	
-	} else {
-		echo 'No hay resultados encontrados';
+	} else {?>
+		<div class="not-results-container">
+			<p>
+				<?php _e('No search results', 'knightsmodels'); ?>
+			</p>
+		</div><?php
 		wp_die();	
 	} 
 }
@@ -405,14 +439,16 @@ function firstFilterRecent(){
 	$argsProduct = array(
 		'category' => array($category),
 		'orderby' => 'date',
-    	'order' => 'DESC'
+    	'order' => 'DESC',
+		'limit' => -1
 	);
 	$i=0;
 	$products = wc_get_products( $argsProduct ); 
 	$list='<div class="card-product-container-first">
 	</div>';
 	if(count($products)> 0){
-	while ($i < count($products)) {
+		if(count($products) > 10){
+			while ($i < count($products)) {
 		$list.='
 		<div>
 			<div class="card-product-container">
@@ -456,6 +492,31 @@ function firstFilterRecent(){
 		}
 			$i=$i+2;
 		}
+		}else {
+		foreach ($products as $product) {
+		$list.='
+		<div>
+			<div class="card-product-container">
+                <div class="product-image-container">
+					<a href="'.$product->get_permalink().'">
+						'.$product->get_image().'
+					</a>
+				</div>
+				<div class="product-title-container">
+					<a class="product-title" href="'.$product->get_permalink().'">'.$product->get_name().'</a>
+				</div>
+				<div class="product-price-wishlist-container">
+					<p class="product-price">'. $product->get_price_html(). '</p>
+					'.do_shortcode("[yith_wcwl_add_to_wishlist product_id=".$product->id.']').'
+				</div>
+				<div class="product-add-cart-button-container">
+					'. do_shortcode("[add_to_cart show_price=false id=".$product->id."]").'
+				</div>
+			</div>
+		</div>
+			';
+		}
+	}
 		echo '
 		<div class="woocommerceq">
             <ul class="productsq">'.$list.
@@ -463,7 +524,12 @@ function firstFilterRecent(){
 		</div>';
 		wp_die();	
 	} else {
-		echo 'No hay resultados encontrados';
+		?>
+		<div class="not-results-container">
+			<p>
+				<?php _e('No search results', 'knightsmodels'); ?>
+			</p>
+		</div><?php
 		wp_die();	
 	} 
 }
@@ -478,13 +544,15 @@ function firstFilterSales(){
 		'category' => array($category),
 		'orderby'   => 'meta_value_num',
   		'meta_key'  => 'total_sales',
+		'limit' => -1
 	);
 	$i=0;
 	$products = wc_get_products( $argsProduct ); 
 	$list='<div class="card-product-container-first">
 	</div>';
 	if(count($products)> 0){
-	while ($i < count($products)) {
+		if(count($products) > 10){
+			while ($i < count($products)) {
 		$list.='
 		<div>
 			<div class="card-product-container">
@@ -528,6 +596,31 @@ function firstFilterSales(){
 		}
 			$i=$i+2;
 		}
+		}else {
+		foreach ($products as $product) {
+		$list.='
+		<div>
+			<div class="card-product-container">
+                <div class="product-image-container">
+					<a href="'.$product->get_permalink().'">
+						'.$product->get_image().'
+					</a>
+				</div>
+				<div class="product-title-container">
+					<a class="product-title" href="'.$product->get_permalink().'">'.$product->get_name().'</a>
+				</div>
+				<div class="product-price-wishlist-container">
+					<p class="product-price">'. $product->get_price_html(). '</p>
+					'.do_shortcode("[yith_wcwl_add_to_wishlist product_id=".$product->id.']').'
+				</div>
+				<div class="product-add-cart-button-container">
+					'. do_shortcode("[add_to_cart show_price=false id=".$product->id."]").'
+				</div>
+			</div>
+		</div>
+			';
+		}
+	}
 		echo '
 		<div class="woocommerceq">
             <ul class="productsq">'.$list.
@@ -540,6 +633,156 @@ function firstFilterSales(){
 	} 
 }
 
+/* filter search product modal */
+add_action('wp_ajax_nopriv_searchproduct', 'searchproduct');
+add_action('wp_ajax_searchproduct', 'searchproduct');
+
+function searchproduct(){
+	$name = $_POST['dataSend']['name'];
+	$argsProduct = array(
+		'limit' => 6,
+    	'like_name' => $name 
+	);
+	$i=0;
+	$products = wc_get_products( $argsProduct );  
+
+	if(count($products)> 0){
+	while ($i < count($products)) {
+		$list.='
+			<div class="card-product-container">
+                <div class="product-image-container">
+					<a href="'.$products[$i]->get_permalink().'">
+						'.$products[$i]->get_image().'
+					</a>
+				</div>
+				<div class="product-title-container">
+					<a class="product-title" href="'.$products[$i]->get_permalink().'">'.$products[$i]->get_name().'</a>
+				</div>
+				<div class="product-price-wishlist-container">
+					<p class="product-price">'. $products[$i]->get_price_html(). '</p>
+					'.do_shortcode("[yith_wcwl_add_to_wishlist product_id=".$products[$i]->id.']').'
+				</div>
+				<div class="product-add-cart-button-container">
+					'. do_shortcode("[add_to_cart show_price=false id=".$products[$i]->id."]").'
+				</div>
+			</div>
+			';
+			$i++;
+		}
+		echo '
+		<div class="woocommerce-search-result">
+            <ul class="products-search-result">'.$list.
+			'</ul>
+		</div>';
+		wp_die();	
+	} else {
+		?>
+		<div class="not-results-container">
+			<p>
+				<?php _e('No search results', 'knightsmodels'); ?>
+			</p>
+		</div><?php
+		wp_die();	
+	}  
+}
+
 add_filter( 'wpcf7_form_elements', 'do_shortcode' );
 
 add_filter('woocommerce_show_page_title', 'false');
+
+
+function change_tabs_order() {
+	global $product; 
+	$product_tabs = apply_filters( 'woocommerce_product_tabs', array() );
+
+	if ( ! empty( $product_tabs ) ) : ?>
+	<div class="single-product-tabs-mobile woocommerce-tabs wc-tabs-wrapper">
+		<?php	foreach ( $product_tabs as $key => $product_tab ) { ?>
+		<button class="descarga-button" onclick="openAccordFile(event)" idfiles="file-<?php echo $key?>">
+			<?php echo wp_kses_post( apply_filters( 'woocommerce_product_' . $key . '_tab_title', $product_tab['title'], $key ) ); ?>
+			<img src="<?php echo wp_get_upload_dir()["url"]?>/icono-flecha-opciones-1.png">
+		</button>
+		<div class="single-product-panel" id="file-<?php echo $key?>">
+			<div class="woocommerce-Tabs-panel--<?php echo esc_attr( $key ); ?> panel entry-content wc-tab" id="tab-<?php echo esc_attr( $key ); ?>" role="tabpanel" aria-labelledby="tab-title-<?php echo esc_attr( $key ); ?>">
+				<?php
+				if ( isset( $product_tab['callback'] ) ) {
+					call_user_func( $product_tab['callback'], $key, $product_tab );
+				}
+				?>
+			</div>
+		</div>
+		<?php } ?>
+
+		<?php do_action( 'woocommerce_product_after_tabs' ); ?>
+	</div>
+	<?php endif; ?>
+
+	<div class="single-title-mobile"><?php
+		$terms = get_the_terms ( $product_id, 'product_cat' );
+		?>
+		<p class="category-single-product"><?php
+			echo $terms[0]->name;
+		?></p>
+		<?php
+		the_title( '<h1 class="product_title entry-title">', '</h1>' );?>
+		<div class="price-whislist-product-wraper">
+			<p class="single-price-mobile <?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?>"><?php echo $product->get_price_html(); ?></p>
+		</div>
+	</div>
+
+	<?php 
+}
+add_action('woocommerce_before_add_to_cart_quantity', 'change_tabs_order');
+
+
+
+remove_action( 'woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10 );
+add_action( 'woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10 );
+
+function woocommerce_template_loop_product_title() {
+    echo '<a href="' . get_permalink() . '" class="' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '">' . get_the_title() . '</a>'; 
+}
+
+function free_shipping_promotion(){
+	global $product; 
+	?>
+	<div class="free-shipping-promotion-container">
+		<button onclick="history.back()" class="back-button-shipping-promotion">
+			<img src="<?php echo wp_get_upload_dir()["url"]?>/icono-flecha.svg">
+		</button>
+		<?php
+		$total_in_cart=WC()->cart->cart_contents_total;
+		$free_shipping_settings = get_option('woocommerce_free_shipping_1_settings');
+        $amount_for_free_shipping = $free_shipping_settings['min_amount'];
+		if($total_in_cart - $amount_for_free_shipping > 0) {
+		?>
+			<p class="free-shipping-promotion"><strong><?php _e('Free shippings', 'knightsmodels'); ?></strong></p>
+		<?php } else {?>
+			<p class="free-shipping-promotion"><?php _e('If you add', 'knightsmodels'); ?> <span><?php echo $amount_for_free_shipping - $total_in_cart." "; echo get_woocommerce_currency();?></span> <?php _e('to cart you will get', 'knightsmodels'); ?> <strong> <?php _e('Free shipping', 'knightsmodels'); ?></strong></p>
+		<?php } ?>
+	</div>
+	<div class="gallery-single-mobile" >
+		<div class="gallery-single-mobile-slide">
+			<?php echo $product->get_image('original');?>
+		</div>
+		<?php
+		$attachment_ids = $product->get_gallery_image_ids();
+		foreach ($attachment_ids as $attachment_id) { ?>
+			<div class="gallery-single-mobile-slide">
+				<?php echo wp_get_attachment_image($attachment_id, 'full'); ?>
+			</div>
+		<?php }
+		?>
+	</div>	
+	<?php
+}
+add_action('woocommerce_before_single_product', 'free_shipping_promotion');
+
+
+add_filter( 'woocommerce_product_data_store_cpt_get_products_query', 'handle_custom_query_var', 10, 2 );
+function handle_custom_query_var( $query, $query_vars ) {
+    if ( isset( $query_vars['like_name'] ) && ! empty( $query_vars['like_name'] ) ) {
+        $query['s'] = esc_attr( $query_vars['like_name'] );
+    }
+    return $query;
+}

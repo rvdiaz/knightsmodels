@@ -48,6 +48,7 @@
     font-size: 20px !important;
     font-weight: 700;
     line-height: 24px;
+    color: $dark;
 }
 .mposshopmassage {
     display: none;
@@ -72,7 +73,7 @@
     background-color: transparent !important;
     color: $light !important;
     font-size: 16px !important;
-    line-height: 100% !important;
+    line-height: 16px !important;
     font-weight: 700 !important;
     padding: 25px 10px !important;
     text-transform: uppercase;
@@ -88,7 +89,7 @@
     background-color: transparent !important;
     color: $light !important;
     font-size: 16px !important;
-    line-height: 100% !important;
+    line-height: 16px !important;
     font-weight: 700 !important;
     padding: 25px 10px !important;
     text-transform: uppercase;
@@ -96,6 +97,7 @@
     clear: both;
     float: left;
     text-align: center;
+    margin-top: 23px !important;
 }
 .share-whishlist-wrapper {
     display: flex;
@@ -103,11 +105,11 @@
 }
 .share-product-button {
     cursor: pointer;
+    margin-left: 13px;
 }
 .share-product-button img{
     width: 20px !important;
     height: 20px !important;
-    margin-left: 13px;
 }
 .share-links {
     display: none;
@@ -128,7 +130,7 @@
 }
 
 @media (max-width: 1200px){
-    .entry-content .woocommerce .products {
+    .shop-content .woocommerce .products {
         padding: 0 20px !important;
         grid-template-columns: repeat(3,1fr);
         width: 100%;
@@ -148,6 +150,8 @@
 @media (max-width: 900px){
     .entry-content .woocommerce .products {
         grid-template-columns: repeat(2,1fr);
+        width: calc(100% - 40px);
+        margin: 0 auto;
     }
     
 }
@@ -157,17 +161,43 @@
     }
     .entry-content .woocommerce .products .product .attachment-woocommerce_thumbnail{
         height: 187px;
+        width: 146px;
+        margin: 0 auto;
+    }
+    .entry-content .woocommerce .related .product {
+        width: 146px !important;
     }
     .woocommerce-Price-amount {
-        font-size: 14px;
+        font-size: 18px;
+        line-height: 18px;
     }
-    .entry-content .woocommerce .product_type_simple {
+    .price-whislist-product-wraper .price{ 
+        line-height: 14px;
+    }
+    .entry-content .woocommerce .product_type_simple,
+    .product .single_add_to_cart_button  {
         font-size: 12px !important;
-        padding: 14px 0 !important;
+        padding: 14px 6px !important;
         background-size: 100% 100%;
+    }
+    .product .add_to_cart_button::after {
+        position: absolute !important;
+        font-size: 10px;
+        top: 1px !important;
+        right: 8px !important;
     }
     .entry-content .woocommerce .products-one-columns {
         grid-template-columns: repeat(1,1fr);
+    }
+    .entry-content .woocommerce .products-one-columns .attachment-woocommerce_thumbnail {
+        height: auto !important;
+        width: auto !important;
+    }
+    .entry-content .woocommerce .products-list-columns .product-title-container {
+        margin-top: 0 !important;
+    }
+    .entry-content .woocommerce .products-list-columns .share-whishlist-wrapper {
+        margin-top: 10px !important;
     }
     .entry-content .woocommerce .products-list-columns {
         grid-template-columns: repeat(1,1fr);
@@ -176,7 +206,8 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
     }
-    .entry-content .woocommerce .products-list-columns .attachment-woocommerce_thumbnail {
+    .entry-content .woocommerce .products-list-columns .attachment-woocommerce_thumbnail,
+    .entry-content .woocommerce .products-list-columns .attachment-post-thumbnail {
         grid-column-start: 1;
         grid-column-end: 2;
         grid-row-start: 1;
@@ -203,6 +234,9 @@
         grid-row-start: 3;
         height: fit-content;
         margin-top: auto;
+    }
+    .entry-content .woocommerce .products-list-columns .range-image .product {
+        display: flex !important;
     }
 }
 

@@ -91,6 +91,15 @@ if(jQuery('.category-highlights-slider')){
   })
 }
 
+
+if(jQuery('.single-product .related .products')){
+  jQuery('.single-product .related .products').flickity({
+      contain:true,
+      prevNextButtons: false,
+      pageDots: false
+  })
+}
+
 const filterAttribute=(event)=>{
   const terms=event.target.innerText;
   const category=jQuery('#category-slug').val();
@@ -230,3 +239,24 @@ const first_filters_sales=(event)=>{
       }								        
     });
 }
+
+jQuery('#submit-search').on('click',()=>{
+  const name=jQuery('#search-input').val();
+  if(name){
+    jQuery.ajax({
+    type : "post",
+    url : ajax.url,
+    data : { action: 'searchproduct', dataSend : {
+        name:name
+     },
+    },
+      beforeSend: function() {
+        jQuery('.product-search-results-container').html(jQuery('.loading-container').html());
+      },
+      success: function(response){		
+        jQuery('.product-search-results-container').html(response);
+        jQuery(document).trigger('yith_wcwl_reload_fragments');
+      }								        
+    });
+  }
+});

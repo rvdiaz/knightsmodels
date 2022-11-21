@@ -4,6 +4,7 @@ const openAccord=(event)=>{
 }
 
 const openAccordFile=(event)=>{
+  event.preventDefault();
   const id=event.target.getAttribute('idfiles');
   jQuery(`#${id}`).toggleClass('show');
 }

@@ -151,7 +151,6 @@
     background-size: 100% 100%;
     background-repeat: no-repeat;
     padding-top: 40px;
-    border-bottom: 1px solid $light;
 }
 .blog-container .title-blog-container {
     font-size: 28px;
@@ -160,8 +159,9 @@
     color: $light;
     font-style: italic;
     text-align: center;
+    text-transform: uppercase;
 }
-.blog-container  .blog-slider-container {
+.blog-container .blog-slider-container {
     width: 1136px;
     margin: 60px auto;
 }
@@ -211,7 +211,7 @@
 }
 .blog-page-link {
     background-size: 100% 100%;
-    
+    border-bottom: 1px solid $light;
 };
 @media (max-width: 1136px) {
     .preorder-info-item,
@@ -220,6 +220,7 @@
     }
     .blog-container .blog-slider-container {
         width: calc(100% - 20px);
+        margin: 30px auto;
     }
     .blog-slider-container .blog-slider-item-container {
         width: calc(50% - 80px);
@@ -235,6 +236,7 @@
 }
 .category-description p {
     font-size: 14px;
+    line-height: 16px;
     width: calc(80% - 20px);
 }
 
@@ -242,11 +244,15 @@
 @media (max-width: 768px){
 .first-level-category--filter-button {
     font-size: 12px;
+    line-height: 12px;
     margin-right: 20px;
     padding-bottom: 10px;
 }
+.blog-container .blog-slider-item-container {
+    padding: 30px;
+}
 .blog-slider-container .blog-slider-item-container {
-    width: calc(100% - 80px);
+    width: calc(100% - 60px);
 } 
 .blog-slider-container .blog-slider-item-container .blog-image {
     text-align: center;
@@ -258,7 +264,7 @@
     width: 57px;
 }
 .first-level-category-products-container {
-    margin: 33px 0;
+    margin: 0;
 }
 .preorder-background-image-item {
     height: 300px;
@@ -276,6 +282,7 @@
 .category-description-blog-button,
 .first-level-category-all-product-link-container {
     width: calc(100% - 40px);
+    padding: 20px 0 40px 0;
 }
 .category-description-blog-button button,
 .first-level-category-all-product-link-container button{
@@ -283,7 +290,7 @@
     width: 100%;
 }
 .category-description-container {
-    min-height: 252px;
+    min-height: 220px;
 }
 .category-description-blog-button a,
 .first-level-category-all-product-link-container a {
@@ -300,6 +307,10 @@
 }
 .preorder-gradient-container {
     bottom: -20px;
+}
+.blog-container {
+    padding-top: 30px;
+    height: 700px;
 }
 }
 

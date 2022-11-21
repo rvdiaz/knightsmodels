@@ -32,7 +32,7 @@
 
 	<?php knightsmodels_post_thumbnail(); ?>
 
-	<div class="entry-content">
+	<div class="entry-content <?php if(is_product()) echo "single-content"; else echo "shop-content"?>">
 		<?php
 		the_content(
 			sprintf(

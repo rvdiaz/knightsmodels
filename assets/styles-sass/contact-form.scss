@@ -48,6 +48,7 @@
     line-height: 16px;
     font-weight: 300;
     color: $dark;
+    background-color: $light;
 }
 .contact-group-textarea textarea {
     font-size: 12px;
@@ -61,11 +62,11 @@
 }
 .contact-group span {
     padding: 0 20px;
-    width: 90%;
+    width: calc(100% - 40px);
 }
 .contact-group select {
     height: 58px;
-    width: 100%;
+    width: calc(100% - 40px );
     border: none;
 }
 .contact-group input:focus,
@@ -143,12 +144,15 @@
     text-transform: uppercase;
     cursor: pointer;
 }
+.contact-group-file {
+    background-image: none !important;
+}
 .contact-group-file span {
     padding: 0;
     width: 100%;
 }
 .contact-group-file input[type=file]{
-    width: 100%;
+    width:100%;
     height: 60px;
 }
 
@@ -161,12 +165,11 @@
     padding: 0;
     padding-top:0;
     background-color: transparent;
-    cursor: potrank voy inter;
     font-size: 16px;
     line-height: 16px;
     font-weight: 300;
     font-family: 'Montserrat';
-    float: right;
+    margin-right: 6px;
   }
 
   @media (max-width: 1024px){
@@ -195,5 +198,12 @@
     }
     .contact-submit-form input {
         width: 100%;
+    }
+    .contact-group input {
+        height: 56px;
+        width: 100%;
+    }
+    .contact-group select {
+        height: 56px;
     }
   }

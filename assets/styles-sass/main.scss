@@ -71,6 +71,7 @@ $dark:#000;
 $light:#fff;
 $theme-color: #D5822F;
 $font-family: 'Montserrat';
+
 @font-face {
 	font-family: 'Montserrat';
     font-style: normal;
@@ -119,7 +120,9 @@ button {
     outline: none;
     border: none
 }
-
+.navigation {
+	display: none;
+}
 /*  header styles */
 @import "header-promotion.scss";
 
@@ -155,3 +158,9 @@ button {
 
 /* single product page */
 @import "single-product-page.scss";
+
+/* search modal */
+@import "search-modal.scss";
+
+/* out of develop pages */
+@import "out-of-develop-files.scss";

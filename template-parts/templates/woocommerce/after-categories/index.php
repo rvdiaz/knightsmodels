@@ -12,7 +12,7 @@ function after_categories_component(){
             $cat=get_term_by( 'id', $woocommerce_category_id, 'product_cat' );
             $parent_cat_id=$cat->parent;
             $parent_cat = get_term_by( 'id', $parent_cat_id, 'product_cat' );
-            if($parent_cat->slug!="inicio"){
+            if($parent_cat->slug!="inicio" && $parent_cat->slug!="inicio-en"){
             if(get_field("logo_banner",$parent_cat)){
             ?>
                 <img src="<?php echo get_field("logo_banner",$parent_cat);?>" alt="<?php echo $parent_cat->name; ?>">
@@ -21,7 +21,7 @@ function after_categories_component(){
            <?php }
             } elseif (get_field("logo_banner",$cat)){
                 ?>
-                    <img src="<?php echo get_field("logo_banner",$cat);?>" alt="<?php echo $parent_cat->name; ?>">
+                    <img src="<?php echo get_field("logo_banner",$cat);?>" alt="<?php echo $cat->name; ?>">
                 <?php } elseif(get_field('imagen_blanca_categoria','option')) {?>
                     <img src="<?php echo get_field('imagen_blanca_categoria','option');?>" alt="knight models">
                <?php }
@@ -31,7 +31,15 @@ function after_categories_component(){
             <?php }  ?>
         </div>
         <div class="form-suscriber">
-            <?php echo do_shortcode('[mc4wp_form id="298"]');?>
+            <?php 
+            echo apply_filters( 'wpml_current_language', null );
+            if(apply_filters( 'wpml_current_language', null ) == "en"){
+                var_dump("dssd");
+                echo do_shortcode('[mc4wp_form id="20760"]');
+            } else {
+                echo do_shortcode('[mc4wp_form id="20542"]');
+            }
+            ?>
         </div>
     </div>
 </div>

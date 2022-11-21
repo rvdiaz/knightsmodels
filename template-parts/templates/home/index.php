@@ -2,15 +2,7 @@
     if(get_field('plantilla') == 'inicio'){  
     ?>    
     <div class="home-categories-container">
-        <!-- listar categorias -->
-        <?php /* $args= array(
-	    'orderby' => 'name',
-	    'hide_empty' => false,
-	    ); 
-	    $all_categories= get_terms('product_cat',$args);
-		foreach ($all_categories as $cat) {
-		$parent_id=$cat->parent;
-		$parent = get_term_by( 'id', $parent_id, 'product_cat' ); */
+      <?php
         if(get_field('menu_categorias','option')){
             foreach (get_field('menu_categorias','option') as $category_id) {
                 $cat = get_term_by( 'id', $category_id['id_categoria'], 'product_cat' );
@@ -18,16 +10,16 @@
 		        $parent = get_term_by( 'id', $parent_id, 'product_cat' ); 
         /* get product by category */
         $argsProduct = array(
-            'category' => array( $cat->slug )
+            'category' => array( $cat->slug ),
+            'limit' => -1
         );
             $products = wc_get_products( $argsProduct );
-			if($parent->slug=='inicio' && count($products)>0){
+			if(($parent->slug=='inicio' || $parent->slug=='inicio-en') && count($products)>0){
+                
 		?>
 		<div id="home-category-wrapper" class="home-category-wrapper">
             <div class="home-category-image">
                 <?php
-               /*  $thumbnail_id = get_woocommerce_term_meta( $cat->term_id, 'thumbnail_id', true );
-                $image = wp_get_attachment_url( $thumbnail_id ); */
                 if(get_field('imagen_slider_categoria',$cat)){
                 ?>
                     <img src="<?php echo get_field('imagen_slider_categoria',$cat);?>" alt="<?php $cat->name; ?>">
@@ -60,7 +52,7 @@
                     <div class="card-product-container">
                         <div class="product-image-container">
                             <a href="<?php echo $product->get_permalink( );?>">
-                            <?php echo $product->get_image()?>
+                            <?php echo $product->get_image('original')?>
                             </a>
                         </div>
                         <div class="product-title-container">

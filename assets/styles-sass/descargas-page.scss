@@ -64,11 +64,16 @@
     text-decoration: none;
 }
 .descargas-files-accordion,
-.descarga-files  {
+.descarga-files,
+.single-product-panel {
     display: none;
 }
-.show {
-    display: block;
+.single-product-panel {
+    margin: 20px;
+}
+.show,
+.show .panel {
+    display: block !important;
 }
 
 @media (max-width: 1024px) {

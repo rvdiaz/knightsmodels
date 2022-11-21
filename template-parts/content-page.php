@@ -17,19 +17,24 @@
 	</header>
 
 	<?php knightsmodels_post_thumbnail(); 
+	
 	if(is_product_category()){
 		$woocommerce_category_id = get_queried_object_id();
 		$cat=get_term_by( 'id', $woocommerce_category_id, 'product_cat' );
 		$parent_id=$cat->parent;
 		$parent = get_term_by( 'id', $parent_id, 'product_cat' );
-		if(($parent->slug!='inicio' && $cat->slug!='inicio') || isset($_GET['cat']))
+		if((($parent->slug!='inicio' && $cat->slug!='inicio') && ($parent->slug!='inicio-en' && $cat->slug!='inicio-en')) || isset($_GET['cat'])){
 			do_shortcode('[woocommerce-product-second-category]');
-	}
+		}
+		elseif($cat->slug=='inicio' || $cat->slug=='inicio-en' )	
+			$my_home_url = apply_filters( 'wpml_home_url', get_option( 'home' ) );
+			wp_redirect($my_home_url);
+		}
 	?>
 
 	<div class="entry-content">
 		<?php
-		if(is_product_category() && $parent->slug=='inicio' && !isset($_GET['cat'])){
+		if(is_product_category() && ($parent->slug=='inicio' || $parent->slug=='inicio-en') && !isset($_GET['cat'])){
 			do_shortcode('[categories-first-level]');
 		} elseif(get_field('plantilla')=='contenido'){
 			do_shortcode('[content]');
@@ -84,6 +89,10 @@
 <!------------- Contact Form --------------------------->	
 
 <?php include('templates/contact-form/index.php'); ?>
+
+<!------------- Blog Page --------------------------->	
+
+<?php include('templates/blog-page/index.php'); ?>
 
 
 

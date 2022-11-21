@@ -19,13 +19,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 global $product;
+
 ?>
 <div class="price-whislist-product-wraper">
-	<p class="<?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?>"><?php echo $product->get_price_html(); ?></p>
+	 <p class="single-price-desktop <?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?>"><?php echo $product->get_price_html(); ?></p>
      <div class="share-whishlist-wrapper">
 		<div class="product-status">
-			<img src="<?php echo wp_get_upload_dir()["url"]?>/icono-check.svg" alt="">
-			<p><?php echo $product->get_stock_status();?></p>
+			<?php 
+			if($product->is_in_stock()){?>
+				<img src="<?php echo wp_get_upload_dir()["url"]?>/icono-check.svg">
+			<?php } else {?>
+				<img src="<?php echo wp_get_upload_dir()["url"]?>/Icono-cerrar.svg">
+			<?php } ?>
+			<p class="<?php if($product->is_in_stock()) echo 'stock'; else echo 'outstock'?>"><?php echo $product->get_stock_status();?></p>
 		</div>
 		<?php
         echo do_shortcode('[yith_wcwl_add_to_wishlist]');?>

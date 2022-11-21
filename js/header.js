@@ -30,10 +30,32 @@ jQuery(document).ready(function(){
             })
         }
     }
+
+    if(jQuery('.tc_video_slide').html()){
+        const video = document.createElement("div");
+        video.classList.add('gallery-single-mobile-slide');
+        video.innerHTML= jQuery('.tc_video_slide').html();
+        jQuery('.gallery-single-mobile').append(video);
+    }
+    if(jQuery('.gallery-single-mobile')){
+    jQuery('.gallery-single-mobile').flickity({
+        freeScroll: false,
+        contain:true,
+        prevNextButtons: false,
+        pageDots: true
+    })
+    }
 })
 
+jQuery('.search-button-action').click(()=>{
+    jQuery('.category-highlights-slider').toggleClass('hide');
+    jQuery('.modal-container').toggleClass('show');
+})
 
+jQuery(document.body ).on( 'added_to_cart', function(){
+    jQuery('.cart-items-total').html(parseInt(jQuery('.cart-items-total').html())+1);
+});
 
-
-
-
+jQuery('.product-remove').on('click',()=>{
+    jQuery('.cart-items-total').html(parseInt(jQuery('.cart-items-total').html())-1);
+})

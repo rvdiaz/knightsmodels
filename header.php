@@ -24,9 +24,9 @@
     .contact-form-container .contact-group{
         background-image:url("<?php echo wp_get_upload_dir()["url"]?>/Group-62.png");
     }
-    .contact-form-container .contact-group-file{
+    /* .contact-form-container .contact-group-file{
         background-image:url("<?php echo wp_get_upload_dir()["url"]?>/Group-110.png");
-    }
+    } */
     .contact-form-container .contact-group-textarea{
         background-image:url("<?php echo wp_get_upload_dir()["url"]?>/Group-111.png");
     }
@@ -39,7 +39,11 @@
     .product-add-cart-button-container .product_type_simple,
     .products .product_type_simple,
     .button-category-container-mobile .add-cart-button,
-	.product .single_add_to_cart_button  {
+	.product .single_add_to_cart_button,
+	.wishlist-items-wrapper .add_to_cart_button,
+	.cart-collaterals .checkout-button,
+	.woocommerce-checkout .woocommerce-checkout-payment .button,
+	.single-product .outofstock .alert_container .stock_alert_button {
         background-image: url('<?php echo wp_get_upload_dir()["url"]?>/Rectangle-65.png') !important;
     }
 	.form-suscriber .submit-input {
@@ -49,6 +53,12 @@
     .contact-group {
         background-image:url("<?php echo wp_get_upload_dir()["url"]?>/Group-110.png") !important;
     }
+	.category-highlights-slider {
+		background-image:url("<?php echo wp_get_upload_dir()["url"]?>/Rectangle-115-1.png") !important;
+	}
+	.wishlist-items-wrapper .add_to_cart_button {
+		background-image: none !important;
+	}
   }
 </style>
 
@@ -134,19 +144,24 @@
 					</ul>	
 				</div>
 				<div class="logo-main-menu">
-					<a href="<?php echo get_site_url();?>">
+					<?php $my_home_url = apply_filters( 'wpml_home_url', get_option( 'home' ) );?>
+					<a href="<?php echo $my_home_url;?>">
 					<?php if(get_field('logo_sitio','option')){?>
 					<img src="<?php echo get_field('logo_sitio','option');?>" alt="knight models">
 					<?php } ?>
 					</a>
 				</div>
 				<div class="submenu-main-menu">
-					<button class="search-button"><img src="<?php echo wp_get_upload_dir()["url"]?>/icono-lupa.svg" alt="search"></button>
+					<button class="search-button search-button-action"><img src="<?php echo wp_get_upload_dir()["url"]?>/icono-lupa.svg" alt="<?php _e('search', 'knightsmodels');?>"></button>
 					<?php if(get_field('wishlist_page','option')){?>
-					<a class="search-button" href="<?php echo get_field('wishlist_page','option');?>" target="_blank"><img src="<?php echo wp_get_upload_dir()["url"]?>/icons8-bookmark-24.png" alt="whishlist"></a>
+					<a class="search-button" href="<?php echo get_field('wishlist_page','option');?>"><img src="<?php echo wp_get_upload_dir()["url"]?>/icons8-bookmark-24.png" alt="<?php _e('whishlist', 'knightsmodels');?>"></a>
 					<?php } ?>
-					<a class="shop-button" href="<?php echo wc_get_cart_url();?>"><img src="<?php echo wp_get_upload_dir()["url"]?>/icono-cesta-numero.svg" alt="search"></a>
+					<a class="shop-button" href="<?php echo wc_get_cart_url();?>">
+						<img src="<?php echo wp_get_upload_dir()["url"]?>/icono-cesta-numero.svg" alt="<?php _e('cart', 'knightsmodels');?>">
+						<span class="cart-items-total"><?php echo WC()->cart->get_cart_contents_count();?></span>
+					</a>
 				</div>
+				<?php echo do_shortcode( '[modal-search]'); ?>
 			</div>
 			<nav class="main-menu-bottom">
 				<ul class="menu-bottom-container">
@@ -197,15 +212,18 @@
 						if(get_field('menu_despues_categoria','option')){
 							foreach (get_field('menu_despues_categoria','option') as $item) {
 						?>
-						<li class="menu-bottom-items-container">
-							<button class="menu-main-bottom-items ">
+						<li class="menu-bottom-items-container menu-bottom-items-container-<?php echo $count;?>">
+							<button class="menu-main-bottom-items menu-button-<?php echo $count;?>">
 								<a class="menu-bottom-items" href="<?php echo $item['item_menu_a_categoria']['url']?>" class="menu-bottom-items"><?php echo $item['item_menu_a_categoria']['title']; ?></a>
 							</button>
 						</li>
-					<?php } }?>
+					<?php 
+					$count++;	
+					} 
+				}?>
 				</ul>	
 			</nav>
 		</div>
-		
-		
+		<?php
+		?>
 	</header><!-- #masthead -->

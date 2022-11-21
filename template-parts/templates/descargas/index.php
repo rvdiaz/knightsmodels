@@ -7,7 +7,7 @@ $args= array(
 	$all_categories= get_terms('product_cat',$args);
 ?>
     <div class="descargas-title-container">
-        <p class="descargas-title">Descargas</p>
+        <p class="descargas-title"><?php echo get_the_title();?></p>
     </div>    
     <div class="descargas-files-container">
             <?php

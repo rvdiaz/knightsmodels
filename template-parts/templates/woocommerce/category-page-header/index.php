@@ -40,13 +40,13 @@ function woocommerce_product_category( ) {
         <div class="shop-views-filter">
             <input type="range" id="filter-views" name="points" min="0" max="2">
             <div class="filter-views-options">
-                <button class="one-column"><img src="<?php echo wp_get_upload_dir()["url"]?>/icono-vista-horizontal.svg" alt=""></button>
-                <button class="one-column"><img src="<?php echo wp_get_upload_dir()["url"]?>/icono-vista-dos-columnas.svg" alt=""></button>
-                <button class="one-column"><img src="<?php echo wp_get_upload_dir()["url"]?>/icono-vista-general.svg" alt=""></button>
+                <button class="one-column"><img src="<?php echo wp_get_upload_dir()["url"]?>/icono-vista-horizontal.svg" ></button>
+                <button class="one-column"><img src="<?php echo wp_get_upload_dir()["url"]?>/icono-vista-dos-columnas.svg"></button>
+                <button class="one-column"><img src="<?php echo wp_get_upload_dir()["url"]?>/icono-vista-general.svg"></button>
             </div>
         </div>
             <div class="subcategories-title-wrapper">
-                <p class="subcategories-title">BANDAS</p>
+                <p class="subcategories-title"><?php _e('bands', 'knightsmodels');?></p>
             </div>
             <div class="subcategories-wrapper">
             <div class="subcategory-list-container" data-flickity='{ "freeScroll": true, "prevNextButtons": false, "pageDots" : false, "contain":true}'>
@@ -60,7 +60,7 @@ function woocommerce_product_category( ) {
 		        foreach ($all_categories as $cate) {
                     $parent_id=$cate->parent;
                     $parent = get_term_by( 'id', $parent_id, 'product_cat' );
-                    if($parent->slug!='inicio' && $cate->slug!='inicio'){
+                    if(($parent->slug!='inicio' && $cate->slug!='inicio') && ($parent->slug!='inicio-en' && $cate->slug!='inicio-en')){
                     ?>
                     <div class="subcategory-item-wrapper">
                         <a href="<?php echo get_category_link( $cate->term_id ); ?>">
@@ -68,7 +68,9 @@ function woocommerce_product_category( ) {
                         if($cate->term_id !=  $woocommerce_category_id){ 
                             ?>
                             <div class="logo-subcategory-dark">
-                                <?php if(get_field('logo_ico_menu',$cate)) {?>
+                                <?php if(get_field('logo_ico_menu',$cate)) {
+                                  /*   echo file_get_contents(get_field('logo_ico_menu',$cate););  */
+                                    ?>
                                     <img src="<?php echo get_field('logo_ico_menu',$cate); ?>" alt="<?php echo $cate->name; ?>">
                                 <?php } elseif (get_field('imagen_negra_categoria','option')) { ?>
                                     <img src="<?php echo get_field('imagen_negra_categoria','option'); ?>" alt="<?php echo $cate->name; ?>">
@@ -101,15 +103,15 @@ function woocommerce_product_category( ) {
                 <div class="filter-wrapper">
                     <input id="category-slug" type="hidden" value="<?php echo $cat->slug;?>">
                     <div class="main-filters-container">
-                    <button onclick="ordenar_filter(event)" class="main-filter active">Ordenar por</button>
-                    <button onclick="rango_filter(event)" class="main-filter">Rango</button>
-                    <button onclick="origen_filter(event)" class="main-filter">Origen</button>
+                    <button onclick="ordenar_filter(event)" class="main-filter active"><?php _e('Order by', 'knightsmodels');?></button>
+                    <button onclick="rango_filter(event)" class="main-filter"><?php _e('Range', 'knightsmodels');?></button>
+                    <button onclick="origen_filter(event)" class="main-filter"><?php _e('Origin', 'knightsmodels');?></button>
                     </div>
                     <div class="secondary-filters-container" >
                     <div id="ordenar-filter" class="secondary-filter">
-                        <button class="secondary-filter-button" filter="new" onclick="filter(event)">Nuevo</button>
-                        <button class="secondary-filter-button" filter="low" onclick="filter(event)">Precio mas bajo</button>
-                        <button class="secondary-filter-button" filter="high" onclick="filter(event)">Precio mas alto</button>
+                        <button class="secondary-filter-button" filter="new" onclick="filter(event)"><?php _e('New', 'knightsmodels');?></button>
+                        <button class="secondary-filter-button" filter="low" onclick="filter(event)"><?php _e('Lower price', 'knightsmodels');?></button>
+                        <button class="secondary-filter-button" filter="high" onclick="filter(event)"><?php _e('Higher price', 'knightsmodels');?></button>
                     </div>
                     <div id="rango-filter" class="secondary-filter">
                         <?php
@@ -130,11 +132,6 @@ function woocommerce_product_category( ) {
                         <button onclick="filterAttribute(event)" class="secondary-filter-button"><?php echo $attr->name;?></button>
                         <?php   } ?>
                     </div>
-                    </div>
-                </div>
-                <div class="loading-container">
-                    <div class="loading-image">
-                        <img src="<?php echo wp_get_upload_dir()["url"] ?>/Double-Ring-1s-200px-1.gif" alt="">
                     </div>
                 </div>
             </div>

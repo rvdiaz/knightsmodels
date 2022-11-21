@@ -15,6 +15,9 @@
 .list-languages .wpml-ls-sub-menu a{
     background-color: $dark !important;
     color: $light !important;
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: 500;
 }
 .list-languages .js-wpml-ls-item-toggle:hover,
 .list-languages .wpml-ls-sub-menu a:hover{
@@ -26,3 +29,18 @@
     font-size: 14px;
     line-height: 14px;
   }
+
+@media (max-width: 768px) {
+    .footer-container {
+        height: 64px;
+    }
+    .copyright-text {
+        font-size: 10px;
+        line-height: 10px;
+    }
+    .list-languages .js-wpml-ls-item-toggle,
+    .list-languages .wpml-ls-sub-menu a{
+        font-size: 10px;
+        line-height: 10px;
+}
+}

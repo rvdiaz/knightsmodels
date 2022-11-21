@@ -2,6 +2,7 @@
 add_shortcode( 'categories-first-level', 'categories_first_level' );
 
 function categories_first_level(){
+    
     if(isset($_GET['cat']))
         var_dump($_GET['cat']);
     $woocommerce_category_id = get_queried_object_id();
@@ -14,7 +15,8 @@ function categories_first_level(){
     $all_categories= get_terms('product_cat',$args); 
 
     $argsProduct = array(
-        'category' => array( $cat->slug )
+        'category' => array( $cat->slug ),
+        'limit' => -1
     );
         $products = wc_get_products( $argsProduct );
     ?>
@@ -24,7 +26,7 @@ function categories_first_level(){
         </div>
         <div class="pre-order-slider-item" data-flickity='{"prevNextButtons": false, "pageDots" : true, "contain":true}'>
             <?php foreach ($products as $prod) { 
-                if($prod->get_meta('_mpos_enable_preorder')){
+                if($prod->get_meta('_mpos_enable_preorder')=="yes"){
                     if(get_field('imagen_alta_resolucion',$prod)){
                         $imageurl=get_field('imagen_alta_resolucion',$prod);
                     }elseif (get_field('imagen_alta_resolucion_producto','option')) {
@@ -46,11 +48,11 @@ function categories_first_level(){
                     </div>
                     <div class="preorder-button-item">
                         <div class="product-add-cart-button-container">
-                            <?php echo do_shortcode('[add_to_cart show_price=false id='.$prod->id.']'); ?>
+                            <?php echo do_shortcode('[add_to_cart name="Just a Test Product" show_price=false id='.$prod->id.']'); ?>
                         </div>
                     </div>
                     <div class="preorder-gradient-container">
-                        <img src="<?php echo wp_get_upload_dir()["url"]?>/Rectangle-87.png" alt="">
+                        <img src="<?php echo wp_get_upload_dir()["url"]?>/Rectangle-87.png" >
                     </div>
                 </div>
             <?php }
@@ -67,7 +69,7 @@ function categories_first_level(){
         <div class="category-description-blog-button">
             <?php if(get_field('boton_slider_categoria','option')){?>
                 <button style="background-image: url('<?php echo wp_get_upload_dir()["url"]?>/button-header-top.png')">
-                    <a href="<?php echo get_field('boton_slider_categoria','option')['url'] ?>"><?php echo get_field('boton_slider_categoria','option')['title'] ?></a>
+                    <a href="<?php echo get_field('boton_slider_categoria','option')['url'] ?>"><?php echo get_field('boton_slider_categoria','option')['title']; ?></a>
                 </button>
             <?php } ?>
         </div>
@@ -76,7 +78,7 @@ function categories_first_level(){
      <!-- subcategories slider -->
      <div class="subcategories-container" style="background-image:url('<?php echo wp_get_upload_dir()["url"]?>/Rectangle-115.png')">
         <div class="subcategories-title-wrapper">
-            <p class="subcategories-title">Afiliaciones</p>
+            <p class="subcategories-title"><?php _e('Afiliations', 'knightsmodels');?></p>
         </div>
         <div class="first-level-subcategories" data-flickity='{ "freeScroll": true, "prevNextButtons": false, "pageDots" : false, "contain":true}' >
              <div class="card-product-container-first">
@@ -107,10 +109,10 @@ function categories_first_level(){
      <div class="first-level-category-filter">
         <div class="first-level-category-filter-button-container" data-flickity='{ "freeScroll": false, "prevNextButtons": false, "pageDots" : false, "contain":true}'>
             <div class="card-product-container-first"></div>
-            <button class="first-level-category--filter-button" onclick="first_filters_all(event)">Todos</button>
-            <button class="first-level-category--filter-button" onclick="first_filters(event)">Bat-Ofertas</button>
-            <button class="first-level-category--filter-button" onclick="first_filters_recent(event)">Novedades</button>
-            <button class="first-level-category--filter-button" onclick="first_filters_sales(event)">Los más vendidos</button>
+            <button class="first-level-category--filter-button" onclick="first_filters_all(event)"><?php _e('All', 'knightsmodels');?></button>
+            <button class="first-level-category--filter-button" onclick="first_filters(event)"><?php _e('Bat-Oferts', 'knightsmodels');?></button>
+            <button class="first-level-category--filter-button" onclick="first_filters_recent(event)"><?php _e('News', 'knightsmodels');?></button>
+            <button class="first-level-category--filter-button" onclick="first_filters_sales(event)"><?php _e('Best sellers', 'knightsmodels');?></button>
             <div class="card-product-container-first"></div>
         </div>
      </div>
@@ -119,12 +121,15 @@ function categories_first_level(){
      <div class="first-level-category-products-container" data-flickity='{ "freeScroll": true, "prevNextButtons": false, "pageDots" : false, "contain":true}'>
         <?php
          $argsProduct = array(
-            'category' => array($cat->slug));
+            'category' => array($cat->slug),
+            'limit' => -1
+        );
             $products = wc_get_products( $argsProduct ); 
             $i=0;?>
         <div class="card-product-container-first">
         </div>
          <?php
+    if(count($products) > 10){
         while ($i < count($products)) {
         ?>
         <div class="first-level-products-slider-wrapper">
@@ -132,7 +137,7 @@ function categories_first_level(){
             <div class="card-product-container">
                 <div class="product-image-container">
                     <a href="<?php echo $products[$i]->get_permalink();?>">
-                        <?php echo $products[$i]->get_image()?>
+                        <?php echo $products[$i]->get_image('original')?>
                     </a>
                 </div>
                 <div class="product-title-container">
@@ -151,7 +156,7 @@ function categories_first_level(){
             <div class="card-product-container second-card">
                 <div class="product-image-container">
                     <a href="<?php echo $products[$i+1]->get_permalink();?>" target="_blank">
-                        <?php echo $products[$i+1]->get_image()?>
+                        <?php echo $products[$i+1]->get_image('original')?>
                     </a>
                 </div>
                 <div class="product-title-container">
@@ -169,18 +174,36 @@ function categories_first_level(){
         </div>
         <?php 
         $i=$i+2;
-    } ?>
+        } 
+    } else {
+         foreach ($products as $product) {?>
+            <div class="card-product-container">
+                <div class="product-image-container">
+                    <a href="<?php echo $product->get_permalink();?>">
+                        <?php echo $product->get_image('original')?>
+                    </a>
+                </div>
+                <div class="product-title-container">
+                    <a class="product-title" href="<?php echo $product->get_permalink( );?>"><?php echo $product->name;?></a>
+                </div>
+                <div class="product-price-wishlist-container">
+                    <p class="product-price"><?php echo $product->get_price_html();?></p>
+                    <?php echo do_shortcode('[yith_wcwl_add_to_wishlist product_id='.$product->id.']');?>
+                </div>
+                <div class="product-add-cart-button-container">
+                    <?php echo do_shortcode('[add_to_cart show_price=false id='.$product->id.']'); ?>
+                </div>
+            </div> 
+    <?php }
+}
+?>
     </div>
     <div class="first-level-category-all-product-link-container">
         <button style="background-image: url('<?php echo wp_get_upload_dir()["url"]?>/Group-110.png')">
-            <a href="<?php echo get_permalink();?>?cat=all">Todos los productos</a>
+            <a href="<?php echo get_permalink();?>?cat=all"><?php _e('All products', 'knightsmodels');?></a>
         </button>
     </div>
-    <div class="loading-container">
-        <div class="loading-image">
-            <img src="<?php echo wp_get_upload_dir()["url"] ?>/Double-Ring-1s-200px-1.gif" alt="">
-        </div>
-    </div>
+    
 
     <!-- blog relation post -->
     <div class="blog-container" style="background-image: url('<?php echo wp_get_upload_dir()["url"]?>/Rectangle-138.png')">
@@ -189,8 +212,8 @@ function categories_first_level(){
         </div>
         <div class="blog-slider-container" data-flickity='{"prevNextButtons": false, "pageDots" : true, "contain":true}'>
             <?php
-            if(get_field('lista_de_blog')){
-              foreach (get_field('lista_de_blog') as $id) {
+            if(get_field('lista_de_blog',$cat)){
+              foreach (get_field('lista_de_blog',$cat) as $id) {
                 $blog=get_post($id['blog_relacionado']);
             ?>
             <div class="blog-slider-item-container">
@@ -209,7 +232,7 @@ function categories_first_level(){
                     </p>
                 </div>
                 <div class="blog-seemore-button">
-                    <a href="<?php echo get_permalink($id['blog_relacionado'])?>">See more...</a>
+                    <a href="<?php echo get_permalink($id['blog_relacionado'])?>"><?php _e('See more', 'knightsmodels');?>...</a>
                 </div>  
             </div>
         <?php 
@@ -222,7 +245,7 @@ function categories_first_level(){
     <div class="category-description-blog-button">
         <?php if(get_field('boton_blog_page','option')){?>
         <button style="background-image: url('<?php echo wp_get_upload_dir()["url"]?>/button-header-top.png')">
-            <a href="<?php echo get_field('boton_blog_page','option')['url'] ?>"><?php echo get_field('boton_blog_page','option')['title'] ?></a>
+            <a href="<?php echo get_field('boton_blog_page','option')['url'] ?>"><?php echo get_field('boton_blog_page','option')['title']; ?></a>
         </button>
         <?php } ?>
     </div>

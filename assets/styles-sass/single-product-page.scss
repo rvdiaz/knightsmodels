@@ -44,6 +44,8 @@
     border-radius: 0 !important;
     border: none !important;
     padding: 10px 1em !important;
+    margin: 0 0 0 -5px !important;
+    border-right: 2px solid $light !important;
 }
 .single-product .tabs li a {
     font-size: 16px !important;
@@ -136,13 +138,39 @@
     cursor: pointer;
     width: 40px;
 }
+
+.descarga-by-single-product .item-descarga-single-product {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0;
+    border-bottom: 1px solid #00000010;
+}
+.descarga-by-single-product .title-item-descarga-single-product-wrapper {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.descarga-by-single-product .title-item-descarga-single-product {
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 500;
+    color: $dark;
+    opacity: 60%;
+    margin-left: 24px;
+    text-decoration: none;
+}
+.descarga-by-single-product .language-item-descarga-single-product{
+   width: 20px;
+   height: 20px;
+}
 @media (max-width: 1136px){
     .single-product .woocommerce-tabs {
-        width: 100%;
+        width: calc(100% - 40px);
     }
     .single-product .sumary-info {
-        width: calc(100% - 40px);
         margin: 0 auto;
+        width: 100%;
     }
     .single-product .summary {
         width: 100% !important;
@@ -162,7 +190,10 @@
         justify-content: center;
         flex-direction: row-reverse;
     }
-    
+    .descarga-by-single-product .title-item-descarga-single-product {
+        font-size: 12px;
+        line-height: 14px;
+    }
 }
 @media (max-width: 1024px){
     .single-product .summary {
@@ -187,7 +218,7 @@
         display: block;
     }
     .single-product .single-product-tabs-mobile {
-        margin: 40px 0;
+        margin: 40px auto;
     }
     .single-product .gallery-single-mobile .gallery-single-mobile-slide {
         width: 100%;
@@ -251,6 +282,19 @@
     }
     .single-product .related .product {
         width: 146px !important;
+    }
+    .blog-box-price-button-menu .button {
+        float: initial !important;
+    }
+    .blog-box-price-button-menu {
+        position: sticky;
+        background-color: $light;
+        bottom: 0;
+        box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+    .blog-box-price-button-menu .price-whislist-product-wraper {
+        padding: 0;
     }
 }
 

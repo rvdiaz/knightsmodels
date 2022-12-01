@@ -123,6 +123,7 @@ button {
 .navigation {
 	display: none;
 }
+
 /*  header styles */
 @import "header-promotion.scss";
 
@@ -164,3 +165,6 @@ button {
 
 /* out of develop pages */
 @import "out-of-develop-files.scss";
+
+/* blog page */
+@import "blog-page.scss";

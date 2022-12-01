@@ -11,7 +11,7 @@
         /* get product by category */
         $argsProduct = array(
             'category' => array( $cat->slug ),
-            'limit' => -1
+            'limit' => 15
         );
             $products = wc_get_products( $argsProduct );
 			if(($parent->slug=='inicio' || $parent->slug=='inicio-en') && count($products)>0){
@@ -41,7 +41,7 @@
             </div>
         </div>
             <!-- listar productos por categoria -->
-            <div class="inicio-category-products-container"  data-flickity='{ "freeScroll": true, "prevNextButtons": false, "pageDots" : false, "contain":true}'>
+            <div class="inicio-category-products-container"  data-flickity='{ "freeScroll": true, "prevNextButtons": false, "pageDots" : false, "contain":true,"selectedAttraction": 0.01, "friction": 0.15}'>
                 <div class="card-product-container-first">
                 </div>
                 <?php 

@@ -69,10 +69,10 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	    do_action( 'woocommerce_after_shop_loop_item_title' );?>
         <div class="share-whishlist-wrapper"><?php
             echo do_shortcode('[yith_wcwl_add_to_wishlist]');?>
-            <button class="share-product-button" onclick="showSharePopup(event)"><img refpopup="" src="<?php echo wp_get_upload_dir()["url"] ?>/share.png" ></button>
+            <button class="share-product-button" onclick="showSharePopup(event)"><img refpopup="" src="<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/share.png" ></button>
             <div class="share-links">
-                <a href="https://www.facebook.com/share.php?u=<?php echo get_permalink( $product->ID );?>" target="_blank"><img src="<?php echo wp_get_upload_dir()["url"] ?>/facebook-share.png" > </a>
-                <a href="https://wa.me/?text=<?php echo get_permalink( $product->ID );?>"  target="_blank"><img src="<?php echo wp_get_upload_dir()["url"] ?>/whatsapp.png" ></a>
+                <a href="https://www.facebook.com/share.php?u=<?php echo get_permalink( $product->ID );?>" target="_blank"><img src="<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/facebook-share.png" > </a>
+                <a href="https://wa.me/?text=<?php echo get_permalink( $product->ID );?>"  target="_blank"><img src="<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/whatsapp.png" ></a>
             </div>
         </div>
     </div> 

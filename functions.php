@@ -227,20 +227,19 @@ add_action('wp_ajax_filter', 'filter');
 function filter(){
 	$category= $_POST['dataSend']['category'];
 	$gol= $_POST['dataSend']['gol'];
+	$page = ( $_POST['dataSend']['page'] ) ? $_POST['dataSend']['page'] : 1;
+
 	switch ($gol) {
 		case 'new':{
-			echo do_shortcode( '[products columns="4" category='.$category.' limit="16" paginate="true" orderby="date" order="ASC" ]' );
-			wp_die();	
+			filterNew($category,$page);
 			break;
 		}
 		case 'high':{
-			echo do_shortcode( '[products columns="4" category='.$category.' limit="16" paginate="true" orderby="price" order="DESC" ]' );
-			wp_die();	
+			filterhigh($category,$page);
 			break;
 		}
 		case 'low':{
-			echo do_shortcode( '[products columns="4" category='.$category.' limit="16" paginate="true" orderby="price" order="ASC" ]' );
-			wp_die();	
+			filterlow($category,$page);
 			break;
 		}
 		default:{
@@ -250,42 +249,36 @@ function filter(){
 		}
 	}
 }
-/* filter by attributes */
-add_action('wp_ajax_nopriv_filterAttribute', 'filterAttribute');
-add_action('wp_ajax_filterAttribute', 'filterAttribute');
 
-function filterAttribute(){
-	$terms= $_POST['dataSend']['terms'];
-	$category= $_POST['dataSend']['category'];
-	echo do_shortcode( '[products columns="4" category='.$category.' limit="16" paginate="true" attribute="new" terms="'.$terms.'" ]' );
-	wp_die();	
-}
-
-/* filter by range price */
-add_action('wp_ajax_nopriv_filterRange', 'filterRange');
-add_action('wp_ajax_filterRange', 'filterRange');
-
-function filterRange(){
-	$min = $_POST['dataSend']['min'];
-	$max = $_POST['dataSend']['max'];
-	$category = $_POST['dataSend']['category'];
+function filterNew($category,$page){
 	$query = array(
+		'posts_per_page' => $posts_per_page,
+    	'paged'          => $page,
         'post_status' => 'publish',
         'post_type' => 'product',
 		'product_cat' => $category,
 		'limit' => 16,
 		'paginate'=>true,
-        'meta_query' => array(
-        array(
-            'key' => '_price',
-            'value' => array($min, $max),
-            'compare' => 'BETWEEN',
-            'type' => 'NUMERIC'
-            ),
-        ),
+		'orderby' => 'date',
+    	'order' => 'DESC'
     );
-    
-    $wpquery =new WP_Query($query);
+
+	$wpquery =new WP_Query($query);
+
+	$posts_per_page = get_option( 'posts_per_page' );
+	$total = $wpquery->found_posts;
+
+	$itemsPagination=0;
+	$division=$total/$posts_per_page;
+
+	if($division >= 1){
+		if($total%$posts_per_page > 0)
+			$itemsPagination=$division+1;
+		else
+			$itemsPagination=$division;
+	}
+	$pagination='';
+
 	$list='';
 	if($wpquery->have_posts()){
         while ($wpquery->have_posts()){
@@ -301,10 +294,10 @@ function filterRange(){
                     <span class="price">'.$prod->get_price_html().'</span>
                     <div class="share-whishlist-wrapper">'.
 					 do_shortcode("[yith_wcwl_add_to_wishlist product_id=".get_the_ID()."]") 
-					 .'<button class="share-product-button" onclick="showSharePopup(event)"><img refpopup="" src="'.wp_get_upload_dir()["url"].'/share.png" ></button>
+					 .'<button class="share-product-button" onclick="showSharePopup(event)"><img refpopup="" src="'.wp_get_upload_dir()["baseurl"].'/2022/11/share.png" ></button>
             			<div class="share-links">
-                			<a href="https://www.facebook.com/share.php?u='.get_permalink( $product->ID ).'" target="_blank"><img src="'.wp_get_upload_dir()["url"].'/facebook-share.png" > </a>
-               				<a href="https://wa.me/?text='. get_permalink( $product->ID ).'"  target="_blank"><img src="'.wp_get_upload_dir()["url"].'/whatsapp.svg" ></a>
+                			<a href="https://www.facebook.com/share.php?u='.get_permalink( $product->ID ).'" target="_blank"><img src="'.wp_get_upload_dir()["baseurl"].'/2022/11/facebook-share.png" > </a>
+               				<a href="https://wa.me/?text='. get_permalink( $product->ID ).'"  target="_blank"><img src="'.wp_get_upload_dir()["baseurl"].'/2022/11/whatsapp.svg" ></a>
             			</div> 
                     </div>
                 </div>'.
@@ -312,11 +305,525 @@ function filterRange(){
             .'</li>
 			';
 		}
+
+		if($itemsPagination != 0){
+			$prevDisabled='';
+			$nextDisabled='';
+			if($page-1==0){
+				$prevDisabled='disabled';
+			}
+			if($page+1>$itemsPagination){
+				$nextDisabled='disabled';
+			}
+			$i=1;
+			$pagination='
+			<nav class="filter-pagination-container">
+				<li class="item-filter-pagination" >
+					<button class="paginations-button" '.$prevDisabled.' filter="new" onclick="filter(event)" page="'.($page-1).'"><span><</span>'.__('Prev', 'knightsmodels').'</button>
+				</li>
+				<ul class="filter-pagination">'
+				;
+			while ($i <= $itemsPagination) {
+				$active='';
+				if($i==$page) 
+					$active="page-active";
+				$pagination.='
+				<li class="item-filter-pagination '.$active.'" >
+					<button onclick="filter(event)" filter="new" page="'.$i.'">'.$i.'</button>
+				</li>
+				';
+				$i++;
+			}
+			$pagination.='
+			</ul>
+				<li class="item-filter-pagination" >
+					<button class="paginations-button" '.$nextDisabled.' filter="new" onclick="filter(event)"  page="'.($page+1).'">'.__('Next', 'knightsmodels').'<span>></span></button>
+				</li>
+			</nav>
+			';
+		}
 		echo '
 		<div class="woocommerce">
             <ul class="products">'.$list.
 			'</ul>
+			'.$pagination.'
 		</div>';
+
+		wp_die();	
+	} else {?>
+		<div class="not-results-container">
+			<p>
+				<?php _e('No search results', 'knightsmodels'); ?>
+			</p>
+		</div>
+	<?php
+		wp_die();	
+	} 
+}
+
+function filterhigh($category,$page){
+	$query = array(
+		'posts_per_page' => $posts_per_page,
+    	'paged'          => $page,
+        'post_status' => 'publish',
+        'post_type' => 'product',
+		'product_cat' => $category,
+		'limit' => 16,
+		'paginate'=>true,
+		'orderby'        => 'meta_value_num',
+		'meta_key'       => '_price',
+		'order'          => 'desc'
+    );
+
+	$wpquery =new WP_Query($query);
+
+	$posts_per_page = get_option( 'posts_per_page' );
+	$total = $wpquery->found_posts;
+
+	$itemsPagination=0;
+	$division=$total/$posts_per_page;
+
+	if($division >= 1){
+		if($total%$posts_per_page > 0)
+			$itemsPagination=$division+1;
+		else
+			$itemsPagination=$division;
+	}
+	$pagination='';
+
+	$list='';
+	if($wpquery->have_posts()){
+        while ($wpquery->have_posts()){
+            $wpquery->the_post();
+			$prod=wc_get_product( get_the_ID() );
+			$list.='
+			<li class="product type-product range-image">
+			 '.get_the_post_thumbnail().'
+			 	<div class="product-title-container">
+                	<a href="'.get_permalink( $product->ID ).'" class="woocommerce-loop-product__title">'.get_the_title().'</a>
+				</div>
+                <div class="price-whislist-product-wraper">
+                    <span class="price">'.$prod->get_price_html().'</span>
+                    <div class="share-whishlist-wrapper">'.
+					 do_shortcode("[yith_wcwl_add_to_wishlist product_id=".get_the_ID()."]") 
+					 .'<button class="share-product-button" onclick="showSharePopup(event)"><img refpopup="" src="'.wp_get_upload_dir()["baseurl"].'/2022/11/share.png" ></button>
+            			<div class="share-links">
+                			<a href="https://www.facebook.com/share.php?u='.get_permalink( $product->ID ).'" target="_blank"><img src="'.wp_get_upload_dir()["baseurl"].'/2022/11/facebook-share.png" > </a>
+               				<a href="https://wa.me/?text='. get_permalink( $product->ID ).'"  target="_blank"><img src="'.wp_get_upload_dir()["baseurl"].'/2022/11/whatsapp.svg" ></a>
+            			</div> 
+                    </div>
+                </div>'.
+				do_shortcode("[add_to_cart show_price=false id=".get_the_ID()."]")
+            .'</li>
+			';
+		}
+
+		if($itemsPagination != 0){
+			$prevDisabled='';
+			$nextDisabled='';
+			if($page-1==0){
+				$prevDisabled='disabled';
+			}
+			if($page+1>$itemsPagination){
+				$nextDisabled='disabled';
+			}
+			$i=1;
+			$pagination='
+			<nav class="filter-pagination-container">
+				<li class="item-filter-pagination" >
+					<button class="paginations-button" '.$prevDisabled.' filter="high" onclick="filter(event)" page="'.($page-1).'"><span><</span>'.__('Prev', 'knightsmodels').'</button>
+				</li>
+				<ul class="filter-pagination">'
+				;
+			while ($i <= $itemsPagination) {
+				$active='';
+				if($i==$page) 
+					$active="page-active";
+				$pagination.='
+				<li class="item-filter-pagination '.$active.'" >
+					<button onclick="filter(event)" filter="high" page="'.$i.'">'.$i.'</button>
+				</li>
+				';
+				$i++;
+			}
+			$pagination.='
+			</ul>
+				<li class="item-filter-pagination" >
+					<button class="paginations-button" '.$nextDisabled.' filter="high" onclick="filter(event)"  page="'.($page+1).'">'.__('Next', 'knightsmodels').'<span>></span></button>
+				</li>
+			</nav>
+			';
+		}
+		echo '
+		<div class="woocommerce">
+            <ul class="products">'.$list.
+			'</ul>
+			'.$pagination.'
+		</div>';
+
+		wp_die();	
+	} else {?>
+		<div class="not-results-container">
+			<p>
+				<?php _e('No search results', 'knightsmodels'); ?>
+			</p>
+		</div>
+	<?php
+		wp_die();	
+	} 
+}
+
+function filterlow($category,$page){
+	$query = array(
+		'posts_per_page' => $posts_per_page,
+    	'paged'          => $page,
+        'post_status' => 'publish',
+        'post_type' => 'product',
+		'product_cat' => $category,
+		'limit' => 16,
+		'paginate'=>true,
+		'orderby'        => 'meta_value_num',
+		'meta_key'       => '_price',
+		'order'          => 'asc'
+    );
+
+	$wpquery =new WP_Query($query);
+
+	$posts_per_page = get_option( 'posts_per_page' );
+	$total = $wpquery->found_posts;
+
+	$itemsPagination=0;
+	$division=$total/$posts_per_page;
+
+	if($division >= 1){
+		if($total%$posts_per_page > 0)
+			$itemsPagination=$division+1;
+		else
+			$itemsPagination=$division;
+	}
+	$pagination='';
+
+	$list='';
+	if($wpquery->have_posts()){
+        while ($wpquery->have_posts()){
+            $wpquery->the_post();
+			$prod=wc_get_product( get_the_ID() );
+			$list.='
+			<li class="product type-product range-image">
+			 '.get_the_post_thumbnail().'
+			 	<div class="product-title-container">
+                	<a href="'.get_permalink( $product->ID ).'" class="woocommerce-loop-product__title">'.get_the_title().'</a>
+				</div>
+                <div class="price-whislist-product-wraper">
+                    <span class="price">'.$prod->get_price_html().'</span>
+                    <div class="share-whishlist-wrapper">'.
+					 do_shortcode("[yith_wcwl_add_to_wishlist product_id=".get_the_ID()."]") 
+					 .'<button class="share-product-button" onclick="showSharePopup(event)"><img refpopup="" src="'.wp_get_upload_dir()["baseurl"].'/2022/11/share.png" ></button>
+            			<div class="share-links">
+                			<a href="https://www.facebook.com/share.php?u='.get_permalink( $product->ID ).'" target="_blank"><img src="'.wp_get_upload_dir()["baseurl"].'/2022/11/facebook-share.png" > </a>
+               				<a href="https://wa.me/?text='. get_permalink( $product->ID ).'"  target="_blank"><img src="'.wp_get_upload_dir()["baseurl"].'/2022/11/whatsapp.svg" ></a>
+            			</div> 
+                    </div>
+                </div>'.
+				do_shortcode("[add_to_cart show_price=false id=".get_the_ID()."]")
+            .'</li>
+			';
+		}
+
+		if($itemsPagination != 0){
+			$prevDisabled='';
+			$nextDisabled='';
+			if($page-1==0){
+				$prevDisabled='disabled';
+			}
+			if($page+1>$itemsPagination){
+				$nextDisabled='disabled';
+			}
+			$i=1;
+			$pagination='
+			<nav class="filter-pagination-container">
+				<li class="item-filter-pagination" >
+					<button class="paginations-button" '.$prevDisabled.' filter="low" onclick="filter(event)" page="'.($page-1).'"><span><</span>'.__('Prev', 'knightsmodels').'</button>
+				</li>
+				<ul class="filter-pagination">'
+				;
+			while ($i <= $itemsPagination) {
+				$active='';
+				if($i==$page) 
+					$active="page-active";
+				$pagination.='
+				<li class="item-filter-pagination '.$active.'" >
+					<button onclick="filter(event)" filter="low" page="'.$i.'">'.$i.'</button>
+				</li>
+				';
+				$i++;
+			}
+			$pagination.='
+			</ul>
+				<li class="item-filter-pagination" >
+					<button class="paginations-button" '.$nextDisabled.' filter="low" onclick="filter(event)"  page="'.($page+1).'">'.__('Next', 'knightsmodels').'<span>></span></button>
+				</li>
+			</nav>
+			';
+		}
+		echo '
+		<div class="woocommerce">
+            <ul class="products">'.$list.
+			'</ul>
+			'.$pagination.'
+		</div>';
+
+		wp_die();	
+	} else {?>
+		<div class="not-results-container">
+			<p>
+				<?php _e('No search results', 'knightsmodels'); ?>
+			</p>
+		</div>
+	<?php
+		wp_die();	
+	} 
+}
+/* filter by attributes */
+add_action('wp_ajax_nopriv_filterAttribute', 'filterAttribute');
+add_action('wp_ajax_filterAttribute', 'filterAttribute');
+
+function filterAttribute(){
+	$category= $_POST['dataSend']['category'];
+	$terms= $_POST['dataSend']['terms'];
+	$page = ( $_POST['dataSend']['page'] ) ? $_POST['dataSend']['page'] : 1;
+
+	$query = array(
+		'posts_per_page' => $posts_per_page,
+    	'paged'          => $page,
+        'post_status' => 'publish',
+        'post_type' => 'product',
+		'product_cat' => $category,
+		'limit' => 16,
+		'paginate'=>true,
+		'tax_query'           => array(
+			array(
+				'taxonomy'        => 'pa_origen',
+				'field'           => 'slug',
+				'terms'           => $terms,
+				'operator'        => 'IN'
+			  )
+		)
+    );
+
+	$wpquery =new WP_Query($query);
+
+	$posts_per_page = get_option( 'posts_per_page' );
+	$total = $wpquery->found_posts;
+
+	$itemsPagination=0;
+	$division=$total/$posts_per_page;
+
+	if($division >= 1){
+		if($total%$posts_per_page > 0)
+			$itemsPagination=$division+1;
+		else
+			$itemsPagination=$division;
+	}
+	$pagination='';
+
+	$list='';
+	if($wpquery->have_posts()){
+        while ($wpquery->have_posts()){
+            $wpquery->the_post();
+			$prod=wc_get_product( get_the_ID() );
+			$list.='
+			<li class="product type-product range-image">
+			 '.get_the_post_thumbnail().'
+			 	<div class="product-title-container">
+                	<a href="'.get_permalink( $product->ID ).'" class="woocommerce-loop-product__title">'.get_the_title().'</a>
+				</div>
+                <div class="price-whislist-product-wraper">
+                    <span class="price">'.$prod->get_price_html().'</span>
+                    <div class="share-whishlist-wrapper">'.
+					 do_shortcode("[yith_wcwl_add_to_wishlist product_id=".get_the_ID()."]") 
+					 .'<button class="share-product-button" onclick="showSharePopup(event)"><img refpopup="" src="'.wp_get_upload_dir()["baseurl"].'/2022/11/share.png" ></button>
+            			<div class="share-links">
+                			<a href="https://www.facebook.com/share.php?u='.get_permalink( $product->ID ).'" target="_blank"><img src="'.wp_get_upload_dir()["baseurl"].'/2022/11/facebook-share.png" > </a>
+               				<a href="https://wa.me/?text='. get_permalink( $product->ID ).'"  target="_blank"><img src="'.wp_get_upload_dir()["baseurl"].'/2022/11/whatsapp.svg" ></a>
+            			</div> 
+                    </div>
+                </div>'.
+				do_shortcode("[add_to_cart show_price=false id=".get_the_ID()."]")
+            .'</li>
+			';
+		}
+
+		if($itemsPagination > 1){
+			$prevDisabled='';
+			$nextDisabled='';
+			if($page-1==0){
+				$prevDisabled='disabled';
+			}
+			if($page+1>$itemsPagination){
+				$nextDisabled='disabled';
+			}
+			$i=1;
+			$pagination='
+			<nav class="filter-pagination-container">
+				<li class="item-filter-pagination" >
+					<button class="paginations-button" '.$prevDisabled.' slug="'.$terms.'" onclick="filterAttribute(event)" page="'.($page-1).'"><span><</span>'.__('Prev', 'knightsmodels').'</button>
+				</li>
+				<ul class="filter-pagination">'
+				;
+			while ($i <= $itemsPagination) {
+				$active='';
+				if($i==$page) 
+					$active="page-active";
+				$pagination.='
+				<li class="item-filter-pagination '.$active.'" >
+					<button onclick="filterAttribute(event)" slug="'.$terms.'" page="'.$i.'">'.$i.'</button>
+				</li>
+				';
+				$i++;
+			}
+			$pagination.='
+			</ul>
+				<li class="item-filter-pagination" >
+					<button class="paginations-button" '.$nextDisabled.' slug="'.$terms.'" onclick="filterAttribute(event)"  page="'.($page+1).'">'.__('Next', 'knightsmodels').'<span>></span></button>
+				</li>
+			</nav>
+			';
+		}
+		echo '
+		<div class="woocommerce">
+            <ul class="products">'.$list.
+			'</ul>
+			'.$pagination.'
+		</div>';
+
+		wp_die();	
+	} else {?>
+		<div class="not-results-container">
+			<p>
+				<?php _e('No search results', 'knightsmodels'); ?>
+			</p>
+		</div>
+	<?php
+		wp_die();	
+	} 
+}
+
+/* filter by range price */
+add_action('wp_ajax_nopriv_filterRange', 'filterRange');
+add_action('wp_ajax_filterRange', 'filterRange');
+
+function filterRange(){
+	$min = $_POST['dataSend']['min'];
+	$max = $_POST['dataSend']['max'];
+	$category = $_POST['dataSend']['category'];
+
+	$page = ( $_POST['dataSend']['page'] ) ? $_POST['dataSend']['page'] : 1;
+
+	$query = array(
+		'posts_per_page' => $posts_per_page,
+    	'paged'          => $page,
+        'post_status' => 'publish',
+        'post_type' => 'product',
+		'product_cat' => $category,
+		'limit' => 16,
+		'paginate'=>true,
+        'meta_query' => array(
+        array(
+            'key' => '_price',
+            'value' => array($min, $max),
+            'compare' => 'BETWEEN',
+            'type' => 'NUMERIC'
+            ),
+        ),
+    );
+
+    $wpquery =new WP_Query($query);
+
+	$posts_per_page = get_option( 'posts_per_page' );
+	$total = $wpquery->found_posts;
+
+	$itemsPagination=0;
+	$division=$total/$posts_per_page;
+
+	if($division >= 1){
+		if($total%$posts_per_page > 0)
+			$itemsPagination=$division+1;
+		else
+			$itemsPagination=$division;
+	}
+	$pagination='';
+
+	$list='';
+	if($wpquery->have_posts()){
+        while ($wpquery->have_posts()){
+            $wpquery->the_post();
+			$prod=wc_get_product( get_the_ID() );
+			$list.='
+			<li class="product type-product range-image">
+			 '.get_the_post_thumbnail().'
+			 	<div class="product-title-container">
+                	<a href="'.get_permalink( $product->ID ).'" class="woocommerce-loop-product__title">'.get_the_title().'</a>
+				</div>
+                <div class="price-whislist-product-wraper">
+                    <span class="price">'.$prod->get_price_html().'</span>
+                    <div class="share-whishlist-wrapper">'.
+					 do_shortcode("[yith_wcwl_add_to_wishlist product_id=".get_the_ID()."]") 
+					 .'<button class="share-product-button" onclick="showSharePopup(event)"><img refpopup="" src="'.wp_get_upload_dir()["baseurl"].'/2022/11/share.png" ></button>
+            			<div class="share-links">
+                			<a href="https://www.facebook.com/share.php?u='.get_permalink( $product->ID ).'" target="_blank"><img src="'.wp_get_upload_dir()["baseurl"].'/2022/11/facebook-share.png" > </a>
+               				<a href="https://wa.me/?text='. get_permalink( $product->ID ).'"  target="_blank"><img src="'.wp_get_upload_dir()["baseurl"].'/2022/11/whatsapp.svg" ></a>
+            			</div> 
+                    </div>
+                </div>'.
+				do_shortcode("[add_to_cart show_price=false id=".get_the_ID()."]")
+            .'</li>
+			';
+		}
+
+		if($itemsPagination != 0){
+			$prevDisabled='';
+			$nextDisabled='';
+			if($page-1==0){
+				$prevDisabled='disabled';
+			}
+			if($page+1>$itemsPagination){
+				$nextDisabled='disabled';
+			}
+			$i=1;
+			$pagination='
+			<nav class="filter-pagination-container">
+				<li class="item-filter-pagination" >
+					<button class="paginations-button" '.$prevDisabled.' onclick="filterRange(event)" min="'.$min.'" max="'.$max.'" page="'.($page-1).'"><span><</span>'.__('Prev', 'knightsmodels').'</button>
+				</li>
+				<ul class="filter-pagination">'
+				;
+			while ($i <= $itemsPagination) {
+				$active='';
+				if($i==$page) 
+					$active="page-active";
+				$pagination.='
+				<li class="item-filter-pagination '.$active.'" >
+					<button onclick="filterRange(event)" min="'.$min.'" max="'.$max.'" page="'.$i.'">'.$i.'</button>
+				</li>
+				';
+				$i++;
+			}
+			$pagination.='
+			</ul>
+				<li class="item-filter-pagination" >
+					<button class="paginations-button" '.$nextDisabled.' onclick="filterRange(event)" min="'.$min.'" max="'.$max.'" page="'.($page+1).'">'.__('Next', 'knightsmodels').'<span>></span></button>
+				</li>
+			</nav>
+			';
+		}
+		echo '
+		<div class="woocommerce">
+            <ul class="products">'.$list.
+			'</ul>
+			'.$pagination.'
+		</div>';
+
 		wp_die();	
 	} else {?>
 		<div class="not-results-container">
@@ -337,7 +844,7 @@ function firstFilterAll(){
 	$category = $_POST['dataSend']['category'];
 	$argsProduct = array(
 		'category' => array($category),
-		'limit' => -1
+		'limit' => 30
 	);
 	$i=0;
 	$products = wc_get_products( $argsProduct ); 
@@ -440,7 +947,7 @@ function firstFilterRecent(){
 		'category' => array($category),
 		'orderby' => 'date',
     	'order' => 'DESC',
-		'limit' => -1
+		'limit' => 30
 	);
 	$i=0;
 	$products = wc_get_products( $argsProduct ); 
@@ -544,7 +1051,7 @@ function firstFilterSales(){
 		'category' => array($category),
 		'orderby'   => 'meta_value_num',
   		'meta_key'  => 'total_sales',
-		'limit' => -1
+		'limit' => 30
 	);
 	$i=0;
 	$products = wc_get_products( $argsProduct ); 
@@ -641,7 +1148,8 @@ function searchproduct(){
 	$name = $_POST['dataSend']['name'];
 	$argsProduct = array(
 		'limit' => 6,
-    	'like_name' => $name 
+    	'like_name' => $name,
+		'order'=>'ASC'
 	);
 	$i=0;
 	$products = wc_get_products( $argsProduct );  
@@ -694,18 +1202,32 @@ add_filter('woocommerce_show_page_title', 'false');
 function change_tabs_order() {
 	global $product; 
 	$product_tabs = apply_filters( 'woocommerce_product_tabs', array() );
-
 	if ( ! empty( $product_tabs ) ) : ?>
 	<div class="single-product-tabs-mobile woocommerce-tabs wc-tabs-wrapper">
 		<?php	foreach ( $product_tabs as $key => $product_tab ) { ?>
 		<button class="descarga-button" onclick="openAccordFile(event)" idfiles="file-<?php echo $key?>">
 			<?php echo wp_kses_post( apply_filters( 'woocommerce_product_' . $key . '_tab_title', $product_tab['title'], $key ) ); ?>
-			<img src="<?php echo wp_get_upload_dir()["url"]?>/icono-flecha-opciones-1.png">
+			<img onclick="openAccordFileIcon(event)" src="<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/icono-flecha-opciones-1.png">
 		</button>
 		<div class="single-product-panel" id="file-<?php echo $key?>">
 			<div class="woocommerce-Tabs-panel--<?php echo esc_attr( $key ); ?> panel entry-content wc-tab" id="tab-<?php echo esc_attr( $key ); ?>" role="tabpanel" aria-labelledby="tab-title-<?php echo esc_attr( $key ); ?>">
 				<?php
-				if ( isset( $product_tab['callback'] ) ) {
+				if( $product_tab['title']=="Descargas"){?>
+					<div class="descarga-by-single-product">
+						<?php if(get_field('descargas',$product->get_id())){
+							foreach (get_field('descargas',$product->get_id()) as $item_descarga) { ?>
+								<div class="item-descarga-single-product">
+									<a class="title-item-descarga-single-product-wrapper" href="<?php echo $item_descarga['documento_descarga']['url'];?>" download>
+										<img src="<?php echo $item_descarga['tipo_documento_descarga'];?>">
+										<span class="title-item-descarga-single-product" ><?php echo $item_descarga['documento_descarga']['title'];?></span>
+									</a>
+									<img class="language-item-descarga-single-product" src="<?php echo $item_descarga['idioma_documento_descarga'];?>">
+								</div>
+							<?php }	
+						}?>
+					</div>
+				<?php }
+				elseif ( isset( $product_tab['callback'] ) ) {
 					call_user_func( $product_tab['callback'], $key, $product_tab );
 				}
 				?>
@@ -716,20 +1238,6 @@ function change_tabs_order() {
 		<?php do_action( 'woocommerce_product_after_tabs' ); ?>
 	</div>
 	<?php endif; ?>
-
-	<div class="single-title-mobile"><?php
-		$terms = get_the_terms ( $product_id, 'product_cat' );
-		?>
-		<p class="category-single-product"><?php
-			echo $terms[0]->name;
-		?></p>
-		<?php
-		the_title( '<h1 class="product_title entry-title">', '</h1>' );?>
-		<div class="price-whislist-product-wraper">
-			<p class="single-price-mobile <?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?>"><?php echo $product->get_price_html(); ?></p>
-		</div>
-	</div>
-
 	<?php 
 }
 add_action('woocommerce_before_add_to_cart_quantity', 'change_tabs_order');
@@ -748,7 +1256,7 @@ function free_shipping_promotion(){
 	?>
 	<div class="free-shipping-promotion-container">
 		<button onclick="history.back()" class="back-button-shipping-promotion">
-			<img src="<?php echo wp_get_upload_dir()["url"]?>/icono-flecha.svg">
+			<img src="<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/icono-flecha.svg">
 		</button>
 		<?php
 		$total_in_cart=WC()->cart->cart_contents_total;
@@ -786,3 +1294,6 @@ function handle_custom_query_var( $query, $query_vars ) {
     }
     return $query;
 }
+
+function custom_remove_all_quantity_fields( $return, $product ) {return true;}
+add_filter( 'woocommerce_is_sold_individually','custom_remove_all_quantity_fields', 10, 2 );

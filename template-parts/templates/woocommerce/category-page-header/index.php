@@ -35,69 +35,69 @@ function woocommerce_product_category( ) {
             </div>
         </div>
         <?php do_shortcode('[category-highlights]'); ?>
-        
-        <div class="subcategories-container subcategories-container-subcategories" style="background-image:url('<?php echo wp_get_upload_dir()["url"]?>/Rectangle-115.png')"?>
         <div class="shop-views-filter">
             <input type="range" id="filter-views" name="points" min="0" max="2">
             <div class="filter-views-options">
-                <button class="one-column"><img src="<?php echo wp_get_upload_dir()["url"]?>/icono-vista-horizontal.svg" ></button>
-                <button class="one-column"><img src="<?php echo wp_get_upload_dir()["url"]?>/icono-vista-dos-columnas.svg"></button>
-                <button class="one-column"><img src="<?php echo wp_get_upload_dir()["url"]?>/icono-vista-general.svg"></button>
+                <button class="one-column"><img src="<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/icono-vista-horizontal.svg" ></button>
+                <button class="one-column"><img src="<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/icono-vista-dos-columnas.svg"></button>
+                <button class="one-column"><img src="<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/icono-vista-general.svg"></button>
             </div>
         </div>
-            <div class="subcategories-title-wrapper">
-                <p class="subcategories-title"><?php _e('bands', 'knightsmodels');?></p>
-            </div>
-            <div class="subcategories-wrapper">
-            <div class="subcategory-list-container" data-flickity='{ "freeScroll": true, "prevNextButtons": false, "pageDots" : false, "contain":true}'>
-                <div class="card-product-container-first">
+        <div class="filter-general-container">
+            <div class="subcategories-container subcategories-container-subcategories" style="background-image:url('<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/Rectangle-115.png')">
+                <div class="subcategories-title-wrapper">
+                    <p class="subcategories-title"><?php _e('bands', 'knightsmodels');?></p>
                 </div>
-               <?php $args= array(
-	            'orderby' => 'name',
-	            'hide_empty' => false
-	            ); 
-	            $all_categories= get_terms('product_cat',$args); 
-		        foreach ($all_categories as $cate) {
-                    $parent_id=$cate->parent;
-                    $parent = get_term_by( 'id', $parent_id, 'product_cat' );
-                    if(($parent->slug!='inicio' && $cate->slug!='inicio') && ($parent->slug!='inicio-en' && $cate->slug!='inicio-en')){
-                    ?>
-                    <div class="subcategory-item-wrapper">
-                        <a href="<?php echo get_category_link( $cate->term_id ); ?>">
-                        <?php 
-                        if($cate->term_id !=  $woocommerce_category_id){ 
-                            ?>
-                            <div class="logo-subcategory-dark">
-                                <?php if(get_field('logo_ico_menu',$cate)) {
-                                  /*   echo file_get_contents(get_field('logo_ico_menu',$cate););  */
-                                    ?>
-                                    <img src="<?php echo get_field('logo_ico_menu',$cate); ?>" alt="<?php echo $cate->name; ?>">
-                                <?php } elseif (get_field('imagen_negra_categoria','option')) { ?>
-                                    <img src="<?php echo get_field('imagen_negra_categoria','option'); ?>" alt="<?php echo $cate->name; ?>">
-                               <?php } ?>
-                            </div>
-                        <?php } else {?>
-                            <div class="logo-subcategory-dark">
-                                <?php if(get_field('logo_ico_menu_active',$cate)) {?>
-                                    <img src="<?php echo get_field('logo_ico_menu_active',$cate); ?>" alt="<?php echo $cate->name; ?>">
-                                <?php } elseif (get_field('imagen_categoria_activa','option')) {?>
-                                    <img src="<?php echo get_field('imagen_categoria_activa','option'); ?>" alt="<?php echo $cate->name; ?>">
-                                <?php } ?>
-                            </div>
-                        <?php } ?>
-                        <div class="subcategory-title-wrapper">
-                            <p class="subcategory-title <?php if($cate->term_id ==  $woocommerce_category_id) echo "subcategory-title-active";?>"><?php echo $cate->name; ?></p>
+                <div class="subcategories-wrapper">
+                    <div class="subcategory-list-container" data-flickity='{ "freeScroll": true, "prevNextButtons": false, "pageDots" : false, "contain":true, "selectedAttraction": 0.01, "friction": 0.15}'>
+                        <div class="card-product-container-first">
                         </div>
-                        </a>
+                    <?php $args= array(
+                        'orderby' => 'name',
+                        'hide_empty' => false
+                        ); 
+                        $all_categories= get_terms('product_cat',$args); 
+                        foreach ($all_categories as $cate) {
+                            $parent_id=$cate->parent;
+                            $parent = get_term_by( 'id', $parent_id, 'product_cat' );
+                            if(($parent->slug!='inicio' && $cate->slug!='inicio') && ($parent->slug!='inicio-en' && $cate->slug!='inicio-en')){
+                            ?>
+                            <div class="subcategory-item-wrapper">
+                                <a href="<?php echo get_category_link( $cate->term_id ); ?>">
+                                <?php 
+                                if($cate->term_id !=  $woocommerce_category_id){ 
+                                    ?>
+                                    <div class="logo-subcategory-dark">
+                                        <?php if(get_field('logo_ico_menu',$cate)) {
+                                        /*   echo file_get_contents(get_field('logo_ico_menu',$cate););  */
+                                            ?>
+                                            <img src="<?php echo get_field('logo_ico_menu',$cate); ?>" alt="<?php echo $cate->name; ?>">
+                                        <?php } elseif (get_field('imagen_negra_categoria','option')) { ?>
+                                            <img src="<?php echo get_field('imagen_negra_categoria','option'); ?>" alt="<?php echo $cate->name; ?>">
+                                    <?php } ?>
+                                    </div>
+                                <?php } else {?>
+                                    <div class="logo-subcategory-dark">
+                                        <?php if(get_field('logo_ico_menu_active',$cate)) {?>
+                                            <img src="<?php echo get_field('logo_ico_menu_active',$cate); ?>" alt="<?php echo $cate->name; ?>">
+                                        <?php } elseif (get_field('imagen_categoria_activa','option')) {?>
+                                            <img src="<?php echo get_field('imagen_categoria_activa','option'); ?>" alt="<?php echo $cate->name; ?>">
+                                        <?php } ?>
+                                    </div>
+                                <?php } ?>
+                                <div class="subcategory-title-wrapper">
+                                    <p class="subcategory-title <?php if($cate->term_id ==  $woocommerce_category_id) echo "subcategory-title-active";?>"><?php echo $cate->name; ?></p>
+                                </div>
+                                </a>
+                            </div>
+                        <?php
+                        }
+                        }
+                        ?>
+                        <div class="card-product-container-last">
+                        </div>
                     </div>
-                <?php
-                 }
-                }
-                ?>
-                <div class="card-product-container-last">
                 </div>
-            </div>
-            </div>
             </div>
             <div class="woocomerce-filters-container">
                 <div class="filter-wrapper">
@@ -123,18 +123,41 @@ function woocommerce_product_category( ) {
                     </div>
                     <div id="origen-filter" class="secondary-filter">
                         <?php
-                           $attribute_terms = get_terms(array(
-                            'taxonomy' => 'pa_new',
-                            'hide_empty' => true,
+                            $attribute_terms = get_terms(array(
+                            'taxonomy' => 'pa_origen',
+                            'hide_empty' => true
                         ));
-                         foreach ($attribute_terms as $attr) {
+                            foreach ($attribute_terms as $attr) {
+                                $argsProducts= array(
+                                    'post_type'           => 'product',
+                                    'post_status'         => 'publish',
+                                    'posts_per_page'  => -1,
+                                    'tax_query'           => array(
+                                        array(
+                                          'taxonomy'        => 'product_cat',
+                                          'field'           => 'slug',
+                                          'terms'           => $cat->slug,
+                                          'operator'        => 'IN',
+                                        ),
+                                        array(
+                                          'taxonomy'        => 'pa_origen',
+                                          'field'           => 'slug',
+                                          'terms'           => $attr->slug,
+                                          'operator'        => 'IN'
+                                        ),
+                                      )
+                                );
+                                $prods=wc_get_products( $argsProducts ); 
+                                if(count($prods)>0){
                         ?>
-                        <button onclick="filterAttribute(event)" class="secondary-filter-button"><?php echo $attr->name;?></button>
-                        <?php   } ?>
+                            <button onclick="filterAttribute(event)" class="secondary-filter-button" slug="<?php echo $attr->slug;?>"><?php echo $attr->name;?></button>
+                        <?php   } 
+                    } ?>
                     </div>
                     </div>
                 </div>
             </div>
+        </div>
         <?php
     }
 }

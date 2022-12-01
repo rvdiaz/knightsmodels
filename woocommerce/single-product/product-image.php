@@ -51,7 +51,7 @@ $wrapper_classes   = apply_filters(
 		?>
 	</figure>
 </div>
-<div class="gallery-single-mobile" data-flickity='{ "freeScroll": false, "prevNextButtons": false, "pageDots" : true, "contain":true}'>
+<div class="gallery-single-mobile" data-flickity='{ "freeScroll": false, "prevNextButtons": false, "pageDots" : true, "contain":true, "selectedAttraction": 0.01, "friction": 0.15}'>
 	<div class="gallery-single-mobile-slide">
 		<?php echo $product->get_image('original');?>
 	</div>

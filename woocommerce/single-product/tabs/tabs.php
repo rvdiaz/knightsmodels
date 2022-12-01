@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @see woocommerce_default_product_tabs()
  */
 $product_tabs = apply_filters( 'woocommerce_product_tabs', array() );
-
+global $product; 
 if ( ! empty( $product_tabs ) ) : ?>
 
 	<div class="single-product-tabs-desktop woocommerce-tabs wc-tabs-wrapper">
@@ -43,7 +43,22 @@ if ( ! empty( $product_tabs ) ) : ?>
 		<?php foreach ( $product_tabs as $key => $product_tab ) : ?>
 			<div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--<?php echo esc_attr( $key ); ?> panel entry-content wc-tab" id="tab-<?php echo esc_attr( $key ); ?>" role="tabpanel" aria-labelledby="tab-title-<?php echo esc_attr( $key ); ?>">
 				<?php
-				if ( isset( $product_tab['callback'] ) ) {
+				if( $product_tab['title']=="Descargas"){?>
+					<div class="descarga-by-single-product">
+						<?php if(get_field('descargas',$product->get_id())){
+							foreach (get_field('descargas',$product->get_id()) as $item_descarga) { ?>
+								<div class="item-descarga-single-product">
+									<a class="title-item-descarga-single-product-wrapper" href="<?php echo $item_descarga['documento_descarga']['url'];?>" download>
+										<img src="<?php echo $item_descarga['tipo_documento_descarga'];?>">
+										<span class="title-item-descarga-single-product" ><?php echo $item_descarga['documento_descarga']['title'];?></span>
+									</a>
+									<img class="language-item-descarga-single-product" src="<?php echo $item_descarga['idioma_documento_descarga'];?>">
+								</div>
+							<?php }	
+						}?>
+					</div>
+				<?php }
+				elseif ( isset( $product_tab['callback'] ) ) {
 					call_user_func( $product_tab['callback'], $key, $product_tab );
 				}
 				?>

@@ -9,8 +9,8 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
+<article class="<?php if(is_singular('blog')) echo 'single-page';?>" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<header class="entry-header ">
 		<?php
 		if(!is_product()){
 		if ( is_singular() ){

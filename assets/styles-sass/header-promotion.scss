@@ -14,7 +14,7 @@
     color: $light;
     font-weight: 700;
     font-size: 16px;
-    line-height: 16px;    
+    line-height: 100%;    
 }
 .button-promotion-container {
     display: flex;
@@ -24,7 +24,7 @@
     background-repeat: no-repeat;
     background-size: 100% 100%;
     font-size: 14px;
-    line-height: 14px;
+    line-height: 100%;
     text-transform: uppercase;
     color: $light;
     font-weight: 500;

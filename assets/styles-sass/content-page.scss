@@ -3,3 +3,9 @@
     max-width: 1136px;
     margin: 0 auto;
 }
+
+@media (max-width: 767px){
+    .content-page {
+        padding: 0 1rem;
+    }  
+}

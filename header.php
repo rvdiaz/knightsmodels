@@ -22,20 +22,17 @@
 
 	<style>
     .contact-form-container .contact-group{
-        background-image:url("<?php echo wp_get_upload_dir()["url"]?>/Group-62.png");
+        background-image:url("<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/Group-62.png");
     }
-    /* .contact-form-container .contact-group-file{
-        background-image:url("<?php echo wp_get_upload_dir()["url"]?>/Group-110.png");
-    } */
+
     .contact-form-container .contact-group-textarea{
-        background-image:url("<?php echo wp_get_upload_dir()["url"]?>/Group-111.png");
+        background-image:url("<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/Group-111.png");
     }
-    .contact-submit-form input {
-        background-image: url("<?php echo wp_get_upload_dir()["url"]?>/Rectangle-65.png");
-    }
+
     .contact-group-file input[type=file]::file-selector-button {
-        background-image: url("<?php echo wp_get_upload_dir()["url"]?>/Rectangle-152.png");
+        background-image: url("<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/Rectangle-152.png");
     }
+
     .product-add-cart-button-container .product_type_simple,
     .products .product_type_simple,
     .button-category-container-mobile .add-cart-button,
@@ -43,18 +40,20 @@
 	.wishlist-items-wrapper .add_to_cart_button,
 	.cart-collaterals .checkout-button,
 	.woocommerce-checkout .woocommerce-checkout-payment .button,
-	.single-product .outofstock .alert_container .stock_alert_button {
-        background-image: url('<?php echo wp_get_upload_dir()["url"]?>/Rectangle-65.png') !important;
+	.single-product .outofstock .alert_container .stock_alert_button,
+	.contact-submit-form input,
+	#yith-wcwl-form .wishlist_table .product-add-to-cart a{
+        background-image: url('<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/Rectangle-65.png') !important;
     }
 	.form-suscriber .submit-input {
-		background-image: url('<?php echo wp_get_upload_dir()["url"]?>/icono-enviar.png') !important;
+		background-image: url('<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/icono-enviar.png') !important;
 	}
     @media (max-width: 1024px){
     .contact-group {
-        background-image:url("<?php echo wp_get_upload_dir()["url"]?>/Group-110.png") !important;
+        background-image:url("<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/Group-110.png") !important;
     }
 	.category-highlights-slider {
-		background-image:url("<?php echo wp_get_upload_dir()["url"]?>/Rectangle-115-1.png") !important;
+		background-image:url("<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/Rectangle-115-1.png") !important;
 	}
 	.wishlist-items-wrapper .add_to_cart_button {
 		background-image: none !important;
@@ -67,12 +66,14 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <div id="page" class="site">
+<div class="modal-container-overflow <?php if(!is_product_category() && !is_front_page()) echo "modal-container-overlow-index"?>">
+</div>
 	<header id="masthead" class="site-header">
 		<div class="message-notification-container">
 			<span id="message-notification">Producto agregado</span>
 		</div>
 		<?php if(!isset($_COOKIE['showPromo'])) {?>
-		<div class="header-top-promotion" style="background-image: url('<?php echo wp_get_upload_dir()["url"] ?>/header-top-background.png');">
+		<div class="header-top-promotion" style="background-image: url('<?php echo wp_get_upload_dir()["baseurl"] ?>/2022/11/header-top-background.png');">
 			<div class="promotion-container">
 				<div class="promotion-text-container">
 					<?php if(get_field('texto_promocion','option')){?>
@@ -81,9 +82,9 @@
 				</div>
 				<div class="button-promotion-container">
 					<?php if(get_field('boton_promocion','option')){?>
-						<a class="button-promocion" style="background-image: url('<?php echo wp_get_upload_dir()["url"] ?>/button-header-top.png')" href="<?php echo get_field('boton_promocion','option')['link']; ?>"><?php echo get_field('boton_promocion','option')['title']?></a>
+						<a class="button-promocion" style="background-image: url('<?php echo wp_get_upload_dir()["baseurl"] ?>/2022/11/button-header-top.png')" href="<?php echo get_field('boton_promocion','option')['link']; ?>"><?php echo get_field('boton_promocion','option')['title']?></a>
 					<?php } ?>
-					<a class="close-promotion"><img src="<?php echo wp_get_upload_dir()["url"] ?>/Icono-cerrar.png"></a>
+					<a class="close-promotion"><img src="<?php echo wp_get_upload_dir()["baseurl"] ?>/2022/11/Icono-cerrar.png"></a>
 				</div>
 			</div>
 		</div>
@@ -91,9 +92,28 @@
 		<div class="<?php if(is_product_category() || is_front_page()) echo "main-menu"; else echo "main-menu-dark";?>">
 			<div class="main-menu-top">
 				<div class="hamburger">
-         			<img src="<?php echo wp_get_upload_dir()["url"] ?>/icono-hamburguesa.png" >
+         			<img src="<?php echo wp_get_upload_dir()["baseurl"] ?>/2022/11/icono-hamburguesa.png" >
         		</div>
 				<div class="hamberguer-menu-desktop">
+					<div class="hamberguer-menu-mobile-topside main-menu-top">
+						<div class="close-hamburger">
+							<img src="<?php echo wp_get_upload_dir()["baseurl"] ?>/2022/11/Icono-cerrar.png" >
+						</div>
+						<div class="logo-main-menu">
+							<?php $my_home_url = apply_filters( 'wpml_home_url', get_option( 'home' ) );?>
+							<a href="<?php echo $my_home_url;?>">
+							<?php if(get_field('logo_sitio','option')){?>
+							<img src="<?php echo get_field('logo_sitio','option');?>" alt="knight models">
+							<?php } ?>
+							</a>
+						</div>
+						<div class="submenu-main-menu">
+							<a class="shop-button" href="<?php echo wc_get_cart_url();?>">
+								<img src="<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/icono-cesta-numero.svg" alt="<?php _e('cart', 'knightsmodels');?>">
+								<span class="cart-items-total"><?php echo WC()->cart->get_cart_contents_count();?></span>
+							</a>
+						</div>
+					</div>
 					<ul class="menu-top-container">
 						<?php
 						if(get_field('menu_categorias','option')){
@@ -152,12 +172,12 @@
 					</a>
 				</div>
 				<div class="submenu-main-menu">
-					<button class="search-button search-button-action"><img src="<?php echo wp_get_upload_dir()["url"]?>/icono-lupa.svg" alt="<?php _e('search', 'knightsmodels');?>"></button>
+					<button class="search-button search-button-action"><img src="<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/icono-lupa.svg" alt="<?php _e('search', 'knightsmodels');?>"></button>
 					<?php if(get_field('wishlist_page','option')){?>
-					<a class="search-button" href="<?php echo get_field('wishlist_page','option');?>"><img src="<?php echo wp_get_upload_dir()["url"]?>/icons8-bookmark-24.png" alt="<?php _e('whishlist', 'knightsmodels');?>"></a>
+					<a class="search-button" href="<?php echo get_field('wishlist_page','option');?>"><img src="<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/icons8-bookmark-24.png" alt="<?php _e('whishlist', 'knightsmodels');?>"></a>
 					<?php } ?>
 					<a class="shop-button" href="<?php echo wc_get_cart_url();?>">
-						<img src="<?php echo wp_get_upload_dir()["url"]?>/icono-cesta-numero.svg" alt="<?php _e('cart', 'knightsmodels');?>">
+						<img src="<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/icono-cesta-numero.svg" alt="<?php _e('cart', 'knightsmodels');?>">
 						<span class="cart-items-total"><?php echo WC()->cart->get_cart_contents_count();?></span>
 					</a>
 				</div>
@@ -176,8 +196,8 @@
 					?>
 					<li class="menu-bottom-items-container menu-bottom-items-container-<?php echo $count;?>">
 						<a class="menu-main-bottom-items menu-button-<?php echo $count;?>" href="<?php echo get_category_link( $cat->term_id ); ?>">
-							<?php if(get_field('logo_ico_menu',$cat)) {?>
-								<img src="<?php echo get_field('logo_ico_menu',$cat)?>" alt="<?php echo $cat->name?>">
+							<?php if(get_field('logo_ico_menu_active',$cat)) {?>
+								<img src="<?php echo get_field('logo_ico_menu_active',$cat)?>" alt="<?php echo $cat->name?>">
 							<?php }elseif (get_field('imagen_icono_menu','option')) {?>
 								<img src="<?php echo get_field('imagen_icono_menu','option')?>" alt="<?php echo $cat->name?>">
 							<?php } ?>

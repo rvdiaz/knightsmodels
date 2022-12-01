@@ -1,5 +1,7 @@
 <?php
- if(get_field('plantilla') == 'contactForm'){ ?>
+
+ if(get_field('plantilla') == 'contactForm'){ 
+    ?>
     <div class="contact-form-title-container">
         <div class="contact-form-logo">
             <?php if(get_field('logo_sitio_dark','option')){?>
@@ -11,6 +13,10 @@
         </div>
     </div>
 <?php
-    echo do_shortcode('[contact-form-7 id="227" title="Contact Form"]');
+if(apply_filters( 'wpml_current_language', null )=='en')
+    echo do_shortcode('[contact-form-7 id="21392" title="Contact Form"]');
+else
+    echo do_shortcode('[contact-form-7 id="14" title="Formulario de contacto"]');
+
     do_shortcode('[after-categories-component]');
  }

@@ -9,7 +9,7 @@
         );
         $loop = new WP_Query( $args ); 
 ?>
-    <div class="blog-container">
+    <div class="blog-container blog-list-container">
         <div class="title-blog-container-blog-page">
             <p><?php echo get_the_title(); ?></p>
         </div>

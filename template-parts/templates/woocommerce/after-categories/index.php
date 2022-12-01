@@ -32,9 +32,7 @@ function after_categories_component(){
         </div>
         <div class="form-suscriber">
             <?php 
-            echo apply_filters( 'wpml_current_language', null );
             if(apply_filters( 'wpml_current_language', null ) == "en"){
-                var_dump("dssd");
                 echo do_shortcode('[mc4wp_form id="20760"]');
             } else {
                 echo do_shortcode('[mc4wp_form id="20542"]');
@@ -58,7 +56,7 @@ function after_categories_component(){
         <div class="blogs-wrapper">
             <button class="blog-question" idref="<?php echo $count;?>">
                 <span><?php echo $blog['titulo_blog'];?></span>
-                <img src="<?php echo wp_get_upload_dir()['baseurl'].'/2022/11/arrow_forward_ios.png'; ?>" >
+                <img src="<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/arrow_forward_ios.png'; ?>" >
             </button>
             <p class="blog-description" id="<?php echo $count;?>"><?php echo $blog['descripcion_blog'];?></p>
         </div>

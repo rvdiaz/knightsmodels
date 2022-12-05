@@ -56,6 +56,5 @@ $args= array(
 ?>
         </div>
 <?php
-do_shortcode('[after-categories-component]');
 }   
 ?>

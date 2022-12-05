@@ -105,6 +105,10 @@ button {
 .navigation {
   display: none; }
 
+.remove-scroll {
+  height: 100vh;
+  overflow: hidden; }
+
 /*  header styles */
 .header-top-promotion {
   height: 80px;
@@ -177,6 +181,9 @@ button {
   position: absolute;
   width: 100%;
   z-index: 4; }
+
+.main-menu-mobile-dark {
+  background-color: #000; }
 
 .main-menu-dark {
   padding: 10px 0;
@@ -339,15 +346,14 @@ button {
   line-height: 12px;
   margin-top: 20px; }
 
-.hamberguer-menu-mobile-topside {
+.hamberguer-menu-mobile-topside,
+.hamburger .close-hamberguer {
   display: none; }
 
-.close-hamburger {
+.hamburger {
+  width: 30px;
   display: flex;
   align-items: center; }
-
-.close-hamburger img {
-  width: 16px; }
 
 @media (max-width: 1136px) {
   .main-menu-top,
@@ -390,8 +396,8 @@ button {
     opacity: 0;
     transition: visibility 0.3s linear,opacity 0.3s linear;
     left: -20px;
-    height: 100vh;
-    top: 0; }
+    height: calc(100vh - 52px);
+    top: 52px; }
 
   .hamberguer-menu-desktop.active {
     width: 100vw;
@@ -424,8 +430,14 @@ button {
   .home-category-image {
     height: 180px; }
 
+  .hamburger {
+    align-items: flex-start; }
+
   .hamburger img {
     height: 14px; }
+
+  .main-menu {
+    padding: 5px 0; }
 
   .logo-main-menu img {
     height: 24px; }
@@ -446,9 +458,17 @@ button {
     top: 8px;
     left: 10px; }
 
+  .hamberguer-menu-desktop {
+    top: 36px;
+    height: calc(100vh - 36px); }
+
   .hamberguer-menu-desktop .menu-top-container .menu-bottom-items {
     font-size: 12px;
-    line-height: 12px; } }
+    line-height: 12px; }
+
+  .hamberguer-menu-desktop .menu-top-container {
+    overflow-y: auto;
+    height: 90%; } }
 /* main-page */
 .home-category-wrapper {
   position: relative; }
@@ -643,6 +663,9 @@ button {
     font-size: 18px;
     line-height: 18px; }
 
+  .container-share-whishlist-button {
+    display: flex; }
+
   .product-price-wishlist-container .yith-wcwl-add-to-wishlist {
     margin-top: 0 !important; }
 
@@ -819,7 +842,7 @@ button {
   color: #fff; }
 
 .main-filters-container {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   display: flex; }
 
 .secondary-filter-button {
@@ -831,6 +854,7 @@ button {
   font-weight: 500;
   border-radius: 4px;
   margin-right: 10px;
+  margin-top: 10px;
   border: 1px solid rgba(0, 0, 0, 0.4); }
 
 .woocommerce-ordering {
@@ -893,7 +917,7 @@ button {
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-top: 40px; }
+    margin-top: 10px; }
     .shop-views-filter input[type=range] {
       -webkit-appearance: none;
       height: 2px;
@@ -1150,7 +1174,7 @@ button {
     grid-template-columns: 1fr 1fr; }
 
   .entry-content .woocommerce .products-list-columns .attachment-woocommerce_thumbnail,
-  .entry-content .woocommerce .products-list-columns .attachment-post-thumbnail {
+  .entry-content .woocommerce .products-list-columns .link-attachment-post-thumbnail {
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 1;
@@ -1385,7 +1409,7 @@ button {
     display: block;
     margin-top: -30px;
     position: sticky;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     z-index: 1; }
 
@@ -1512,6 +1536,9 @@ button {
 .single-product-panel {
   margin: 20px 0; }
 
+/* .show-modal {
+
+} */
 .show,
 .show .panel {
   display: block !important; }
@@ -1786,9 +1813,6 @@ button {
   width: 570px;
   z-index: 1; }
 
-.first-level-category-products-container {
-  margin: 60px 0; }
-
 .category-description-container {
   background-color: #000;
   padding-top: 50px;
@@ -1812,7 +1836,7 @@ button {
   margin: 0 auto;
   text-align: center;
   width: 570px;
-  padding: 40px 0; }
+  padding: 60px 0; }
 
 .category-description-blog-button button {
   padding: 22px;
@@ -1866,7 +1890,8 @@ button {
 
 .first-level-category-filter {
   border-bottom: 4px solid #EEEEEE;
-  padding-bottom: 4px; }
+  padding-bottom: 4px;
+  margin-bottom: 60px; }
 
 .first-level-category-filter-button-container {
   width: 1136px;
@@ -2006,6 +2031,9 @@ button {
   .blog-slider-container .blog-slider-item-container .blog-image {
     text-align: center; }
 
+  .first-level-category-filter {
+    margin-bottom: 20px; }
+
   .first-level-category-filter-button-container .flickity-viewport {
     overflow: hidden !important; }
 
@@ -2014,7 +2042,7 @@ button {
 
   .first-level-category-products-container {
     margin: 0;
-    margin-top: 30px; }
+    margin-top: 10px; }
 
   .preorder-background-image-item {
     height: 300px; }
@@ -2032,7 +2060,7 @@ button {
   .category-description-blog-button,
   .first-level-category-all-product-link-container {
     width: calc(100% - 40px);
-    padding: 20px 0 0 0; }
+    padding: 30px 0 20px 0; }
 
   .category-description-blog-button button,
   .first-level-category-all-product-link-container button {
@@ -2064,7 +2092,10 @@ button {
 
   .blog-container .title-blog-container {
     font-size: 20px;
-    line-height: 20px; } }
+    line-height: 20px; }
+
+  .second-card {
+    margin-top: 10px; } }
 /* content page */
 .content-page {
   margin-top: 60px;
@@ -2151,6 +2182,9 @@ button {
   padding: 66px 40px 40px 40px !important;
   margin-bottom: 0 !important; }
 
+.single-product .woocommerce-Tabs-panel h2 {
+  display: none !important; }
+
 .single-product .related {
   grid-template-columns: 1fr !important;
   width: 100% !important;
@@ -2176,6 +2210,9 @@ button {
 
 .single-product .sumary-info {
   width: 540px; }
+
+.single-product .sumary-info .quantity {
+  display: none; }
 
 .single-content .woocommerce {
   width: 100%;
@@ -2429,6 +2466,10 @@ button {
 .modal-container .input-search-container input::placeholder {
   color: #fff; }
 
+.modal-container .product-search-results-container {
+  height: 70vh;
+  overflow-y: auto; }
+
 .modal-container .product-search-results-container .product-title-container a {
   font-size: 20px;
   font-weight: 700;
@@ -2644,7 +2685,8 @@ button {
   font-size: 16px;
   line-height: 16px;
   font-weight: 300;
-  padding: 20px; }
+  padding: 20px;
+  width: 66% !important; }
 
 .single-product .outofstock .alert_container .stock_alert_button {
   padding: 22px 40px;

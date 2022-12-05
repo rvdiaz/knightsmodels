@@ -5,6 +5,9 @@
     width: 100%;
     z-index: 4;
 }
+.main-menu-mobile-dark {
+    background-color: $dark;
+}
 .main-menu-dark {
     padding: 10px 0;
     background-color:$dark;
@@ -26,6 +29,7 @@
 .hamburger {
     cursor: pointer;
 }
+
 .hamberguer-menu-desktop {
     display: none;
     position: absolute;
@@ -167,15 +171,14 @@
     line-height: 12px;
     margin-top: 20px;
 }
-.hamberguer-menu-mobile-topside {
+.hamberguer-menu-mobile-topside,
+.hamburger .close-hamberguer {
     display: none;
 }
-.close-hamburger {
+.hamburger {
+    width: 30px;
     display: flex;
     align-items: center;
-}
-.close-hamburger img {
-    width: 16px;
 }
 @media (max-width: 1136px){
     .main-menu-top,
@@ -221,8 +224,8 @@
         opacity:0;
         transition:visibility 0.3s linear,opacity 0.3s linear;
         left: -20px;
-        height: 100vh;
-        top: 0;
+        height: calc(100vh - 52px);
+        top: 52px;
     }
     .hamberguer-menu-desktop.active {
         width: 100vw;
@@ -258,30 +261,44 @@
     .home-category-image {
         height: 180px;
     }
+    .hamburger {
+        align-items: flex-start;
+    }
     .hamburger img {
     height: 14px;
-}
+    }
+    .main-menu {
+        padding: 5px 0;
+    }
     .logo-main-menu img{
-    height: 24px;
-}
-.search-button img{
-    width: 18px;
-    height: 18px;
-}
-.shop-button img {
-    width: 15px;
-    height: 17px;
-}
-.submenu-main-menu {
-    margin: 0;
-}
-.shop-button .cart-items-total {
-    font-size: 12px;
-    top: 8px;
-    left: 10px;
-}
-.hamberguer-menu-desktop .menu-top-container .menu-bottom-items{
-    font-size: 12px;
-    line-height: 12px;
-}
-}
+        height: 24px;
+    }
+    .search-button img{
+        width: 18px;
+        height: 18px;
+    }
+    .shop-button img {
+        width: 15px;
+        height: 17px;
+    }
+    .submenu-main-menu {
+        margin: 0;
+    }
+    .shop-button .cart-items-total {
+        font-size: 12px;
+        top: 8px;
+        left: 10px;
+    }
+    .hamberguer-menu-desktop {
+        top: 36px;
+        height: calc(100vh - 36px);
+    }
+    .hamberguer-menu-desktop .menu-top-container .menu-bottom-items{
+        font-size: 12px;
+        line-height: 12px;
+    }
+    .hamberguer-menu-desktop .menu-top-container {
+        overflow-y: auto;
+        height: 90%;
+    }
+    }

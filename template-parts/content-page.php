@@ -53,9 +53,6 @@
 
 	<footer class="entry-footer">
 			<?php
-			if(is_product_category()){
-			echo do_shortcode('[after-categories-component]');   
-			}
 			edit_post_link(
 				sprintf(
 					wp_kses(

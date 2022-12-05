@@ -109,7 +109,7 @@
     color: $light;
 }
 .main-filters-container {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     display: flex;
 }
 .secondary-filter-button{
@@ -121,6 +121,7 @@
     font-weight: 500;
     border-radius: 4px;
     margin-right: 10px;
+    margin-top: 10px;
     border: 1px solid rgba(0,0,0,0.4);
 }
 .woocommerce-ordering {
@@ -187,7 +188,7 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        margin-top: 40px;
+        margin-top: 10px;
         input[type=range]{
             -webkit-appearance: none;
             height: 2px;

@@ -18,5 +18,4 @@ if(apply_filters( 'wpml_current_language', null )=='en')
 else
     echo do_shortcode('[contact-form-7 id="14" title="Formulario de contacto"]');
 
-    do_shortcode('[after-categories-component]');
  }

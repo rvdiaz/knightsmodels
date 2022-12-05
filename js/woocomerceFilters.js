@@ -139,6 +139,7 @@ if(jQuery('.single-product .related .products')){
 
 const filterAttribute=(event)=>{
   const terms=event.target.getAttribute('slug');
+  const attr=event.target.getAttribute('attr');
   const category=jQuery('#category-slug').val();
   const page=event.target.getAttribute('page');
 
@@ -152,6 +153,7 @@ const filterAttribute=(event)=>{
       url : ajax.url,
       data : { action: 'filterAttribute', dataSend : {
         terms:terms,
+        attr:attr,
         category:category,
         page:page
       },
@@ -164,49 +166,6 @@ const filterAttribute=(event)=>{
             jQuery(document).trigger('yith_wcwl_init');  
             jQuery('.entry-content').html(response);
             updateShare();
-            updateWayDisplay();
-            if(page)
-            if(window.screen.width < 600){
-              jQuery('html, body').animate({
-                scrollTop: jQuery(".subcategories-title-wrapper").offset().top
-              },1000);
-              }else
-              jQuery('html, body').animate({
-                scrollTop: jQuery(".filter-wrapper").offset().top
-            },1000);
-      }								        
-    });
-}
-
-const filterRange=(event)=>{
-    const min=event.target.getAttribute('min');
-    const max=event.target.getAttribute('max');
-    const page=event.target.getAttribute('page');
-
-    if(!page){
-      jQuery('.secondary-filter-button').removeClass('active-secondary ');
-      event.target.classList.add('active-secondary');
-    }
-
-    const category=jQuery('#category-slug').val();
-    jQuery.ajax({
-      type : "post",
-      url : ajax.url,
-      data : { action: 'filterRange', dataSend : {
-        min:min,
-        max:max,
-        page:page,
-        category:category
-      },
-          },
-          beforeSend: function() {
-            if(!page)
-            jQuery('.entry-content').html(jQuery('.loading-container').html());
-        },
-          success: function(response){		
-            jQuery(document).trigger('yith_wcwl_reload_fragments');
-            jQuery('.entry-content').html(response);
-            updateShare();  
             updateWayDisplay();
             if(page)
             if(window.screen.width < 600){
@@ -249,12 +208,12 @@ const first_filters_all=(event)=>{
      },
     },
       beforeSend: function() {
-        jQuery('.first-level-category-products-container').html(jQuery('.loading-container').html());
+        jQuery('.container-category-products-general').html(jQuery('.loading-container').html());
       },
       success: function(response){		
-        jQuery('.first-level-category-products-container').html(response);
+        jQuery('.container-category-products-general').html(response);
         jQuery(document).trigger('yith_wcwl_reload_fragments');
-        jQuery('.first-level-category-products-container .woocommerceq .productsq').flickity({
+        jQuery('.container-category-products-general .woocommerceq .productsq').flickity({
           contain:true,
           prevNextButtons: false,
           pageDots: false,
@@ -278,12 +237,12 @@ const first_filters_recent=(event)=>{
      },
     },
       beforeSend: function() {
-        jQuery('.first-level-category-products-container').html(jQuery('.loading-container').html());
+        jQuery('.container-category-products-general').html(jQuery('.loading-container').html());
       },
       success: function(response){		
-        jQuery('.first-level-category-products-container').html(response);
+        jQuery('.container-category-products-general').html(response);
         jQuery(document).trigger('yith_wcwl_reload_fragments');
-        jQuery('.first-level-category-products-container .woocommerceq .productsq').flickity({
+        jQuery('.container-category-products-general .woocommerceq .productsq').flickity({
           contain:true,
           prevNextButtons: false,
           pageDots: false,
@@ -307,12 +266,12 @@ const first_filters_sales=(event)=>{
      },
     },
       beforeSend: function() {
-        jQuery('.first-level-category-products-container').html(jQuery('.loading-container').html());
+        jQuery('.container-category-products-general').html(jQuery('.loading-container').html());
       },
       success: function(response){		
-        jQuery('.first-level-category-products-container').html(response);
+        jQuery('.container-category-products-general').html(response);
         jQuery(document).trigger('yith_wcwl_reload_fragments');
-        jQuery('.first-level-category-products-container .woocommerceq .productsq').flickity({
+        jQuery('.container-category-products-general .woocommerceq .productsq').flickity({
           contain:true,
           prevNextButtons: false,
           pageDots: false,
@@ -324,7 +283,7 @@ const first_filters_sales=(event)=>{
     });
 }
 
-jQuery('#submit-search').on('click',()=>{
+/* jQuery('#submit-search').on('click',()=>{
   const name=jQuery('#search-input').val();
   if(name){
     jQuery.ajax({
@@ -343,4 +302,27 @@ jQuery('#submit-search').on('click',()=>{
       }								        
     });
   }
+}); */
+
+jQuery('#search-input').on('keyup',(e)=>{
+  if(e.target.value.length>=3){
+  const name=e.target.value;
+  if(name){
+    jQuery.ajax({
+    type : "post",
+    url : ajax.url,
+    data : { action: 'searchproduct', dataSend : {
+        name:name
+     },
+    },
+      beforeSend: function() {
+        jQuery('.product-search-results-container').html(jQuery('.loading-container').html());
+      },
+      success: function(response){		
+        jQuery('.product-search-results-container').html(response);
+        jQuery(document).trigger('yith_wcwl_reload_fragments');
+      }								        
+    });
+  }
+}
 });

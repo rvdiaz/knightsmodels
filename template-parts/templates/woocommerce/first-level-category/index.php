@@ -13,6 +13,7 @@ function categories_first_level(){
 
     $argsProduct = array(
         'category' => array( $cat->slug ),
+        'post_status' => 'publish',
         'limit' => -1
     );
         $products = wc_get_products( $argsProduct );
@@ -116,19 +117,22 @@ function categories_first_level(){
      </div>
 
      <!-- slider products -->
-     <div class="first-level-category-products-container" data-flickity='{ "freeScroll": true, "prevNextButtons": false, "pageDots" : false, "contain":true, "selectedAttraction": 0.01, "friction": 0.5, "autoPlay": 2000 }'>
         <?php
          $argsProduct = array(
             'category' => array($cat->slug),
+            'post_status' => 'publish',
             'limit' => 30
         );
             $products = wc_get_products( $argsProduct ); 
-            $i=0;?>
-        <div class="card-product-container-first">
-        </div>
-         <?php
-    if(count($products) > 10){
-        while ($i < count($products)) {
+            $i=0;
+    ?>
+    <div class="container-category-products-general"><?php
+    if(count($products) > 10){?>
+        <div class="first-level-category-products-container" data-flickity='{ "freeScroll": true, "prevNextButtons": false, "pageDots" : false, "contain":true, "selectedAttraction": 0.01, "friction": 0.5, "autoPlay": 2000 }'>
+            <div class="card-product-container-first">
+            </div>
+        <?php
+        while ($i < intdiv(count($products),2)) {
         ?>
         <div class="first-level-products-slider-wrapper">
         <!-- top product -->
@@ -149,32 +153,46 @@ function categories_first_level(){
                     <?php echo do_shortcode('[add_to_cart show_price=false id='.$products[$i]->id.']'); ?>
                 </div>
             </div>
+        </div>
+        <?php 
+        $i=$i+1;
+    } ?>
+        </div>
+        <div class="first-level-category-products-container" data-flickity='{ "freeScroll": true, "prevNextButtons": false, "pageDots" : false, "contain":true, "selectedAttraction": 0.01, "friction": 0.5, "autoPlay": 2000 }'> 
+            <div class="card-product-container-first">
+            </div>
+            <?php  
+            $i=intdiv(count($products),2);
+            while ($i < count($products)) {
+        ?>
         <!-- bottom product -->
-            <?php if($products[$i+1]){ ?>
             <div class="card-product-container second-card">
                 <div class="product-image-container">
-                    <a href="<?php echo $products[$i+1]->get_permalink();?>" target="_blank">
-                        <?php echo $products[$i+1]->get_image('original')?>
+                    <a href="<?php echo $products[$i]->get_permalink();?>" >
+                        <?php echo $products[$i]->get_image('original')?>
                     </a>
                 </div>
                 <div class="product-title-container">
-                    <a class="product-title" href="<?php echo $products[$i+1]->get_permalink( );?>" target="_blank"><?php echo $products[$i+1]->name;?></a>
+                    <a class="product-title" href="<?php echo $products[$i]->get_permalink( );?>" ><?php echo $products[$i]->name;?></a>
                 </div>
                 <div class="product-price-wishlist-container">
                     <p class="product-price"><?php echo $products[$i]->get_price_html();?></p>
-                    <?php echo do_shortcode('[yith_wcwl_add_to_wishlist product_id='.$products[$i+1]->id.']');?>
+                    <?php echo do_shortcode('[yith_wcwl_add_to_wishlist product_id='.$products[$i]->id.']');?>
                 </div>
                 <div class="product-add-cart-button-container">
-                    <?php echo do_shortcode('[add_to_cart show_price=false id='.$products[$i+1]->id.']'); ?>
+                    <?php echo do_shortcode('[add_to_cart show_price=false id='.$products[$i]->id.']'); ?>
                 </div>
             </div>
-            <?php } ?>
+            <?php 
+            $i=$i+1;
+        } ?>
         </div>
         <?php 
-        $i=$i+2;
-        } 
-    } else {
-         foreach ($products as $product) {?>
+    } else {?>
+    <div class="first-level-category-products-container" data-flickity='{ "freeScroll": true, "prevNextButtons": false, "pageDots" : false, "contain":true, "selectedAttraction": 0.01, "friction": 0.5, "autoPlay": 2000 }'> 
+        <div class="card-product-container-first">
+        </div>    
+        <?php foreach ($products as $product) {?>
             <div class="card-product-container">
                 <div class="product-image-container">
                     <a href="<?php echo $product->get_permalink();?>">
@@ -195,6 +213,7 @@ function categories_first_level(){
     <?php }
 }
 ?>
+    </div>
     </div>
     <div class="first-level-category-all-product-link-container">
         <button style="background-image: url('<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/Group-110.png')">

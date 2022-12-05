@@ -76,7 +76,9 @@
     padding: 66px 40px 40px 40px !important;
     margin-bottom: 0 !important;
 }
-
+.single-product .woocommerce-Tabs-panel h2{
+    display: none !important;
+}
 .single-product .related {
     grid-template-columns: 1fr !important;
     width: 100% !important;
@@ -103,6 +105,9 @@
 }
 .single-product .sumary-info {
     width: 540px;
+}
+.single-product .sumary-info .quantity {
+    display: none;
 }
 .single-content .woocommerce {
     width: 100%;

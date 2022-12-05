@@ -123,6 +123,10 @@ button {
 .navigation {
 	display: none;
 }
+.remove-scroll {
+	height: 100vh;
+	overflow: hidden;
+}
 
 /*  header styles */
 @import "header-promotion.scss";

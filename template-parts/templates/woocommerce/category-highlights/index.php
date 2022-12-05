@@ -7,10 +7,10 @@ function category_highlights(){
     ?>
     <div class="category-highlights-slider">
         <div class="category-highlights-title-slider">
-            <p ><?php _e('Highlights Products', 'knightsmodels');?></p>
+            <p ></p>
         </div>
     <?php
-        echo do_shortcode( '[products limit="10" columns="4" category='.$cat->slug.']' );
+      /*   echo do_shortcode( '[products limit="10" columns="4" category='.$cat->slug.']' ); */
     ?>
     </div>
     <?php

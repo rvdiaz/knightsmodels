@@ -10,7 +10,9 @@
  */
 
 ?>
+	<?php do_shortcode('[after-categories-component]');?>
 	<footer class="footer-page" style="text-align: center;">
+
 		<div class="footer-container">
 			<div class="selects-menu-container">
 				<div class="list-languages">

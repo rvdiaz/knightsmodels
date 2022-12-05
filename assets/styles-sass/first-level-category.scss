@@ -38,9 +38,7 @@
     width: 570px;
     z-index: 1;
 }
-.first-level-category-products-container {
-    margin: 60px 0;
-}
+
 .category-description-container {
     background-color: $dark;
     padding-top: 50px;
@@ -64,7 +62,7 @@
     margin: 0 auto;
     text-align: center;
     width: 570px;
-    padding: 40px 0;
+    padding: 60px 0;
 }
 .category-description-blog-button button{
     padding: 22px;
@@ -120,6 +118,7 @@
 .first-level-category-filter {
     border-bottom: 4px solid #EEEEEE;
     padding-bottom: 4px;
+    margin-bottom: 60px;
 }
 .first-level-category-filter-button-container {
     width: 1136px;
@@ -266,6 +265,9 @@
 .blog-slider-container .blog-slider-item-container .blog-image {
     text-align: center;
 }
+.first-level-category-filter {
+    margin-bottom: 20px;
+}
 .first-level-category-filter-button-container .flickity-viewport {
     overflow: hidden !important;
 }
@@ -274,7 +276,7 @@
 }
 .first-level-category-products-container {
     margin: 0;
-    margin-top: 30px;
+    margin-top: 10px;
 }
 .preorder-background-image-item {
     height: 300px;
@@ -292,7 +294,7 @@
 .category-description-blog-button,
 .first-level-category-all-product-link-container {
     width: calc(100% - 40px);
-    padding: 20px 0 0 0;
+    padding: 30px 0 20px 0;
 }
 .category-description-blog-button button,
 .first-level-category-all-product-link-container button{
@@ -325,6 +327,9 @@
 .blog-container .title-blog-container {
     font-size: 20px;
     line-height: 20px;
+}
+.second-card {
+    margin-top: 10px;
 }
 }
 

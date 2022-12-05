@@ -46,6 +46,10 @@
 .modal-container .input-search-container input::placeholder {
     color: $light;
 }
+.modal-container .product-search-results-container {
+    height: 70vh;
+    overflow-y: auto;
+}
 .modal-container .product-search-results-container .product-title-container a{
     font-size: 20px;
     font-weight: 700;

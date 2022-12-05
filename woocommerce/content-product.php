@@ -43,8 +43,13 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	 * @hooked woocommerce_show_product_loop_sale_flash - 10
 	 * @hooked woocommerce_template_loop_product_thumbnail - 10
 	 */
-	do_action( 'woocommerce_before_shop_loop_item_title' );
-
+	?>
+	<a class="link-attachment-post-thumbnail" href="<?php echo get_permalink( $product->ID );?>">
+	<?php
+		do_action( 'woocommerce_before_shop_loop_item_title' );
+	?> 
+	</a>
+	<?php
 	/**
 	 * Hook: woocommerce_shop_loop_item_title.
 	 *
@@ -69,7 +74,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	    do_action( 'woocommerce_after_shop_loop_item_title' );?>
         <div class="share-whishlist-wrapper"><?php
             echo do_shortcode('[yith_wcwl_add_to_wishlist]');?>
-            <button class="share-product-button" onclick="showSharePopup(event)"><img refpopup="" src="<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/share.png" ></button>
+            <button class="share-product-button" onclick="showSharePopup(event)"><img src="<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/share.png" ></button>
             <div class="share-links">
                 <a href="https://www.facebook.com/share.php?u=<?php echo get_permalink( $product->ID );?>" target="_blank"><img src="<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/facebook-share.png" > </a>
                 <a href="https://wa.me/?text=<?php echo get_permalink( $product->ID );?>"  target="_blank"><img src="<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/whatsapp.png" ></a>

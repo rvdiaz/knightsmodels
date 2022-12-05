@@ -115,11 +115,36 @@ function woocommerce_product_category( ) {
                     </div>
                     <div id="rango-filter" class="secondary-filter">
                         <?php
-                        if(get_field('lista_de_opciones_de_rango','option'))
-                        foreach (get_field('lista_de_opciones_de_rango','option') as $range) {
+                            $attribute_terms = get_terms(array(
+                            'taxonomy' => 'pa_rango',
+                            'hide_empty' => true
+                        ));
+                            foreach ($attribute_terms as $attr) {
+                                $argsProducts= array(
+                                    'post_type'           => 'product',
+                                    'post_status'         => 'publish',
+                                    'posts_per_page'  => -1,
+                                    'tax_query'           => array(
+                                        array(
+                                          'taxonomy'        => 'product_cat',
+                                          'field'           => 'slug',
+                                          'terms'           => $cat->slug,
+                                          'operator'        => 'IN',
+                                        ),
+                                        array(
+                                          'taxonomy'        => 'pa_rango',
+                                          'field'           => 'slug',
+                                          'terms'           => $attr->slug,
+                                          'operator'        => 'IN'
+                                        ),
+                                      )
+                                );
+                                $prods=wc_get_products( $argsProducts ); 
+                                if(count($prods)>0){
                         ?>
-                        <button onclick="filterRange(event)" class="secondary-filter-button" min="<?php echo $range['minimo']; ?>" max="<?php echo $range['maximo']; ?>"><?php echo $range['minimo'];?> - <?php echo $range['maximo'];?></button>
-                        <?php } ?>
+                             <button onclick="filterAttribute(event)" class="secondary-filter-button" attr="pa_rango" slug="<?php echo $attr->slug;?>"><?php echo $attr->name;?></button>
+                        <?php   } 
+                    } ?>
                     </div>
                     <div id="origen-filter" class="secondary-filter">
                         <?php
@@ -150,7 +175,7 @@ function woocommerce_product_category( ) {
                                 $prods=wc_get_products( $argsProducts ); 
                                 if(count($prods)>0){
                         ?>
-                            <button onclick="filterAttribute(event)" class="secondary-filter-button" slug="<?php echo $attr->slug;?>"><?php echo $attr->name;?></button>
+                            <button onclick="filterAttribute(event)" class="secondary-filter-button" attr="pa_origen" slug="<?php echo $attr->slug;?>"><?php echo $attr->name;?></button>
                         <?php   } 
                     } ?>
                     </div>

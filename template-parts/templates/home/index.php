@@ -11,7 +11,8 @@
         /* get product by category */
         $argsProduct = array(
             'category' => array( $cat->slug ),
-            'limit' => 15
+            'limit' => 15,
+            'post_status' => 'publish'
         );
             $products = wc_get_products( $argsProduct );
 			if(($parent->slug=='inicio' || $parent->slug=='inicio-en') && count($products)>0){
@@ -60,7 +61,14 @@
                         </div>
                         <div class="product-price-wishlist-container">
                             <p class="product-price"><?php echo $product->get_price_html();?></p>
-                            <?php echo do_shortcode('[yith_wcwl_add_to_wishlist product_id='.$product->id.']');?>
+                            <div class="container-share-whishlist-button">
+                                <?php echo do_shortcode('[yith_wcwl_add_to_wishlist product_id='.$product->id.']');?>
+                                <button class="share-product-button" onclick="showSharePopup(event)"><img src="<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/share.png" ></button>
+                                <div class="share-links">
+                                    <a href="https://www.facebook.com/share.php?u=<?php echo get_permalink( $product->ID );?>" target="_blank"><img src="<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/facebook-share.png" > </a>
+                                    <a href="https://wa.me/?text=<?php echo get_permalink( $product->ID );?>"  target="_blank"><img src="<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/whatsapp.png" ></a>
+                                </div>
+                            </div>
                         </div>
                         <div class="product-add-cart-button-container">
                         <?php echo do_shortcode('[add_to_cart show_price=false id='.$product->id.']'); ?>

@@ -92,28 +92,10 @@
 		<div class="<?php if(is_product_category() || is_front_page()) echo "main-menu"; else echo "main-menu-dark";?>">
 			<div class="main-menu-top">
 				<div class="hamburger">
-         			<img src="<?php echo wp_get_upload_dir()["baseurl"] ?>/2022/11/icono-hamburguesa.png" >
+         			<img class="open-menu-hamberguer" src="<?php echo wp_get_upload_dir()["baseurl"] ?>/2022/11/icono-hamburguesa.png" >
+					<img class="close-hamberguer" src="<?php echo wp_get_upload_dir()["baseurl"] ?>/2022/11/Icono-cerrar.png" >
         		</div>
 				<div class="hamberguer-menu-desktop">
-					<div class="hamberguer-menu-mobile-topside main-menu-top">
-						<div class="close-hamburger">
-							<img src="<?php echo wp_get_upload_dir()["baseurl"] ?>/2022/11/Icono-cerrar.png" >
-						</div>
-						<div class="logo-main-menu">
-							<?php $my_home_url = apply_filters( 'wpml_home_url', get_option( 'home' ) );?>
-							<a href="<?php echo $my_home_url;?>">
-							<?php if(get_field('logo_sitio','option')){?>
-							<img src="<?php echo get_field('logo_sitio','option');?>" alt="knight models">
-							<?php } ?>
-							</a>
-						</div>
-						<div class="submenu-main-menu">
-							<a class="shop-button" href="<?php echo wc_get_cart_url();?>">
-								<img src="<?php echo wp_get_upload_dir()["baseurl"]?>/2022/11/icono-cesta-numero.svg" alt="<?php _e('cart', 'knightsmodels');?>">
-								<span class="cart-items-total"><?php echo WC()->cart->get_cart_contents_count();?></span>
-							</a>
-						</div>
-					</div>
 					<ul class="menu-top-container">
 						<?php
 						if(get_field('menu_categorias','option')){

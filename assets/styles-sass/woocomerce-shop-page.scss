@@ -211,13 +211,14 @@
         grid-template-columns: 1fr 1fr;
     }
     .entry-content .woocommerce .products-list-columns .attachment-woocommerce_thumbnail,
-    .entry-content .woocommerce .products-list-columns .attachment-post-thumbnail {
+    .entry-content .woocommerce .products-list-columns .link-attachment-post-thumbnail {
         grid-column-start: 1;
         grid-column-end: 2;
         grid-row-start: 1;
         grid-row-end: 4;
         height: 148px !important;
     }
+
     .entry-content .woocommerce .products-list-columns .woocommerce-loop-product__title {
         grid-column-start: 2;
         grid-row-start: 1;
